@@ -30,4 +30,8 @@ public class Connection {
         this.properties = properties;
         this.engine = engine;
     }
+
+    public String getUrl() {
+        return String.format("%s://%s:%s", schema, host, port);
+    }
 }
