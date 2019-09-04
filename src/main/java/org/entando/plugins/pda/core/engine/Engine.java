@@ -13,8 +13,6 @@ public abstract class Engine {
     protected String type;
     protected TaskService taskService;
 
-    //protected CommentService commentService;
-
     public TaskService getTaskService() {
         return Optional.ofNullable(taskService)
                 .orElseThrow(EngineNotSupportedException::new);
