@@ -1,15 +1,14 @@
 package org.entando.plugins.pda.core.engine;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Map;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class Connection {
     private String name;
     private String host;
