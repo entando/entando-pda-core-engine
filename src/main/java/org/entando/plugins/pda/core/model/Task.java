@@ -2,6 +2,7 @@ package org.entando.plugins.pda.core.model;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.Singular;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,12 +20,4 @@ public class Task {
     private String processId;
     private String processInstanceId;
     private Map<String,String> properties;
-
-    public void addProperty(String key, String value){
-        if (properties == null) {
-            properties = new HashMap<>();
-        }
-
-        properties.put(key,value);
-    }
 }
