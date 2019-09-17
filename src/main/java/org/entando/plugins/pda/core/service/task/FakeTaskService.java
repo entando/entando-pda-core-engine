@@ -1,14 +1,13 @@
 package org.entando.plugins.pda.core.service.task;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.model.Task;
 import org.entando.web.request.PagedListRequest;
 import org.entando.web.response.PagedMetadata;
 import org.entando.web.response.PagedRestResponse;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class FakeTaskService implements TaskService {
@@ -32,7 +31,7 @@ public class FakeTaskService implements TaskService {
     public static final String TASK_PROCESS_ID_2 = "processId2";
     public static final String TASK_PROCESS_INSTANCE_ID_2 = "processInstanceId2";
 
-    private List<Task> tasks = createTasks();
+    private final List<Task> tasks = createTasks();
 
     @Override
     public PagedRestResponse<Task> list(Connection connection, PagedListRequest restListRequest) {
