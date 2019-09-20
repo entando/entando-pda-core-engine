@@ -7,4 +7,5 @@ import org.entando.web.response.PagedRestResponse;
 
 public interface TaskService {
     PagedRestResponse<Task> list(Connection connection, PagedListRequest restListRequest);
+    Task get(Connection connection, String id);
 }

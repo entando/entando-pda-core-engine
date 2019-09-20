@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import org.entando.plugins.pda.core.engine.Connection;
+import org.entando.plugins.pda.core.exception.TaskNotFoundException;
 import org.entando.plugins.pda.core.model.FakeTask;
 import org.entando.plugins.pda.core.model.Task;
 import org.entando.web.request.PagedListRequest;
@@ -38,6 +39,17 @@ public class FakeTaskService implements TaskService {
     @Override
     public PagedRestResponse<Task> list(Connection connection, PagedListRequest restListRequest) {
         return new PagedRestResponse<>(new PagedMetadata<>(restListRequest, createTasks()));
+    }
+
+    @Override
+    public Task get(Connection connection, String id) {
+        for (Task task : createTasks()) {
+            if (task.getId().equals(Integer.valueOf(id)))  {
+                return task;
+            }
+        }
+
+        throw new TaskNotFoundException();
     }
 
     private List<Task> createTasks() {
