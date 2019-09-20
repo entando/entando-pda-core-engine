@@ -1,11 +1,8 @@
 package org.entando.plugins.pda.core.model;
 
+import java.util.Map;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Singular;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Data
 @Builder
