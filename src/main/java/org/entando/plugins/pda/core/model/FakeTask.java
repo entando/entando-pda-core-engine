@@ -1,5 +1,6 @@
 package org.entando.plugins.pda.core.model;
 
+import java.util.HashMap;
 import java.util.Map;
 import lombok.Builder;
 import lombok.Singular;
@@ -15,7 +16,7 @@ public class FakeTask extends BaseMapModel implements Task {
     @Builder
     public FakeTask(Integer id, String name, String processId, Integer processInstanceId, String containerId,
             @Singular("extraProperty") Map<String,Object> extraProperties) {
-        super(extraProperties);
+        super(new HashMap<>(extraProperties));
 
         this.data.put(ID, id);
         this.data.put(NAME, name);

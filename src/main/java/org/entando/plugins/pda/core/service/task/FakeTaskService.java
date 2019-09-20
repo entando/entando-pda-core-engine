@@ -58,11 +58,13 @@ public class FakeTaskService implements TaskService {
         result.add(FakeTask.builder()
                 .id(TASK_ID_1)
                 .name(TASK_NAME_1)
+                .extraProperty("subject", TASK_SUBJECT_1)
                 .build());
 
         result.add(FakeTask.builder()
                 .id(TASK_ID_2)
                 .name(TASK_NAME_2)
+                .extraProperty("subject", TASK_SUBJECT_2)
                 .build());
 
         return result;
