@@ -21,7 +21,7 @@ public class Connection {
     private String host;
     @Builder.Default private String port = "80";
     private String schema;
-    private String app = "/";
+    @Builder.Default private String app = "/";
     private String username;
     private String password;
     @Builder.Default private Integer connectionTimeout = 60_000; //millis
