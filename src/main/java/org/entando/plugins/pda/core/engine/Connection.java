@@ -1,7 +1,6 @@
 package org.entando.plugins.pda.core.engine;
 
 import java.util.Map;
-import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -33,7 +32,7 @@ public class Connection {
         String url = String.format("%s://%s:%s%s", schema, host, port, app);
 
         if (url.substring(url.length() - 1).equals("/")) {
-            url = url.substring(0, url.length()-1);
+            url = url.substring(0, url.length() - 1);
         }
 
         return url;

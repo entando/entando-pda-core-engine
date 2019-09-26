@@ -2,14 +2,11 @@ package org.entando.plugins.pda.core.service.task;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.exception.TaskNotFoundException;
 import org.entando.plugins.pda.core.model.FakeTask;
 import org.entando.plugins.pda.core.model.Task;
 import org.entando.web.request.PagedListRequest;
-import org.entando.web.response.BaseMapModel;
 import org.entando.web.response.PagedMetadata;
 import org.entando.web.response.PagedRestResponse;
 import org.springframework.stereotype.Service;
