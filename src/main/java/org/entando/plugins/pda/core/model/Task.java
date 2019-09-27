@@ -1,20 +1,29 @@
 package org.entando.plugins.pda.core.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Map;
+import lombok.NoArgsConstructor;
+import org.entando.web.response.BaseMapModel;
 
-public interface Task {
-    @JsonIgnore
-    Integer getId();
+@NoArgsConstructor
+public abstract class Task extends BaseMapModel {
 
-    @JsonIgnore
-    String getName();
-
-    @JsonIgnore
-    String getProcessId();
-
-    @JsonIgnore
-    Integer getProcessInstanceId();
+    public Task(Map<String,Object> map) {
+        super(map);
+    }
 
     @JsonIgnore
-    String getContainerId();
+    public abstract Integer getId();
+
+    @JsonIgnore
+    public abstract String getName();
+
+    @JsonIgnore
+    public abstract String getProcessId();
+
+    @JsonIgnore
+    public abstract Integer getProcessInstanceId();
+
+    @JsonIgnore
+    public abstract String getContainerId();
 }

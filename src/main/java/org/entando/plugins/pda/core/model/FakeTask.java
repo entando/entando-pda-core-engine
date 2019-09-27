@@ -4,9 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import lombok.Builder;
 import lombok.Singular;
-import org.entando.web.response.BaseMapModel;
 
-public class FakeTask extends BaseMapModel implements Task {
+public class FakeTask extends Task {
     private static final String ID = "id";
     private static final String NAME = "name";
     private static final String PROCESS_ID = "processId";
