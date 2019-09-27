@@ -41,7 +41,7 @@ public class FakeTaskService implements TaskService {
     @Override
     public Task get(Connection connection, String id) {
         for (Task task : createTasks()) {
-            if (task.getId().equals(Integer.valueOf(id)))  {
+            if (task.getId().equals(id))  {
                 return task;
             }
         }
