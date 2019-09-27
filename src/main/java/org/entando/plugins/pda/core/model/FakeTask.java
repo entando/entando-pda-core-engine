@@ -13,7 +13,7 @@ public class FakeTask extends Task {
     private static final String CONTAINER_ID = "containerId";
 
     @Builder
-    public FakeTask(Integer id, String name, String processId, Integer processInstanceId, String containerId,
+    public FakeTask(String id, String name, String processId, Integer processInstanceId, String containerId,
             @Singular("extraProperty") Map<String,Object> extraProperties) {
         super(new HashMap<>(extraProperties));
 
@@ -25,8 +25,8 @@ public class FakeTask extends Task {
     }
 
     @Override
-    public Integer getId() {
-        return (Integer) data.get(ID);
+    public String getId() {
+        return (String) data.get(ID);
     }
 
     @Override
@@ -40,8 +40,8 @@ public class FakeTask extends Task {
     }
 
     @Override
-    public Integer getProcessInstanceId() {
-        return (Integer) data.get(PROCESS_INSTANCE_ID);
+    public String getProcessInstanceId() {
+        return (String) data.get(PROCESS_INSTANCE_ID);
     }
 
     @Override

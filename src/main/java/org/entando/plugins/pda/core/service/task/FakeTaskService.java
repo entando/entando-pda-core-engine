@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class FakeTaskService implements TaskService {
-    public static final Integer TASK_ID_1 = 1;
+    public static final String TASK_ID_1 = "1";
     public static final String TASK_NAME_1 = "Task 1";
     public static final String TASK_SUBJECT_1 = "Task Subject 1";
     public static final String TASK_DESCRIPTION_1 = "Task description #1 describing a task's details";
@@ -23,7 +23,7 @@ public class FakeTaskService implements TaskService {
     public static final String TASK_PROCESS_ID_1 = "processId1";
     public static final String TASK_PROCESS_INSTANCE_ID_1 = "processInstanceId1";
 
-    public static final Integer TASK_ID_2 = 2;
+    public static final String TASK_ID_2 = "2";
     public static final String TASK_NAME_2 = "Task 2";
     public static final String TASK_SUBJECT_2 = "Task Subject 2";
     public static final String TASK_DESCRIPTION_2 = "Task description #2 describing a task's details";

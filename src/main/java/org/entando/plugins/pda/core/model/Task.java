@@ -13,7 +13,7 @@ public abstract class Task extends BaseMapModel {
     }
 
     @JsonIgnore
-    public abstract Integer getId();
+    public abstract String getId();
 
     @JsonIgnore
     public abstract String getName();
@@ -22,7 +22,7 @@ public abstract class Task extends BaseMapModel {
     public abstract String getProcessId();
 
     @JsonIgnore
-    public abstract Integer getProcessInstanceId();
+    public abstract String getProcessInstanceId();
 
     @JsonIgnore
     public abstract String getContainerId();
