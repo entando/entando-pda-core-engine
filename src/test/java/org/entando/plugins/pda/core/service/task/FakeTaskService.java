@@ -35,13 +35,13 @@ public class FakeTaskService implements TaskService {
     public static final String TASK_PROCESS_INSTANCE_ID_2 = "processInstanceId2";
 
     @Override
-    public PagedRestResponse<Task> list(Connection connection, AuthenticatedUser user,
+    public PagedRestResponse<Task> list(Connection connection,
             PagedListRequest restListRequest) {
         return new PagedRestResponse<>(new PagedMetadata<>(restListRequest, createTasks()));
     }
 
     @Override
-    public Task get(Connection connection, AuthenticatedUser user, String id) {
+    public Task get(Connection connection, String id) {
         for (Task task : createTasks()) {
             if (task.getId().equals(id))  {
                 return task;
