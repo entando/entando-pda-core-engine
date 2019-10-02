@@ -2,6 +2,7 @@ package org.entando.plugins.pda.core.service.task;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.entando.keycloak.security.AuthenticatedUser;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.exception.TaskNotFoundException;
 import org.entando.plugins.pda.core.model.FakeTask;
@@ -34,12 +35,13 @@ public class FakeTaskService implements TaskService {
     public static final String TASK_PROCESS_INSTANCE_ID_2 = "processInstanceId2";
 
     @Override
-    public PagedRestResponse<Task> list(Connection connection, PagedListRequest restListRequest) {
+    public PagedRestResponse<Task> list(Connection connection, AuthenticatedUser user,
+            PagedListRequest restListRequest) {
         return new PagedRestResponse<>(new PagedMetadata<>(restListRequest, createTasks()));
     }
 
     @Override
-    public Task get(Connection connection, String id) {
+    public Task get(Connection connection, AuthenticatedUser user, String id) {
         for (Task task : createTasks()) {
             if (task.getId().equals(id))  {
                 return task;
