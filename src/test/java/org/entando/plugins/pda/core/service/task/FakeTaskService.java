@@ -17,31 +17,18 @@ public class FakeTaskService implements TaskService {
     public static final String TASK_ID_1 = "1";
     public static final String TASK_NAME_1 = "Task 1";
     public static final String TASK_SUBJECT_1 = "Task Subject 1";
-    public static final String TASK_DESCRIPTION_1 = "Task description #1 describing a task's details";
-    public static final String TASK_STATUS_1 = "Pending";
-    public static final Integer TASK_PRIORITY_1 = 10;
-    public static final Boolean TASK_SKIPABLE_1 = false;
-    public static final String TASK_PROCESS_ID_1 = "processId1";
-    public static final String TASK_PROCESS_INSTANCE_ID_1 = "processInstanceId1";
 
     public static final String TASK_ID_2 = "2";
     public static final String TASK_NAME_2 = "Task 2";
     public static final String TASK_SUBJECT_2 = "Task Subject 2";
-    public static final String TASK_DESCRIPTION_2 = "Task description #2 describing a task's details";
-    public static final String TASK_STATUS_2 = "Complete";
-    public static final Integer TASK_PRIORITY_2 = 5;
-    public static final Boolean TASK_SKIPABLE_2 = true;
-    public static final String TASK_PROCESS_ID_2 = "processId2";
-    public static final String TASK_PROCESS_INSTANCE_ID_2 = "processInstanceId2";
 
     @Override
-    public PagedRestResponse<Task> list(Connection connection,
+    public PagedRestResponse<Task> list(Connection connection, AuthenticatedUser user,
             PagedListRequest restListRequest) {
         return new PagedRestResponse<>(new PagedMetadata<>(restListRequest, createTasks()));
     }
 
-    @Override
-    public Task get(Connection connection, String id) {
+    public Task get(Connection connection, AuthenticatedUser user, String id) {
         for (Task task : createTasks()) {
             if (task.getId().equals(id))  {
                 return task;
