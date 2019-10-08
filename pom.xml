@@ -96,6 +96,20 @@
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.13.2</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
     <profiles>
         <profile>
@@ -266,6 +280,7 @@
                     <rulesets>
                         <ruleset>config/pmd/pmd-ruleset.xml</ruleset>
                     </rulesets>
+                    <includeTests>true</includeTests>
                 </configuration>
                 <executions>
                     <execution>

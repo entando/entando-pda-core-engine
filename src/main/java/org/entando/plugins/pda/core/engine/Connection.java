@@ -3,29 +3,27 @@ package org.entando.plugins.pda.core.engine;
 import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
 @Builder
 public class Connection {
+
     private String name;
     private String host;
-    @Builder.Default private String port = "80";
+    @Builder.Default
+    private String port = "80";
     private String schema;
-    @Builder.Default private String app = "/";
+    @Builder.Default
+    private String app = "/";
     private String username;
     private String password;
-    @Builder.Default private Integer connectionTimeout = 60_000; //millis
-    private Map<String,String> properties;
+    @Builder.Default
+    private Integer connectionTimeout = 60_000; //millis
+    private Map<String, String> properties;
     private String engine;
 
     public String getUrl() {
