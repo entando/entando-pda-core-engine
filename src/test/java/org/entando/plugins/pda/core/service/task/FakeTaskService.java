@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class FakeTaskService implements TaskService {
+
     public static final String TASK_ID_1 = "1";
     public static final String TASK_NAME_1 = "Task 1";
     public static final String TASK_SUBJECT_1 = "Task Subject 1";
@@ -28,9 +29,10 @@ public class FakeTaskService implements TaskService {
         return new PagedRestResponse<>(new PagedMetadata<>(restListRequest, createTasks()));
     }
 
+    @Override
     public Task get(Connection connection, AuthenticatedUser user, String id) {
         for (Task task : createTasks()) {
-            if (task.getId().equals(id))  {
+            if (task.getId().equals(id)) {
                 return task;
             }
         }
