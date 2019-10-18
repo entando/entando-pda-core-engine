@@ -4,9 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.Singular;
 import org.entando.plugins.pda.core.engine.Connection;
 
@@ -21,7 +18,8 @@ public class WidgetConfig {
     protected Map<String,Object> extraProperties;
 
     @Builder
-    public WidgetConfig(String pageId, String frameId, Connection connection, @Singular Map<String,Object> extraProperties) {
+    public WidgetConfig(String pageId, String frameId, Connection connection,
+            @Singular Map<String,Object> extraProperties) {
         this.pageId = pageId;
         this.frameId = frameId;
         this.connection = connection;
