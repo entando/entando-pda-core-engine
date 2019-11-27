@@ -5,7 +5,6 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 import org.entando.plugins.pda.core.exception.EngineNotSupportedException;
 import org.entando.plugins.pda.core.service.process.FakeProcessService;
 import org.entando.plugins.pda.core.service.task.FakeTaskService;
-import org.entando.plugins.pda.core.service.task.ProcessService;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
