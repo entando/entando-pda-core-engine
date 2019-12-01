@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import org.entando.plugins.pda.core.engine.Connection;
+import org.springframework.stereotype.Service;
 
+@Service
 public class FakeGroupService implements GroupService {
 
     private static final String SEPARATOR = "#";
