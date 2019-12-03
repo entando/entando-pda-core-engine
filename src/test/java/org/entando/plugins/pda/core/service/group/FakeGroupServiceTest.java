@@ -10,6 +10,13 @@ import org.junit.Test;
 
 public class FakeGroupServiceTest {
 
+    private static final String GROUP_1 = "group1";
+    private static final String GROUP_2 = "group2";
+    private static final String GROUP_3 = "group3";
+    private static final String GROUP_4 = "group4";
+    private static final String GROUP_5 = "group5";
+    private static final String GROUP_6 = "group6";
+    
     private FakeGroupService groupService;
 
     @Before
@@ -20,7 +27,7 @@ public class FakeGroupServiceTest {
     @Test
     public void shouldListAllGroups() {
         // Given
-        List<String> loadedGroups = Arrays.asList("group1", "group2", "group3");
+        List<String> loadedGroups = Arrays.asList(GROUP_1, GROUP_2, GROUP_3);
         groupService.addGroups(null, null, loadedGroups);
 
         // When
@@ -33,8 +40,8 @@ public class FakeGroupServiceTest {
     @Test
     public void shouldListGroupsByContainerIdAndProcessId() {
         // Given
-        List<String> loadedGroups1 = Arrays.asList("group1", "group2", "group3");
-        List<String> loadedGroups2 = Arrays.asList("group4", "group5", "group6");
+        List<String> loadedGroups1 = Arrays.asList(GROUP_1, GROUP_2, GROUP_3);
+        List<String> loadedGroups2 = Arrays.asList(GROUP_4, GROUP_5, GROUP_6);
         String first = "1";
         String second = "2";
         groupService.addGroups(first, first, loadedGroups1);
