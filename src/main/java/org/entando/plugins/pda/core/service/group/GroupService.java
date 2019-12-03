@@ -5,5 +5,5 @@ import org.entando.plugins.pda.core.engine.Connection;
 
 public interface GroupService {
 
-    List<String> list(Connection connection, String containerId, String processId);
+    List<String> list(Connection connection, String processId);
 }
