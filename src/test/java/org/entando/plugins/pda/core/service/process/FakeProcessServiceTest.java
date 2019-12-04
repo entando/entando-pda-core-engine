@@ -3,7 +3,9 @@ package org.entando.plugins.pda.core.service.process;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import java.util.List;
+import java.util.UUID;
 import org.entando.plugins.pda.core.engine.Connection;
+import org.entando.plugins.pda.core.exception.ProcessNotFoundException;
 import org.entando.plugins.pda.core.model.ProcessDefinition;
 import org.junit.Before;
 import org.junit.Rule;
@@ -28,6 +30,21 @@ public class FakeProcessServiceTest {
                 .listDefinitions(Connection.builder().build());
 
         assertThat(result).isNotEmpty();
+    }
+
+    @Test
+    public void shouldGetProcessDiagram() {
+        String result = processService.getProcessDiagram(Connection.builder().build(), FakeProcessService.PROCESS_ID_1);
+
+        assertThat(result).isNotNull();
+        assertThat(result.length()).isEqualTo(FakeProcessService.PROCESS_DIAGRAM_LENGTH_1);
+    }
+
+    @Test
+    public void shouldThrowProcessNotFoundException() {
+        expectedException.expect(ProcessNotFoundException.class);
+
+        processService.getProcessDiagram(Connection.builder().build(), UUID.randomUUID().toString());
     }
 
 }
