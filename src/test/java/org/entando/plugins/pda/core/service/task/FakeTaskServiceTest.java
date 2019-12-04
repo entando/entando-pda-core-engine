@@ -2,6 +2,7 @@ package org.entando.plugins.pda.core.service.task;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
+import java.util.Set;
 import java.util.UUID;
 import org.entando.keycloak.security.AuthenticatedUser;
 import org.entando.plugins.pda.core.engine.Connection;
@@ -9,6 +10,7 @@ import org.entando.plugins.pda.core.exception.TaskNotFoundException;
 import org.entando.plugins.pda.core.model.Task;
 import org.entando.web.request.PagedListRequest;
 import org.entando.web.response.PagedRestResponse;
+import org.entando.web.response.SimpleRestResponse;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -48,6 +50,14 @@ public class FakeTaskServiceTest {
         expectedException.expect(TaskNotFoundException.class);
 
         taskService.get(Connection.builder().build(), dummyUser(), UUID.randomUUID().toString());
+    }
+
+    @Test
+    public void shouldListTaskColumns() {
+        SimpleRestResponse<Set<String>> response = taskService
+                .listTaskColumns(Connection.builder().build(), dummyUser());
+
+        assertThat(response.getPayload()).containsAll(FakeTaskService.TASK_COLUMNS);
     }
 
     private AuthenticatedUser dummyUser() {
