@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.exception.ProcessNotFoundException;
@@ -51,11 +52,9 @@ public class FakeProcessService implements ProcessService {
     }
 
     private String readFromFile(String filename) {
-        InputStream is;
         try {
             File file = new ClassPathResource(filename).getFile();
-            is = Files.newInputStream(Paths.get(file.getAbsolutePath()));
-            return IOUtils.toString(is, Charset.defaultCharset().toString());
+            return FileUtils.readFileToString(file);
         } catch (IOException e) {
             throw new InternalServerException("Error reading file", e);
         }
