@@ -3,12 +3,16 @@ package org.entando.plugins.pda.core.service.process;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.apache.commons.io.IOUtils;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.exception.ProcessNotFoundException;
+import org.entando.plugins.pda.core.model.form.Form;
 import org.entando.plugins.pda.core.model.FakeProcessDefinition;
 import org.entando.plugins.pda.core.model.ProcessDefinition;
+import org.entando.plugins.pda.core.model.form.FormField;
+import org.entando.plugins.pda.core.model.form.FormFieldType;
 import org.entando.plugins.pda.core.service.task.ProcessService;
 import org.entando.web.exception.InternalServerException;
 import org.springframework.core.io.ClassPathResource;
@@ -29,12 +33,45 @@ public class FakeProcessService implements ProcessService {
     public static final int PROCESS_DIAGRAM_LENGTH_1 = 63_453;
 
     public static final String PROCESS_DEFINITION_ID_2 = "process-2";
+    public static final String PROCESS_ID_2 = "2";
     public static final String PROCESS_NAME_2 = "Process 2";
     public static final String PROCESS_PROP_2 = "New Prop 2";
 
     @Override
     public List<ProcessDefinition> listDefinitions(Connection connection) {
         return createProcessDefinitions();
+    }
+
+    @Override
+    public List<Form> getProcessForm(Connection connection, String processId) {
+
+        FormField formField1 = FormField.builder()
+                .id(PROCESS_ID_1)
+                .type(FormFieldType.INTEGER)
+                .name(PROCESS_NAME_1)
+                .label(PROCESS_NAME_1)
+                .build();
+
+        FormField formField2 = FormField.builder()
+                .id(PROCESS_ID_2)
+                .type(FormFieldType.INTEGER)
+                .name(PROCESS_NAME_2)
+                .label(PROCESS_NAME_2)
+                .build();
+
+        Form pf1 = Form.builder()
+                .id(PROCESS_ID_1)
+                .name(PROCESS_NAME_1)
+                .fields(Arrays.asList(formField1))
+                .build();
+
+        Form pf2 = Form.builder()
+                .id(PROCESS_ID_2)
+                .name(PROCESS_NAME_2)
+                .fields(Arrays.asList(formField2))
+                .build();
+
+        return Arrays.asList(pf1, pf2);
     }
 
     @Override
