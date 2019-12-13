@@ -3,22 +3,42 @@ package org.entando.plugins.pda.core.engine;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.entando.plugins.pda.core.exception.EngineNotSupportedException;
 import org.entando.plugins.pda.core.service.group.GroupService;
-import org.entando.plugins.pda.core.service.task.ProcessService;
+import org.entando.plugins.pda.core.service.process.ProcessService;
+import org.entando.plugins.pda.core.service.task.TaskCommentService;
+import org.entando.plugins.pda.core.service.task.TaskDefinitionService;
 import org.entando.plugins.pda.core.service.task.TaskService;
 
 @Getter
+@NoArgsConstructor
 @AllArgsConstructor
-public abstract class Engine {
+public class Engine {
 
     protected String type;
     protected TaskService taskService;
+    protected TaskDefinitionService taskDefinitionService;
+    protected TaskCommentService taskCommentService;
     protected ProcessService processService;
     protected GroupService groupService;
 
+    public Engine(String type) {
+        this.type = type;
+    }
+
     public TaskService getTaskService() {
         return Optional.ofNullable(taskService)
+                .orElseThrow(EngineNotSupportedException::new);
+    }
+
+    public TaskDefinitionService getTaskDefinitionService() {
+        return Optional.ofNullable(taskDefinitionService)
+                .orElseThrow(EngineNotSupportedException::new);
+    }
+
+    public TaskCommentService getTaskCommentService() {
+        return Optional.ofNullable(taskCommentService)
                 .orElseThrow(EngineNotSupportedException::new);
     }
 

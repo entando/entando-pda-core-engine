@@ -9,7 +9,6 @@ import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.exception.ProcessNotFoundException;
 import org.entando.plugins.pda.core.model.FakeProcessDefinition;
 import org.entando.plugins.pda.core.model.ProcessDefinition;
-import org.entando.plugins.pda.core.service.task.ProcessService;
 import org.entando.web.exception.InternalServerException;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
