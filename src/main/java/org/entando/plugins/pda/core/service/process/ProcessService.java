@@ -1,4 +1,4 @@
-package org.entando.plugins.pda.core.service.task;
+package org.entando.plugins.pda.core.service.process;
 
 import java.util.List;
 import org.entando.plugins.pda.core.engine.Connection;

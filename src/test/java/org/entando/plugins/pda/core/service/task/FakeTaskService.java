@@ -1,9 +1,14 @@
 package org.entando.plugins.pda.core.service.task;
 
-import com.google.common.collect.Sets;
+import static org.entando.plugins.pda.core.utils.TestUtils.TASK_ID_1;
+import static org.entando.plugins.pda.core.utils.TestUtils.TASK_ID_2;
+import static org.entando.plugins.pda.core.utils.TestUtils.TASK_NAME_1;
+import static org.entando.plugins.pda.core.utils.TestUtils.TASK_NAME_2;
+import static org.entando.plugins.pda.core.utils.TestUtils.TASK_SUBJECT_1;
+import static org.entando.plugins.pda.core.utils.TestUtils.TASK_SUBJECT_2;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import org.entando.keycloak.security.AuthenticatedUser;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.exception.TaskNotFoundException;
@@ -12,21 +17,10 @@ import org.entando.plugins.pda.core.model.Task;
 import org.entando.web.request.PagedListRequest;
 import org.entando.web.response.PagedMetadata;
 import org.entando.web.response.PagedRestResponse;
-import org.entando.web.response.SimpleRestResponse;
 import org.springframework.stereotype.Service;
 
 @Service
 public class FakeTaskService implements TaskService {
-
-    public static final String TASK_ID_1 = "1";
-    public static final String TASK_NAME_1 = "Task 1";
-    public static final String TASK_SUBJECT_1 = "Task Subject 1";
-
-    public static final String TASK_ID_2 = "2";
-    public static final String TASK_NAME_2 = "Task 2";
-    public static final String TASK_SUBJECT_2 = "Task Subject 2";
-
-    public static final Set<String> TASK_COLUMNS = Sets.newHashSet("id", "name", "subject");
 
     @Override
     public PagedRestResponse<Task> list(Connection connection, AuthenticatedUser user,
@@ -43,11 +37,6 @@ public class FakeTaskService implements TaskService {
         }
 
         throw new TaskNotFoundException();
-    }
-
-    @Override
-    public SimpleRestResponse<Set<String>> listTaskColumns(Connection connection, AuthenticatedUser user) {
-        return new SimpleRestResponse<>(TASK_COLUMNS);
     }
 
     private List<Task> createTasks() {

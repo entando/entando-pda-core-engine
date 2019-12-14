@@ -4,8 +4,12 @@ import org.entando.web.exception.NotFoundException;
 
 public class TaskNotFoundException extends NotFoundException {
 
+    public TaskNotFoundException(Throwable e) {
+        super("org.entando.error.task.notFound", e);
+    }
+
     public TaskNotFoundException() {
-        super("org.entando.error.task.notFound");
+        this(null);
     }
 
 }
