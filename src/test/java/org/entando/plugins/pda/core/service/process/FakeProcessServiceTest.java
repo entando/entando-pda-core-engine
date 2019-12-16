@@ -7,8 +7,6 @@ import java.util.UUID;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.exception.ProcessNotFoundException;
 import org.entando.plugins.pda.core.model.ProcessDefinition;
-import org.entando.plugins.pda.core.model.form.Form;
-import org.entando.plugins.pda.core.model.form.FormFieldType;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -47,32 +45,6 @@ public class FakeProcessServiceTest {
         expectedException.expect(ProcessNotFoundException.class);
 
         processService.getProcessDiagram(Connection.builder().build(), UUID.randomUUID().toString());
-    }
-
-    @Test
-    public void shouldGetProcessForm() {
-        List<Form> result = processService
-                .getProcessForm(Connection.builder().build(), "processId01");
-
-        assertThat(result).isNotEmpty();
-        assertThat(result.size()).isEqualTo(2);
-
-        assertThat(result.get(0).getId()).isEqualTo("1");
-        assertThat(result.get(0).getName()).isEqualTo("Process 1");
-        assertThat(result.get(0).getFields().size()).isEqualTo(1);
-        assertThat(result.get(0).getFields().get(0).getId()).isEqualTo("1");
-        assertThat(result.get(0).getFields().get(0).getType()).isEqualTo(FormFieldType.INTEGER);
-        assertThat(result.get(0).getFields().get(0).getName()).isEqualTo("Process 1");
-        assertThat(result.get(0).getFields().get(0).getLabel()).isEqualTo("Process 1");
-
-        assertThat(result.get(1).getId()).isEqualTo("2");
-        assertThat(result.get(1).getName()).isEqualTo("Process 2");
-        assertThat(result.get(1).getFields().size()).isEqualTo(1);
-        assertThat(result.get(1).getFields().get(0).getId()).isEqualTo("2");
-        assertThat(result.get(1).getFields().get(0).getType()).isEqualTo(FormFieldType.INTEGER);
-        assertThat(result.get(1).getFields().get(0).getName()).isEqualTo("Process 2");
-        assertThat(result.get(1).getFields().get(0).getLabel()).isEqualTo("Process 2");
-
     }
 
 }
