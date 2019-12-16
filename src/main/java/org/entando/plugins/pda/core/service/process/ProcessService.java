@@ -3,7 +3,6 @@ package org.entando.plugins.pda.core.service.process;
 import java.util.List;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.model.ProcessDefinition;
-import org.entando.plugins.pda.core.model.form.Form;
 
 public interface ProcessService {
 
