@@ -25,7 +25,6 @@ public class FakeProcessService implements ProcessService {
     public static final String PROCESS_NAME_1 = "Process 1";
     public static final String PROCESS_PROP_1 = "New Prop 1";
     public static final String PROCESS_DIAGRAM_FILENAME_1 = "process_diagram_1.svg";
-    public static final int PROCESS_DIAGRAM_LENGTH_1 = 63_453;
 
     public static final String PROCESS_DEFINITION_ID_2 = "process-2";
     public static final String PROCESS_NAME_2 = "Process 2";
