@@ -1,8 +1,15 @@
 package org.entando.plugins.pda.core.utils;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
+import java.io.InputStream;
+import org.apache.commons.io.IOUtils;
 import org.entando.keycloak.security.AuthenticatedUser;
 import org.entando.plugins.pda.core.engine.Connection;
+import org.entando.web.exception.InternalServerException;
 import org.keycloak.representations.AccessToken;
+import org.springframework.core.io.ClassPathResource;
 
 public abstract class TestUtils {
 
@@ -45,4 +52,17 @@ public abstract class TestUtils {
                 .port("8080")
                 .build();
     }
+
+    public static String readFromFile(String filename) {
+        try (InputStream is = new ClassPathResource(filename).getInputStream()){
+            return IOUtils.toString(is);
+        } catch (IOException e) {
+            throw new InternalServerException("Error reading file", e);
+        }
+    }
+
+    public static String minifyJsonString(String prettyJson) throws IOException {
+        return new ObjectMapper().readValue(prettyJson, JsonNode.class).toString();
+    }
+
 }

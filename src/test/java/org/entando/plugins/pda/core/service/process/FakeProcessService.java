@@ -1,16 +1,13 @@
 package org.entando.plugins.pda.core.service.process;
 
-import java.io.IOException;
-import java.io.InputStream;
+import static org.entando.plugins.pda.core.utils.TestUtils.readFromFile;
+
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.io.IOUtils;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.exception.ProcessNotFoundException;
 import org.entando.plugins.pda.core.model.FakeProcessDefinition;
 import org.entando.plugins.pda.core.model.ProcessDefinition;
-import org.entando.web.exception.InternalServerException;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -42,14 +39,6 @@ public class FakeProcessService implements ProcessService {
         }
 
         throw new ProcessNotFoundException();
-    }
-
-    private String readFromFile(String filename) {
-        try (InputStream is = new ClassPathResource(filename).getInputStream()){
-             return IOUtils.toString(is);
-        } catch (IOException e) {
-            throw new InternalServerException("Error reading file", e);
-        }
     }
 
     private List<ProcessDefinition> createProcessDefinitions() {
