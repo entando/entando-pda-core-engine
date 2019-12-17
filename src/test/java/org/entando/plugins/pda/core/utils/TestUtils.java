@@ -20,6 +20,12 @@ public abstract class TestUtils {
     public static final String TASK_COMMENT_ID_2_1 = "t2-c1";
     public static final String TASK_COMMENT_2_1 = "This is another task comment!";
 
+    public static final String PROCESS_ID_1 = "1";
+    public static final String PROCESS_NAME_1 = "Process 1";
+
+    public static final String PROCESS_ID_2 = "2";
+    public static final String PROCESS_NAME_2 = "Process 2";
+
     public static AuthenticatedUser getDummyUser() {
         return getDummyUser("test");
     }
