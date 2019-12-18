@@ -66,5 +66,5 @@ public abstract class TestUtils {
     public static String minifyJsonString(String prettyJson) throws IOException {
         return new ObjectMapper().readValue(prettyJson, JsonNode.class).toString();
     }
-    
+
 }
