@@ -9,7 +9,5 @@ public interface ProcessService {
 
     List<ProcessDefinition> listDefinitions(Connection connection);
 
-    List<Form> getProcessForm(Connection connection, String processId);
-
     String getProcessDiagram(Connection connection, String id);
 }
