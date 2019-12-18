@@ -12,8 +12,8 @@ public class FormField {
     private String id;
     private String name;
     private String label;
-    private Boolean required;
-    private Boolean readOnly;
+    private boolean required;
+    private boolean readOnly;
     private FormFieldType type;
     private String placeholder;
 
