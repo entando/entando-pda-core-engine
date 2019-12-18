@@ -18,14 +18,14 @@ public class FakeProcessService implements ProcessService {
     public static final String PROCESS_PROP_KEY = "new-key";
 
     public static final String PROCESS_DEFINITION_ID_1 = "process-1";
-    public static final String PROCESS_ID_1 = "1";
+    public static final String PROCESS_ID_1 = "process-1";
     public static final String PROCESS_NAME_1 = "Process 1";
-    public static final String PROCESS_PROP_1 = "New Prop 1";
     public static final String PROCESS_DIAGRAM_FILENAME_1 = "process_diagram_1.svg";
-
     public static final String PROCESS_DEFINITION_ID_2 = "process-2";
     public static final String PROCESS_NAME_2 = "Process 2";
-    public static final String PROCESS_PROP_2 = "New Prop 2";
+
+    public static final String PROCESS_PROP_1 = "Age of Property";
+    public static final String PROCESS_PROP_2 = "Address";
 
     @Override
     public List<ProcessDefinition> listDefinitions(Connection connection) {
@@ -41,7 +41,7 @@ public class FakeProcessService implements ProcessService {
         throw new ProcessNotFoundException();
     }
 
-    private List<ProcessDefinition> createProcessDefinitions() {
+    private static List<ProcessDefinition> createProcessDefinitions() {
         List<ProcessDefinition> result = new ArrayList<>();
 
         result.add(FakeProcessDefinition.builder()

@@ -29,11 +29,22 @@ public abstract class TestUtils {
 
     public static final String PROCESS_DEFINITION_ID = "part1@part2";
 
-    public static final String PROCESS_ID_1 = "1";
+    public static final String PROCESS_ID_1 = "process-1";
     public static final String PROCESS_NAME_1 = "Process 1";
 
-    public static final String PROCESS_ID_2 = "2";
+    public static final String PROCESS_ID_2 = "process-2";
     public static final String PROCESS_NAME_2 = "Process 2";
+
+    public static final String PROCESS_FORM_PROP_KEY_1 = "age";
+    public static final String PROCESS_FORM_PROP_KEY_2 = "address";
+    public static final String PROCESS_FORM_PROP_KEY_3 = "isNew";
+    public static final String PROCESS_FORM_PROP_1 = "Age of Property";
+    public static final String PROCESS_FORM_PROP_2 = "Address";
+    public static final String PROCESS_FORM_PROP_3 = "Is Property New?";
+    public static final String PROCESS_FORM_PROP_DESCRIPTION_1 = "This is the placeholder for form field 1";
+    public static final String PROCESS_FORM_PROP_DESCRIPTION_2 = "This is the placeholder for form field 2";
+    public static final String PROCESS_FORM_PROP_DESCRIPTION_3 = "This is the placeholder for form field 3";
+
 
     public static AuthenticatedUser getDummyUser() {
         return getDummyUser("test");

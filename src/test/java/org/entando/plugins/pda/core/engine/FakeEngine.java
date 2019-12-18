@@ -16,8 +16,7 @@ public class FakeEngine extends Engine {
     @Builder
     public FakeEngine(FakeTaskService taskService, FakeTaskDefinitionService taskDefinitionService,
             FakeTaskCommentService taskCommentService, FakeProcessService processService,
-            FakeProcessFormService processFormService,
-            FakeGroupService groupService) {
+            FakeProcessFormService processFormService, FakeGroupService groupService) {
         super(TYPE, taskService, taskDefinitionService, taskCommentService, processService, processFormService,
                 groupService);
     }
