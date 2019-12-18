@@ -1,6 +1,7 @@
 package org.entando.plugins.pda.core.service.process;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.entando.plugins.pda.core.utils.TestUtils.readFromFile;
 
 import java.util.List;
 import java.util.UUID;
@@ -36,8 +37,7 @@ public class FakeProcessServiceTest {
     public void shouldGetProcessDiagram() {
         String result = processService.getProcessDiagram(Connection.builder().build(), FakeProcessService.PROCESS_ID_1);
 
-        assertThat(result).isNotNull();
-        assertThat(result.length()).isEqualTo(FakeProcessService.PROCESS_DIAGRAM_LENGTH_1);
+        assertThat(result).isEqualTo(readFromFile(FakeProcessService.PROCESS_DIAGRAM_FILENAME_1));
     }
 
     @Test

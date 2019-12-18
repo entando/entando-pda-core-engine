@@ -5,6 +5,7 @@ import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.model.ProcessDefinition;
 
 public interface ProcessService {
+
     List<ProcessDefinition> listDefinitions(Connection connection);
 
     String getProcessDiagram(Connection connection, String id);

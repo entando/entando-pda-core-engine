@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.entando.plugins.pda.core.exception.EngineNotSupportedException;
 import org.entando.plugins.pda.core.service.group.GroupService;
+import org.entando.plugins.pda.core.service.process.ProcessFormService;
 import org.entando.plugins.pda.core.service.process.ProcessService;
 import org.entando.plugins.pda.core.service.task.TaskCommentService;
 import org.entando.plugins.pda.core.service.task.TaskDefinitionService;
@@ -21,6 +22,7 @@ public class Engine {
     protected TaskDefinitionService taskDefinitionService;
     protected TaskCommentService taskCommentService;
     protected ProcessService processService;
+    protected ProcessFormService processFormService;
     protected GroupService groupService;
 
     public Engine(String type) {
@@ -44,6 +46,11 @@ public class Engine {
 
     public ProcessService getProcessService() {
         return Optional.ofNullable(processService)
+                .orElseThrow(EngineNotSupportedException::new);
+    }
+
+    public ProcessFormService getProcessFormService() {
+        return Optional.ofNullable(processFormService)
                 .orElseThrow(EngineNotSupportedException::new);
     }
 
