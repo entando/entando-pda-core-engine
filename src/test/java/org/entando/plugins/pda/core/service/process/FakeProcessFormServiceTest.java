@@ -1,14 +1,19 @@
 package org.entando.plugins.pda.core.service.process;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.entando.plugins.pda.core.service.process.FakeProcessFormService.FORMS;
+import static org.entando.plugins.pda.core.utils.TestUtils.PROCESS_DEFINITION_ID;
+import static org.entando.plugins.pda.core.utils.TestUtils.PROCESS_ID_1;
 
 import java.util.List;
 import org.entando.plugins.pda.core.engine.Connection;
+import org.entando.plugins.pda.core.exception.ProcessNotFoundException;
 import org.entando.plugins.pda.core.model.form.Form;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.springframework.http.HttpStatus;
 
 public class FakeProcessFormServiceTest {
 
@@ -25,9 +30,15 @@ public class FakeProcessFormServiceTest {
     @Test
     public void shouldGetProcessForm() {
         List<Form> result = processFormService
-                .getProcessForm(Connection.builder().build(), "processId01");
+                .getProcessForm(Connection.builder().build(), PROCESS_ID_1);
 
-        assertThat(result).isEqualTo(FakeProcessFormService.FORMS);
+        assertThat(result).isEqualTo(FORMS);
+    }
+
+    @Test
+    public void shouldThrowProcessNotFound() {
+        expectedException.expect(ProcessNotFoundException.class);
+        processFormService.getProcessForm(Connection.builder().build(), PROCESS_DEFINITION_ID);
     }
 
 }

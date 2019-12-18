@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.entando.plugins.pda.core.engine.Connection;
+import org.entando.plugins.pda.core.exception.ProcessNotFoundException;
 import org.entando.plugins.pda.core.model.form.Form;
 import org.entando.plugins.pda.core.model.form.FormField;
 import org.entando.plugins.pda.core.model.form.FormFieldType;
@@ -49,7 +50,11 @@ public class FakeProcessFormService implements ProcessFormService {
 
     @Override
     public List<Form> getProcessForm(Connection connection, String processId) {
-        return FORMS;
+        if (PROCESS_ID_1.equals(processId)){
+            return FORMS;
+        }
+
+        throw new ProcessNotFoundException();
     }
 
 }
