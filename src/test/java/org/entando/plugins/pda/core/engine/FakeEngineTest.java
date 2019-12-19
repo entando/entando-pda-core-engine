@@ -4,9 +4,11 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import org.entando.plugins.pda.core.exception.EngineNotSupportedException;
 import org.entando.plugins.pda.core.service.group.FakeGroupService;
+import org.entando.plugins.pda.core.service.process.FakeProcessFormService;
 import org.entando.plugins.pda.core.service.process.FakeProcessService;
 import org.entando.plugins.pda.core.service.task.FakeTaskCommentService;
 import org.entando.plugins.pda.core.service.task.FakeTaskDefinitionService;
+import org.entando.plugins.pda.core.service.task.FakeTaskFormService;
 import org.entando.plugins.pda.core.service.task.FakeTaskService;
 import org.junit.Rule;
 import org.junit.Test;
@@ -49,11 +51,27 @@ public class FakeEngineTest {
     }
 
     @Test
+    public void shouldReturnTaskFormService() {
+        FakeTaskFormService taskFormService = new FakeTaskFormService();
+        Engine engine = FakeEngine.builder().taskFormService(taskFormService).build();
+
+        assertThat(engine.getTaskFormService()).isEqualTo(taskFormService);
+    }
+
+    @Test
     public void shouldReturnProcessService() {
         FakeProcessService processService = new FakeProcessService();
         Engine engine = FakeEngine.builder().processService(processService).build();
 
         assertThat(engine.getProcessService()).isEqualTo(processService);
+    }
+
+    @Test
+    public void shouldReturnProcessFormService() {
+        FakeProcessFormService processFormService = new FakeProcessFormService();
+        Engine engine = FakeEngine.builder().processFormService(processFormService).build();
+
+        assertThat(engine.getProcessFormService()).isEqualTo(processFormService);
     }
 
     @Test

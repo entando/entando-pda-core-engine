@@ -6,6 +6,7 @@ import org.entando.plugins.pda.core.service.process.FakeProcessFormService;
 import org.entando.plugins.pda.core.service.process.FakeProcessService;
 import org.entando.plugins.pda.core.service.task.FakeTaskCommentService;
 import org.entando.plugins.pda.core.service.task.FakeTaskDefinitionService;
+import org.entando.plugins.pda.core.service.task.FakeTaskFormService;
 import org.entando.plugins.pda.core.service.task.FakeTaskService;
 import org.springframework.stereotype.Component;
 
@@ -15,9 +16,10 @@ public class FakeEngine extends Engine {
 
     @Builder
     public FakeEngine(FakeTaskService taskService, FakeTaskDefinitionService taskDefinitionService,
-            FakeTaskCommentService taskCommentService, FakeProcessService processService,
-            FakeProcessFormService processFormService, FakeGroupService groupService) {
-        super(TYPE, taskService, taskDefinitionService, taskCommentService, processService, processFormService,
-                groupService);
+            FakeTaskCommentService taskCommentService, FakeTaskFormService taskFormService,
+            FakeProcessService processService, FakeProcessFormService processFormService,
+            FakeGroupService groupService) {
+        super(TYPE, taskService, taskDefinitionService, taskCommentService, taskFormService, processService,
+                processFormService, groupService);
     }
 }

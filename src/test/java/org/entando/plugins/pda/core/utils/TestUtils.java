@@ -13,6 +13,8 @@ import org.springframework.core.io.ClassPathResource;
 
 public abstract class TestUtils {
 
+    public static final String TASK_DEFINITION_ID = "1@part2";
+
     public static final String TASK_ID_1 = "1";
     public static final String TASK_NAME_1 = "Task 1";
     public static final String TASK_SUBJECT_1 = "Task Subject 1";
@@ -26,6 +28,13 @@ public abstract class TestUtils {
     public static final String TASK_SUBJECT_2 = "Task Subject 2";
     public static final String TASK_COMMENT_ID_2_1 = "t2-c1";
     public static final String TASK_COMMENT_2_1 = "This is another task comment!";
+
+    public static final String TASK_FORM_PROP_KEY_1 = "reason";
+    public static final String TASK_FORM_PROP_KEY_2 = "performance";
+    public static final String TASK_FORM_PROP_1 = "Reason";
+    public static final String TASK_FORM_PROP_2 = "Performance";
+    public static final String TASK_FORM_PROP_DESCRIPTION_1 = "This is the placeholder for form field 1";
+    public static final String TASK_FORM_PROP_DESCRIPTION_2 = "This is the placeholder for form field 2";
 
     public static final String PROCESS_DEFINITION_ID = "part1@part2";
 

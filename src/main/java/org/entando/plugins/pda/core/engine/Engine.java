@@ -10,6 +10,7 @@ import org.entando.plugins.pda.core.service.process.ProcessFormService;
 import org.entando.plugins.pda.core.service.process.ProcessService;
 import org.entando.plugins.pda.core.service.task.TaskCommentService;
 import org.entando.plugins.pda.core.service.task.TaskDefinitionService;
+import org.entando.plugins.pda.core.service.task.TaskFormService;
 import org.entando.plugins.pda.core.service.task.TaskService;
 
 @Getter
@@ -21,6 +22,7 @@ public class Engine {
     protected TaskService taskService;
     protected TaskDefinitionService taskDefinitionService;
     protected TaskCommentService taskCommentService;
+    protected TaskFormService taskFormService;
     protected ProcessService processService;
     protected ProcessFormService processFormService;
     protected GroupService groupService;
@@ -41,6 +43,11 @@ public class Engine {
 
     public TaskCommentService getTaskCommentService() {
         return Optional.ofNullable(taskCommentService)
+                .orElseThrow(EngineNotSupportedException::new);
+    }
+
+    public TaskFormService getTaskFormService() {
+        return Optional.ofNullable(taskFormService)
                 .orElseThrow(EngineNotSupportedException::new);
     }
 

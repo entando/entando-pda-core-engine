@@ -1,0 +1,75 @@
+package org.entando.plugins.pda.core.service.task;
+
+import static org.entando.plugins.pda.core.utils.TestUtils.TASK_FORM_PROP_1;
+import static org.entando.plugins.pda.core.utils.TestUtils.TASK_FORM_PROP_2;
+import static org.entando.plugins.pda.core.utils.TestUtils.TASK_FORM_PROP_DESCRIPTION_1;
+import static org.entando.plugins.pda.core.utils.TestUtils.TASK_FORM_PROP_DESCRIPTION_2;
+import static org.entando.plugins.pda.core.utils.TestUtils.TASK_FORM_PROP_KEY_1;
+import static org.entando.plugins.pda.core.utils.TestUtils.TASK_FORM_PROP_KEY_2;
+import static org.entando.plugins.pda.core.utils.TestUtils.TASK_ID_1;
+import static org.entando.plugins.pda.core.utils.TestUtils.TASK_ID_2;
+import static org.entando.plugins.pda.core.utils.TestUtils.TASK_NAME_1;
+import static org.entando.plugins.pda.core.utils.TestUtils.TASK_NAME_2;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import org.entando.plugins.pda.core.engine.Connection;
+import org.entando.plugins.pda.core.exception.TaskNotFoundException;
+import org.entando.plugins.pda.core.model.form.Form;
+import org.entando.plugins.pda.core.model.form.FormField;
+import org.entando.plugins.pda.core.model.form.FormFieldInteger;
+import org.entando.plugins.pda.core.model.form.FormFieldText;
+import org.entando.plugins.pda.core.model.form.FormFieldType;
+import org.springframework.stereotype.Service;
+
+@Service
+public class FakeTaskFormService implements TaskFormService {
+
+    public static final List<Form> TASK_FORMS = new ArrayList<>();
+
+    static {
+        FormField formField11 = FormFieldInteger.builder()
+                .id(TASK_FORM_PROP_1)
+                .type(FormFieldType.INTEGER)
+                .name(TASK_FORM_PROP_KEY_1)
+                .label(TASK_FORM_PROP_1)
+                .placeholder(TASK_FORM_PROP_DESCRIPTION_1)
+                .minValue(0)
+                .maxValue(10)
+                .build();
+
+        FormField formField21 = FormFieldText.builder()
+                .id(TASK_FORM_PROP_2)
+                .type(FormFieldType.STRING)
+                .name(TASK_FORM_PROP_KEY_2)
+                .label(TASK_FORM_PROP_2)
+                .placeholder(TASK_FORM_PROP_DESCRIPTION_2)
+                .build();
+
+        Form pf1 = Form.builder()
+                .id(TASK_ID_1)
+                .name(TASK_NAME_1)
+                .fields(Collections.singletonList(formField11))
+                .build();
+
+        Form pf2 = Form.builder()
+                .id(TASK_ID_2)
+                .name(TASK_NAME_2)
+                .fields(Collections.singletonList(formField21))
+                .build();
+
+        TASK_FORMS.add(pf1);
+        TASK_FORMS.add(pf2);
+    }
+
+    @Override
+    public List<Form> getTaskForm(Connection connection, String taskId) {
+        if (TASK_ID_1.equals(taskId)){
+            return TASK_FORMS;
+        }
+
+        throw new TaskNotFoundException();
+    }
+
+}

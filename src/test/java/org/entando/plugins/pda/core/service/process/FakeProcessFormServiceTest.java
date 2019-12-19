@@ -1,7 +1,7 @@
 package org.entando.plugins.pda.core.service.process;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.entando.plugins.pda.core.service.process.FakeProcessFormService.FORMS;
+import static org.entando.plugins.pda.core.service.process.FakeProcessFormService.PROCESS_FORMS;
 import static org.entando.plugins.pda.core.utils.TestUtils.PROCESS_DEFINITION_ID;
 import static org.entando.plugins.pda.core.utils.TestUtils.PROCESS_ID_1;
 
@@ -31,7 +31,7 @@ public class FakeProcessFormServiceTest {
         List<Form> result = processFormService
                 .getProcessForm(Connection.builder().build(), PROCESS_ID_1);
 
-        assertThat(result).isEqualTo(FORMS);
+        assertThat(result).isEqualTo(PROCESS_FORMS);
     }
 
     @Test
