@@ -2,10 +2,10 @@ package org.entando.plugins.pda.core.service.task;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.entando.plugins.pda.core.service.task.FakeTaskFormService.TASK_FORMS;
-import static org.entando.plugins.pda.core.utils.TestUtils.TASK_DEFINITION_ID;
 import static org.entando.plugins.pda.core.utils.TestUtils.TASK_ID_1;
 
 import java.util.List;
+import java.util.UUID;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.exception.TaskNotFoundException;
 import org.entando.plugins.pda.core.model.form.Form;
@@ -37,7 +37,7 @@ public class FakeTaskFormServiceTest {
     @Test
     public void shouldThrowTaskNotFound() {
         expectedException.expect(TaskNotFoundException.class);
-        taskFormService.getTaskForm(Connection.builder().build(), TASK_DEFINITION_ID);
+        taskFormService.getTaskForm(Connection.builder().build(), UUID.randomUUID().toString());
     }
 
 }
