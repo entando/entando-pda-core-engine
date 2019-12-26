@@ -30,7 +30,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class FakeProcessFormService implements ProcessFormService {
 
-    public static final List<Form> FORMS = new ArrayList<>();
+    public static final List<Form> PROCESS_FORMS = new ArrayList<>();
 
     static {
         FormField formField11 = FormFieldInteger.builder()
@@ -73,14 +73,14 @@ public class FakeProcessFormService implements ProcessFormService {
                 .fields(Collections.singletonList(formField21))
                 .build();
 
-        FORMS.add(pf1);
-        FORMS.add(pf2);
+        PROCESS_FORMS.add(pf1);
+        PROCESS_FORMS.add(pf2);
     }
 
     @Override
     public List<Form> getProcessForm(Connection connection, String processId) {
         if (PROCESS_ID_1.equals(processId)){
-            return FORMS;
+            return PROCESS_FORMS;
         }
 
         throw new ProcessNotFoundException();
