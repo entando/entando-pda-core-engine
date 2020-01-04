@@ -31,11 +31,11 @@ public class Comment {
     }
 
     public Date getCreatedAt() {
-        return createdAt == null ? null : (Date) createdAt.clone();
+        return createdAt == null ? null : new Date(createdAt.getTime());
     }
 
     public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt == null ? null : (Date) createdAt.clone();
+        this.createdAt = createdAt == null ? null : new Date(createdAt.getTime());
     }
 }
 

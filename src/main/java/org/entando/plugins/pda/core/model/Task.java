@@ -1,29 +1,70 @@
 package org.entando.plugins.pda.core.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import java.util.Date;
 import java.util.Map;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.entando.web.response.BaseMapModel;
 
+@Data
 @NoArgsConstructor
-public abstract class Task extends BaseMapModel {
+@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "The warned bug is exposure on the Builder,"
+        + "however after .build() the constructor is called and vulnerability is resolved")
+public class Task {
 
-    public Task(Map<String,Object> map) {
-        super(map);
+    protected String id;
+    protected String name;
+    protected String description;
+    protected String createdBy;
+    protected Date createdAt;
+    protected Date dueTo;
+    protected Status status;
+    protected String owner;
+    protected Map<String, Object> variables;
+
+    @Builder(builderMethodName = "taskBuilder")
+    public Task(String id, String name, String description, String createdBy, Date createdAt, Date dueTo,
+            Status status, String owner, Map<String, Object> variables) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.createdBy = createdBy;
+        this.createdAt = createdAt == null ? null : new Date(createdAt.getTime());
+        this.dueTo = dueTo == null ? null : new Date(dueTo.getTime());
+        this.status = status;
+        this.owner = owner;
+        this.variables = variables;
     }
 
-    @JsonIgnore
-    public abstract String getId();
+    @JsonAnyGetter
+    public Map<String,Object> getVariables() {
+        return variables;
+    }
 
-    @JsonIgnore
-    public abstract String getName();
+    public Date getCreatedAt() {
+        return createdAt == null ? null : new Date(createdAt.getTime());
+    }
 
-    @JsonIgnore
-    public abstract String getProcessId();
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt == null ? null : new Date(createdAt.getTime());
+    }
 
-    @JsonIgnore
-    public abstract String getProcessInstanceId();
+    public Date getDueTo() {
+        return dueTo == null ? null : new Date(dueTo.getTime());
+    }
 
-    @JsonIgnore
-    public abstract String getContainerId();
+    public void setDueTo(Date dueTo) {
+        this.dueTo = dueTo == null ? null : new Date(dueTo.getTime());
+    }
+
+    public enum Status {
+        CREATED,
+        RESERVED,
+        IN_PROGRESS,
+        PAUSED,
+        COMPLETED,
+        FAILED
+    }
 }

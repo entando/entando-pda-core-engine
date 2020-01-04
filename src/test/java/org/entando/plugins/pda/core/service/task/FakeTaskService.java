@@ -8,11 +8,11 @@ import static org.entando.plugins.pda.core.utils.TestUtils.TASK_SUBJECT_1;
 import static org.entando.plugins.pda.core.utils.TestUtils.TASK_SUBJECT_2;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.entando.keycloak.security.AuthenticatedUser;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.exception.TaskNotFoundException;
-import org.entando.plugins.pda.core.model.FakeTask;
 import org.entando.plugins.pda.core.model.Task;
 import org.entando.web.request.PagedListRequest;
 import org.entando.web.response.PagedMetadata;
@@ -42,16 +42,16 @@ public class FakeTaskService implements TaskService {
     private List<Task> createTasks() {
         List<Task> result = new ArrayList<>();
 
-        result.add(FakeTask.builder()
+        result.add(Task.taskBuilder()
                 .id(TASK_ID_1)
                 .name(TASK_NAME_1)
-                .extraProperty("subject", TASK_SUBJECT_1)
+                .variables(Collections.singletonMap("subject", TASK_SUBJECT_1))
                 .build());
 
-        result.add(FakeTask.builder()
+        result.add(Task.taskBuilder()
                 .id(TASK_ID_2)
                 .name(TASK_NAME_2)
-                .extraProperty("subject", TASK_SUBJECT_2)
+                .variables(Collections.singletonMap("subject", TASK_SUBJECT_2))
                 .build());
 
         return result;
