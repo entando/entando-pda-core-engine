@@ -1,6 +1,5 @@
 package org.entando.plugins.pda.core.model;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.Date;
 import java.util.Map;
@@ -22,11 +21,13 @@ public class Task {
     protected Date dueTo;
     protected Status status;
     protected String owner;
-    protected Map<String, Object> variables;
+    protected Map<String, Object> inputData;
+    protected Map<String, Object> outputData;
 
     @Builder(builderMethodName = "taskBuilder")
+    @SuppressWarnings("PMD.ExcessiveParameterList")
     public Task(String id, String name, String description, String createdBy, Date createdAt, Date dueTo,
-            Status status, String owner, Map<String, Object> variables) {
+            Status status, String owner, Map<String, Object> inputData, Map<String, Object> outputData) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -35,12 +36,8 @@ public class Task {
         this.dueTo = dueTo == null ? null : new Date(dueTo.getTime());
         this.status = status;
         this.owner = owner;
-        this.variables = variables;
-    }
-
-    @JsonAnyGetter
-    public Map<String,Object> getVariables() {
-        return variables;
+        this.inputData = inputData;
+        this.outputData = outputData;
     }
 
     public Date getCreatedAt() {

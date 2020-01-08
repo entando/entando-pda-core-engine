@@ -45,13 +45,13 @@ public class FakeTaskService implements TaskService {
         result.add(Task.taskBuilder()
                 .id(TASK_ID_1)
                 .name(TASK_NAME_1)
-                .variables(Collections.singletonMap("subject", TASK_SUBJECT_1))
+                .inputData(Collections.singletonMap("subject", TASK_SUBJECT_1))
                 .build());
 
         result.add(Task.taskBuilder()
                 .id(TASK_ID_2)
                 .name(TASK_NAME_2)
-                .variables(Collections.singletonMap("subject", TASK_SUBJECT_2))
+                .inputData(Collections.singletonMap("subject", TASK_SUBJECT_2))
                 .build());
 
         return result;
