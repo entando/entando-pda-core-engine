@@ -14,15 +14,12 @@ public class Connection {
 
     private String name;
     private String host;
-    @Builder.Default
-    private String port = "80";
+    private String port;
     private String schema;
-    @Builder.Default
-    private String app = "/";
+    private String app;
     private String username;
     private String password;
-    @Builder.Default
-    private Integer connectionTimeout = 60_000; //millis
+    private Integer connectionTimeout;
     private Map<String, String> properties;
     private String engine;
 
