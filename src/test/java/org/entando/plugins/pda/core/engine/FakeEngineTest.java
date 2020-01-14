@@ -53,7 +53,7 @@ public class FakeEngineTest {
 
     @Test
     public void shouldReturnTaskFormService() {
-        FakeTaskFormService taskFormService = new FakeTaskFormService();
+        FakeTaskFormService taskFormService = new FakeTaskFormService(null);
         Engine engine = FakeEngine.builder().taskFormService(taskFormService).build();
 
         assertThat(engine.getTaskFormService()).isEqualTo(taskFormService);
