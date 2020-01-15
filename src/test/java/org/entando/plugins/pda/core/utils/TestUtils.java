@@ -4,7 +4,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.UUID;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.RandomStringUtils;
 import org.entando.keycloak.security.AuthenticatedUser;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.web.exception.InternalServerException;
@@ -13,8 +15,7 @@ import org.springframework.core.io.ClassPathResource;
 
 public abstract class TestUtils {
 
-    public static final String TASK_DEFINITION_ID = "1@part2";
-    public static final String NON_EXISTENT_TASK_ID = "1@part2";
+    public static final String CONTAINER_ID_1 = "container1";
 
     public static final String TASK_ID_1 = "1";
     public static final String TASK_NAME_1 = "Task 1";
@@ -30,6 +31,8 @@ public abstract class TestUtils {
     public static final String TASK_COMMENT_ID_2_1 = "t2-c1";
     public static final String TASK_COMMENT_2_1 = "This is another task comment!";
 
+    public static final String TASK_FORM_ID_1 = "taskForm1";
+    public static final String TASK_FORM_ID_2 = "taskForm2";
     public static final String TASK_FORM_PROP_KEY_1 = "reason";
     public static final String TASK_FORM_PROP_KEY_2 = "external";
     public static final String TASK_FORM_PROP_KEY_3 = "performance";
@@ -48,6 +51,8 @@ public abstract class TestUtils {
     public static final String PROCESS_ID_2 = "process-2";
     public static final String PROCESS_NAME_2 = "Process 2";
 
+    public static final String PROCESS_FORM_ID_1 = "processForm1";
+    public static final String PROCESS_FORM_ID_2 = "processForm2";
     public static final String PROCESS_FORM_PROP_KEY_1 = "age";
     public static final String PROCESS_FORM_PROP_KEY_2 = "address";
     public static final String PROCESS_FORM_PROP_KEY_3 = "isNew";
@@ -77,6 +82,14 @@ public abstract class TestUtils {
                 .host("myurl")
                 .port("8080")
                 .build();
+    }
+
+    public static String randomStringId() {
+        return UUID.randomUUID().toString();
+    }
+
+    public static Long randomLongId() {
+        return Long.valueOf(RandomStringUtils.randomNumeric(10));
     }
 
     public static String readFromFile(String filename) {

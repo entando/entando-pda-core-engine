@@ -10,6 +10,8 @@ import static org.entando.plugins.pda.core.utils.TestUtils.TASK_SUBJECT_2;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import org.entando.keycloak.security.AuthenticatedUser;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.exception.TaskNotFoundException;
@@ -22,24 +24,29 @@ import org.springframework.stereotype.Service;
 @Service
 public class FakeTaskService implements TaskService {
 
+    public static final Map<String, Task> TASKS = new ConcurrentHashMap<>();
+
+    static {
+        for (Task task : createTasks()) {
+            TASKS.put(task.getId(), task);
+        }
+    }
+
     @Override
     public PagedRestResponse<Task> list(Connection connection, AuthenticatedUser user,
             PagedListRequest restListRequest) {
-        return new PagedRestResponse<>(new PagedMetadata<>(restListRequest, createTasks()));
+        return new PagedRestResponse<>(new PagedMetadata<>(restListRequest, new ArrayList<>(TASKS.values())));
     }
 
     @Override
     public Task get(Connection connection, AuthenticatedUser user, String id) {
-        for (Task task : createTasks()) {
-            if (task.getId().equals(id)) {
-                return task;
-            }
-        }
-
-        throw new TaskNotFoundException();
+        return TASKS.values().stream()
+                .filter(task -> task.getId().equals(id))
+                .findFirst()
+                .orElseThrow(TaskNotFoundException::new);
     }
 
-    private List<Task> createTasks() {
+    private static List<Task> createTasks() {
         List<Task> result = new ArrayList<>();
 
         result.add(Task.taskBuilder()

@@ -18,17 +18,27 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import lombok.RequiredArgsConstructor;
+import org.entando.keycloak.security.AuthenticatedUser;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.exception.TaskNotFoundException;
+import org.entando.plugins.pda.core.model.Task;
 import org.entando.plugins.pda.core.model.form.Form;
 import org.entando.plugins.pda.core.model.form.FormField;
 import org.entando.plugins.pda.core.model.form.FormFieldInteger;
 import org.entando.plugins.pda.core.model.form.FormFieldText;
 import org.entando.plugins.pda.core.model.form.FormFieldType;
+import org.entando.plugins.pda.core.model.task.CreateTaskFormSubmissionRequest;
 import org.springframework.stereotype.Service;
 
+@SuppressWarnings("PMD.ExcessiveImports")
 @Service
+@RequiredArgsConstructor
 public class FakeTaskFormService implements TaskFormService {
+
+    private final FakeTaskService taskService;
 
     public static final List<Form> TASK_FORMS = new ArrayList<>();
 
@@ -76,12 +86,25 @@ public class FakeTaskFormService implements TaskFormService {
     }
 
     @Override
-    public List<Form> getTaskForm(Connection connection, String taskId) {
+    public List<Form> get(Connection connection, String taskId) {
         if (TASK_ID_1.equals(taskId)){
             return TASK_FORMS;
         }
 
         throw new TaskNotFoundException();
+    }
+
+    @Override
+    public Task submit(Connection connection, AuthenticatedUser user, String taskId,
+            CreateTaskFormSubmissionRequest request) {
+
+        Task task = taskService.get(connection, null, taskId);
+
+        Map<String, Object> variables = new ConcurrentHashMap<>();
+        request.getForms().values().forEach(variables::putAll);
+
+        task.setOutputData(variables);
+        return task;
     }
 
 }
