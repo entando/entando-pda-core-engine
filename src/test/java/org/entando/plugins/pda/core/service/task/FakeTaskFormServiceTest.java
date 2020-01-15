@@ -69,7 +69,7 @@ public class FakeTaskFormServiceTest {
                 .build();
 
         Map<String, Object> expected = new ConcurrentHashMap<>();
-        request.getForms().forEach((key, value) -> value.forEach(expected::put));
+        request.getForms().values().forEach(expected::putAll);
 
         //When
         Task task = taskFormService.submit(getDummyConnection(), getDummyUser(), TASK_ID_1, request);

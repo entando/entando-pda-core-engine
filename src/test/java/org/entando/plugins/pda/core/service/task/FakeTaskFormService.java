@@ -101,7 +101,7 @@ public class FakeTaskFormService implements TaskFormService {
         Task task = taskService.get(connection, null, taskId);
 
         Map<String, Object> variables = new ConcurrentHashMap<>();
-        request.getForms().forEach((key, value) -> value.forEach(variables::put));
+        request.getForms().values().forEach(variables::putAll);
 
         task.setOutputData(variables);
         return task;

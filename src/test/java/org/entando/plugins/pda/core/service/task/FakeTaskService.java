@@ -40,13 +40,10 @@ public class FakeTaskService implements TaskService {
 
     @Override
     public Task get(Connection connection, AuthenticatedUser user, String id) {
-        for (Task task : TASKS.values()) {
-            if (task.getId().equals(id)) {
-                return task;
-            }
-        }
-
-        throw new TaskNotFoundException();
+        return TASKS.values().stream()
+                .filter(task -> task.getId().equals(id))
+                .findFirst()
+                .orElseThrow(TaskNotFoundException::new);
     }
 
     private static List<Task> createTasks() {
