@@ -18,5 +18,5 @@ public class Summary {
     private String title;
     private String totalLabel;
     private String total;
-    private double percentage;
+    private String percentage;
 }

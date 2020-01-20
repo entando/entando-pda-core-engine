@@ -57,7 +57,7 @@ public class SummaryServiceTest {
     public void shouldRegisterNewSummaryType() {
         // Given
         String id = "requests";
-        Summary summary = Summary.builder().title("Requests").percentage(98).total("2567")
+        Summary summary = Summary.builder().title("Requests").percentage("98").total("2567")
                 .totalLabel("Total Requests").build();
         SummaryType summaryType = newSummaryType(TEST_ENGINE, id, summary);
 
@@ -77,15 +77,15 @@ public class SummaryServiceTest {
     public void shouldReturnSummaryTypeById() {
         // Given
         Summary requests = Summary.builder().title("Requests").totalLabel("Total Requests")
-                .total("2567").percentage(98).build();
+                .total("2567").percentage("98").build();
         String requestsId = "requests";
         summaryService.registerSummaryType(newSummaryType(TEST_ENGINE, requestsId, requests));
         summaryService.registerSummaryType(newSummaryType(TEST_ENGINE, "cases",
-                Summary.builder().title("Cases").totalLabel("Total Cases").total("80800").percentage(20)
+                Summary.builder().title("Cases").totalLabel("Total Cases").total("80800").percentage("20")
                         .build()));
         summaryService.registerSummaryType(newSummaryType(TEST_ENGINE, "time_to_complete",
                 Summary.builder().title("Time to Complete").totalLabel("Case creation to completion").total("2.5 days")
-                        .percentage(44).build()));
+                        .percentage("44").build()));
 
         // When
         SummaryType summaryType = summaryService.getSummaryTypeById(TEST_ENGINE, requestsId);
@@ -103,7 +103,7 @@ public class SummaryServiceTest {
     public void shouldCalculateSummary() {
         // Given
         Summary requests = Summary.builder().title("Requests").totalLabel("Total Requests")
-                .total("2567").percentage(98).build();
+                .total("2567").percentage("98").build();
         String requestsId = "requests";
         summaryService.registerSummaryType(newSummaryType(TEST_ENGINE, requestsId, requests));
 
