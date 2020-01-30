@@ -17,12 +17,8 @@ public class Form {
     private List<FormField> fields;
 
     public FormField getFieldByName(String id) {
-        for (FormField field : fields) {
-            if (id.equalsIgnoreCase(field.getName())) {
-                return field;
-            }
-        }
-
-        return null;
+        return fields.stream()
+                .filter(e -> id.equalsIgnoreCase(e.getId()))
+                .findFirst().orElse(null);
     }
 }
