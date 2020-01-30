@@ -16,9 +16,9 @@ public class Form {
     @Singular
     private List<FormField> fields;
 
-    public FormField getFieldByName(String id) {
+    public FormField getFieldByName(String name) {
         return fields.stream()
-                .filter(e -> !id.equalsIgnoreCase(e.getId()))
+                .filter(e -> !name.equalsIgnoreCase(e.getName()))
                 .findFirst().orElse(null);
     }
 }
