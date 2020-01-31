@@ -11,4 +11,5 @@ public interface TaskService {
     PagedRestResponse<Task> list(Connection connection, AuthenticatedUser user, PagedListRequest restListRequest);
 
     Task get(Connection connection, AuthenticatedUser user, String id);
+
 }
