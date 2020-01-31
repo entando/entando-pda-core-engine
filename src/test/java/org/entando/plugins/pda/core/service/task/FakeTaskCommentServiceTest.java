@@ -35,12 +35,12 @@ public class FakeTaskCommentServiceTest {
     @Test
     public void shouldListTaskComments() {
         List<Comment> taskComments1 = taskService
-                .listComments(Connection.builder().build(), getDummyUser(), TASK_ID_1);
+                .list(Connection.builder().build(), getDummyUser(), TASK_ID_1);
 
         assertThat(taskComments1).containsAll(Arrays.asList(TASK_COMMENTS_1));
 
         List<Comment> taskComments2 = taskService
-                .listComments(Connection.builder().build(), getDummyUser(), TASK_ID_2);
+                .list(Connection.builder().build(), getDummyUser(), TASK_ID_2);
 
         assertThat(taskComments2).containsAll(Arrays.asList(TASK_COMMENTS_2));
     }
@@ -49,18 +49,18 @@ public class FakeTaskCommentServiceTest {
     public void listTaskCommentsShouldThrowNotFoundException() {
         expectedException.expect(TaskNotFoundException.class);
 
-        taskService.listComments(Connection.builder().build(), getDummyUser(), "invalid");
+        taskService.list(Connection.builder().build(), getDummyUser(), "invalid");
     }
 
     @Test
     public void shouldGetTaskComment() {
         Comment taskComment11 = taskService
-                .getComment(Connection.builder().build(), getDummyUser(), TASK_ID_1, TASK_COMMENT_ID_1_1);
+                .get(Connection.builder().build(), getDummyUser(), TASK_ID_1, TASK_COMMENT_ID_1_1);
 
         assertThat(taskComment11).isEqualTo(TASK_COMMENTS_1[0]);
 
         Comment taskComment21 = taskService
-                .getComment(Connection.builder().build(), getDummyUser(), TASK_ID_2, TASK_COMMENT_ID_2_1);
+                .get(Connection.builder().build(), getDummyUser(), TASK_ID_2, TASK_COMMENT_ID_2_1);
 
         assertThat(taskComment21).isEqualTo(TASK_COMMENTS_2[0]);
     }
@@ -69,25 +69,25 @@ public class FakeTaskCommentServiceTest {
     public void shouldThrowNotFoundExceptionWhenGetCommentNonExistent() {
         expectedException.expect(CommentNotFoundException.class);
 
-        taskService.getComment(Connection.builder().build(), getDummyUser(), "invalid", TASK_COMMENT_ID_1_1);
+        taskService.get(Connection.builder().build(), getDummyUser(), "invalid", TASK_COMMENT_ID_1_1);
     }
 
     @Test
     public void shouldThrowNotFoundExceptionWhenGetCommentFromWrongTask() {
         expectedException.expect(CommentNotFoundException.class);
 
-        taskService.getComment(Connection.builder().build(), getDummyUser(), TASK_ID_2, TASK_COMMENT_ID_1_1);
+        taskService.get(Connection.builder().build(), getDummyUser(), TASK_ID_2, TASK_COMMENT_ID_1_1);
     }
 
     @Test
     public void shouldDeleteTaskComment() {
         String taskComment11 = taskService
-                .deleteComment(Connection.builder().build(), getDummyUser(), TASK_ID_1, TASK_COMMENT_ID_1_1);
+                .delete(Connection.builder().build(), getDummyUser(), TASK_ID_1, TASK_COMMENT_ID_1_1);
 
         assertThat(taskComment11).isEqualTo(TASK_COMMENT_ID_1_1);
 
         expectedException.expect(CommentNotFoundException.class);
 
-        taskService.getComment(Connection.builder().build(), getDummyUser(), TASK_ID_1, TASK_COMMENT_ID_1_1);
+        taskService.get(Connection.builder().build(), getDummyUser(), TASK_ID_1, TASK_COMMENT_ID_1_1);
     }
 }

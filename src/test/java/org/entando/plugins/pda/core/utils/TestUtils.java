@@ -24,12 +24,21 @@ public abstract class TestUtils {
     public static final String TASK_COMMENT_1_1 = "This is a task comment!";
     public static final String TASK_COMMENT_ID_1_2 = "t1-c2";
     public static final String TASK_COMMENT_1_2 = "Whatever he said...";
+    public static final String TASK_ATTACHMENT_ID_1_1 = "t1-a1";
+    public static final String TASK_ATTACHMENT_1_1_NAME = "attachment.pdf";
+    public static final String TASK_ATTACHMENT_1_1_TYPE = "application/pdf";
+    public static final String TASK_ATTACHMENT_ID_1_2 = "t1-a1";
+    public static final String TASK_ATTACHMENT_1_2_NAME = "image.jpeg";
+    public static final String TASK_ATTACHMENT_1_2_TYPE = "application/jpeg";
 
     public static final String TASK_ID_2 = "2";
     public static final String TASK_NAME_2 = "Task 2";
     public static final String TASK_SUBJECT_2 = "Task Subject 2";
     public static final String TASK_COMMENT_ID_2_1 = "t2-c1";
     public static final String TASK_COMMENT_2_1 = "This is another task comment!";
+    public static final String TASK_ATTACHMENT_ID_2_1 = "t2-a1";
+    public static final String TASK_ATTACHMENT_2_1_NAME = "image.jpeg";
+    public static final String TASK_ATTACHMENT_2_1_TYPE = "application/jpeg";
 
     public static final String TASK_FORM_ID_1 = "taskForm1";
     public static final String TASK_FORM_TYPE_1 = "formType1";
