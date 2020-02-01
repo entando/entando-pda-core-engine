@@ -8,7 +8,8 @@ import org.entando.web.response.PagedRestResponse;
 
 public interface TaskService {
 
-    PagedRestResponse<Task> list(Connection connection, AuthenticatedUser user, PagedListRequest restListRequest);
+    PagedRestResponse<Task> list(Connection connection, AuthenticatedUser user, PagedListRequest restListRequest,
+            String filter);
 
     Task get(Connection connection, AuthenticatedUser user, String id);
 }
