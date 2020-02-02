@@ -14,11 +14,14 @@ import org.entando.plugins.pda.core.exception.SummaryTypeNotFoundException;
 import org.entando.plugins.pda.core.model.summary.FrequencyEnum;
 import org.entando.plugins.pda.core.model.summary.Summary;
 import org.entando.plugins.pda.core.model.summary.SummaryType;
+import org.entando.plugins.pda.core.model.summary.SummaryValue;
+import org.entando.plugins.pda.core.model.summary.ValuePercentageSummaryValue;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class SummaryServiceTest {
 
     private static final String TEST_ENGINE = "test";
@@ -37,17 +40,17 @@ public class SummaryServiceTest {
     @Test
     public void shouldInitializeSummaryTypesFromConstructor() {
         // Given
-        SummaryType test1 = newSummaryType(TEST_ENGINE, "test1", Summary.builder().build());
-        SummaryType test2 = newSummaryType(TEST_ENGINE, "test2", Summary.builder().build());
-        SummaryType test3 = newSummaryType(TEST2_ENGINE, "test3", Summary.builder().build());
+        Summary test1 = newSummary(TEST_ENGINE, "test1", ValuePercentageSummaryValue.builder().build());
+        Summary test2 = newSummary(TEST_ENGINE, "test2", ValuePercentageSummaryValue.builder().build());
+        Summary test3 = newSummary(TEST2_ENGINE, "test3", ValuePercentageSummaryValue.builder().build());
         summaryService = new SummaryService(Arrays.asList(test1, test2, test3));
 
         // When
-        List<SummaryType> summaryTypes = summaryService.getAllSummaryTypes();
+        List<Summary> summaries = summaryService.getAllSummaries();
 
         // Then
-        assertThat(summaryTypes.size()).isEqualTo(3);
-        assertThat(summaryTypes).extracting(SummaryType::getEngine, SummaryType::getId)
+        assertThat(summaries.size()).isEqualTo(3);
+        assertThat(summaries).extracting(Summary::getEngine, Summary::getId)
                 .containsExactlyInAnyOrder(new Tuple(TEST_ENGINE, "test1"),
                         new Tuple(TEST_ENGINE, "test2"),
                         new Tuple(TEST2_ENGINE, "test3"));
@@ -57,59 +60,59 @@ public class SummaryServiceTest {
     public void shouldRegisterNewSummaryType() {
         // Given
         String id = "requests";
-        Summary summary = Summary.builder().title("Requests").percentage("98").total("2567")
+        ValuePercentageSummaryValue summaryValue = ValuePercentageSummaryValue.builder().title("Requests").percentage("98").total("2567")
                 .totalLabel("Total Requests").build();
-        SummaryType summaryType = newSummaryType(TEST_ENGINE, id, summary);
+        Summary summary = newSummary(TEST_ENGINE, id, summaryValue);
 
         // When
-        summaryService.registerSummaryType(summaryType);
+        summaryService.registerSummary(summary);
 
         // Then
-        List<SummaryType> summaryTypes = summaryService.getSummaryTypesByEngine(TEST_ENGINE);
-        assertThat(summaryTypes.size()).isEqualTo(1);
-        assertThat(summaryTypes.get(0).getId()).isEqualTo(summaryType.getId());
-        assertThat(summaryTypes.get(0).getDescription()).isEqualTo(summaryType.getDescription());
-        assertThat(summaryTypes.get(0).calculateSummary(Connection.builder().build(), FrequencyEnum.ANNUALLY))
-                .isEqualTo(summary);
+        List<Summary> summaries = summaryService.getSummariesByEngine(TEST_ENGINE);
+        assertThat(summaries.size()).isEqualTo(1);
+        assertThat(summaries.get(0).getId()).isEqualTo(summary.getId());
+        assertThat(summaries.get(0).getDescription()).isEqualTo(summary.getDescription());
+        assertThat(summaries.get(0).calculateSummary(Connection.builder().build(), FrequencyEnum.ANNUALLY))
+                .isEqualTo(summaryValue);
     }
 
     @Test
     public void shouldReturnSummaryTypeById() {
         // Given
-        Summary requests = Summary.builder().title("Requests").totalLabel("Total Requests")
+        ValuePercentageSummaryValue requests = ValuePercentageSummaryValue.builder().title("Requests").totalLabel("Total Requests")
                 .total("2567").percentage("98").build();
         String requestsId = "requests";
-        summaryService.registerSummaryType(newSummaryType(TEST_ENGINE, requestsId, requests));
-        summaryService.registerSummaryType(newSummaryType(TEST_ENGINE, "cases",
-                Summary.builder().title("Cases").totalLabel("Total Cases").total("80800").percentage("20")
+        summaryService.registerSummary(newSummary(TEST_ENGINE, requestsId, requests));
+        summaryService.registerSummary(newSummary(TEST_ENGINE, "cases",
+                ValuePercentageSummaryValue.builder().title("Cases").totalLabel("Total Cases").total("80800").percentage("20")
                         .build()));
-        summaryService.registerSummaryType(newSummaryType(TEST_ENGINE, "time_to_complete",
-                Summary.builder().title("Time to Complete").totalLabel("Case creation to completion").total("2.5 days")
+        summaryService.registerSummary(newSummary(TEST_ENGINE, "time_to_complete",
+                ValuePercentageSummaryValue.builder().title("Time to Complete").totalLabel("Case creation to completion").total("2.5 days")
                         .percentage("44").build()));
 
         // When
-        SummaryType summaryType = summaryService.getSummaryTypeById(TEST_ENGINE, requestsId);
+        Summary summary = summaryService.getSummaryById(TEST_ENGINE, requestsId);
 
         // Then
-        assertThat(summaryType.getId()).isEqualTo(requestsId);
-        assertThat(summaryType.getDescription()).isEqualTo(requests.getTitle());
+        assertThat(summary.getId()).isEqualTo(requestsId);
+        assertThat(summary.getDescription()).isEqualTo(requests.getTitle());
         assertThat(
-                summaryType.calculateSummary(Connection.builder().engine(TEST_ENGINE).build(), FrequencyEnum.MONTHLY))
-                .extracting(Summary::getTitle, Summary::getTotalLabel, Summary::getTotal, Summary::getPercentage)
+                (ValuePercentageSummaryValue)summary.calculateSummary(Connection.builder().engine(TEST_ENGINE).build(), FrequencyEnum.MONTHLY))
+                .extracting(ValuePercentageSummaryValue::getTitle, ValuePercentageSummaryValue::getTotalLabel, ValuePercentageSummaryValue::getTotal, ValuePercentageSummaryValue::getPercentage)
                 .contains(requests.getTitle(), requests.getTotalLabel(), requests.getTotal(), requests.getPercentage());
     }
 
     @Test
     public void shouldCalculateSummary() {
         // Given
-        Summary requests = Summary.builder().title("Requests").totalLabel("Total Requests")
+        ValuePercentageSummaryValue requests = ValuePercentageSummaryValue.builder().title("Requests").totalLabel("Total Requests")
                 .total("2567").percentage("98").build();
         String requestsId = "requests";
-        summaryService.registerSummaryType(newSummaryType(TEST_ENGINE, requestsId, requests));
+        summaryService.registerSummary(newSummary(TEST_ENGINE, requestsId, requests));
 
         // When
-        Connection connection = Connection.builder().engine(TEST_ENGINE).build(); // NOPMD
-        Summary summary = summaryService.calculateSummary(connection, requestsId, FrequencyEnum.DAILY);
+        Connection connection = Connection.builder().engine(TEST_ENGINE).build(); //NOPMD
+        SummaryValue summary = summaryService.calculateSummary(connection, requestsId, FrequencyEnum.DAILY);
 
         assertThat(requests).isEqualTo(summary);
     }
@@ -122,13 +125,71 @@ public class SummaryServiceTest {
         summaryService.calculateSummary(Connection.builder().build(), "invalid", FrequencyEnum.MONTHLY);
     }
 
-    private SummaryType newSummaryType(String engine, String id, Summary summary) {
-        SummaryType summaryType = mock(SummaryType.class);
-        when(summaryType.calculateSummary(any(), any(FrequencyEnum.class))).thenReturn(
-                summary);
-        when(summaryType.getId()).thenReturn(id);
-        when(summaryType.getDescription()).thenReturn(summary.getTitle());
-        when(summaryType.getEngine()).thenReturn(engine);
-        return summaryType;
+    @Test
+    public void shouldGetSummaryTypesByEngine() {
+
+        //Test empty
+
+        Connection connection = Connection.builder().engine(TEST_ENGINE).build(); //NOPMD
+        List<SummaryType> types = summaryService.getSummaryTypesByEngine(connection.getEngine());
+        assertThat(0).isEqualTo(types.size());
+
+        //Test valid entry
+        // Given
+        ValuePercentageSummaryValue requests = ValuePercentageSummaryValue.builder().title("Requests").totalLabel("Total Requests")
+                .total("2567").percentage("98").build();
+
+        String requestsId = "requests";
+        Summary newSummary = newSummary(TEST_ENGINE, requestsId, requests);
+
+        summaryService.registerSummary(newSummary);
+
+        // When
+        List<SummaryType> populatedTypes = summaryService.getSummaryTypesByEngine(connection.getEngine());
+        assertThat(1).isEqualTo(populatedTypes.size());
+        assertThat(newSummary.getSummaryType()).isEqualTo(populatedTypes.get(0));
+
+    }
+
+    @Test
+    public void shouldGetSummariesByEngineAndSummaryType() {
+
+        //Test empty
+
+        Connection connection = Connection.builder().engine(TEST_ENGINE).build(); //NOPMD
+        List<Summary> types = summaryService.getSummariesByEngineAndSummaryType(connection.getEngine(), SummaryType.VALUE_PERCENTAGE.name());
+        assertThat(0).isEqualTo(types.size());
+
+        //Test valid entry
+        // Given
+        ValuePercentageSummaryValue requests = ValuePercentageSummaryValue.builder().title("Requests").totalLabel("Total Requests")
+                .total("2567").percentage("98").build();
+        String requestsId = "requests";
+        Summary newSummary = newSummary(TEST_ENGINE, requestsId, requests);
+
+        summaryService.registerSummary(newSummary);
+
+        // When
+        List<Summary> populatedTypes = summaryService.getSummariesByEngineAndSummaryType(connection.getEngine(), SummaryType.VALUE_PERCENTAGE.name());
+        assertThat(1).isEqualTo(populatedTypes.size());
+        assertThat(newSummary).isEqualTo(populatedTypes.get(0));
+
+        //Test non-matching type
+        List<Summary> badType = summaryService.getSummariesByEngineAndSummaryType(connection.getEngine(), "NOT_A_VALUE");
+        assertThat(0).isEqualTo(badType.size());
+
+
+    }
+
+
+    private Summary newSummary(String engine, String id, ValuePercentageSummaryValue summaryValue) {
+        Summary summary = mock(Summary.class);
+        when(summary.calculateSummary(any(), any(FrequencyEnum.class))).thenReturn(
+                summaryValue);
+        when(summary.getId()).thenReturn(id);
+        when(summary.getDescription()).thenReturn(summaryValue.getTitle());
+        when(summary.getEngine()).thenReturn(engine);
+        when(summary.getSummaryType()).thenReturn(SummaryType.VALUE_PERCENTAGE);
+        return summary;
     }
 }

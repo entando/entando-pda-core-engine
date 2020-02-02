@@ -1,22 +1,16 @@
 package org.entando.plugins.pda.core.model.summary;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.entando.plugins.pda.core.engine.Connection;
 
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode
-public class Summary {
+public interface Summary {
 
-    private String title;
-    private String totalLabel;
-    private String total;
-    private String percentage;
+    SummaryValue calculateSummary(Connection connection, FrequencyEnum frequency);
+
+    SummaryType getSummaryType();
+
+    String getEngine();
+
+    String getId();
+
+    String getDescription();
 }
