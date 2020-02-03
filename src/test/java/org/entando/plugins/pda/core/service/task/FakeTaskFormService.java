@@ -1,23 +1,28 @@
 package org.entando.plugins.pda.core.service.task;
 
+import static org.entando.plugins.pda.core.utils.TestUtils.TASK_FORM_ID_1;
+import static org.entando.plugins.pda.core.utils.TestUtils.TASK_FORM_ID_2;
 import static org.entando.plugins.pda.core.utils.TestUtils.TASK_FORM_PROP_1;
 import static org.entando.plugins.pda.core.utils.TestUtils.TASK_FORM_PROP_2;
 import static org.entando.plugins.pda.core.utils.TestUtils.TASK_FORM_PROP_3;
+import static org.entando.plugins.pda.core.utils.TestUtils.TASK_FORM_PROP_4;
 import static org.entando.plugins.pda.core.utils.TestUtils.TASK_FORM_PROP_DESCRIPTION_1;
 import static org.entando.plugins.pda.core.utils.TestUtils.TASK_FORM_PROP_DESCRIPTION_2;
 import static org.entando.plugins.pda.core.utils.TestUtils.TASK_FORM_PROP_DESCRIPTION_3;
+import static org.entando.plugins.pda.core.utils.TestUtils.TASK_FORM_PROP_DESCRIPTION_4;
 import static org.entando.plugins.pda.core.utils.TestUtils.TASK_FORM_PROP_KEY_1;
 import static org.entando.plugins.pda.core.utils.TestUtils.TASK_FORM_PROP_KEY_2;
 import static org.entando.plugins.pda.core.utils.TestUtils.TASK_FORM_PROP_KEY_3;
+import static org.entando.plugins.pda.core.utils.TestUtils.TASK_FORM_PROP_KEY_4;
+import static org.entando.plugins.pda.core.utils.TestUtils.TASK_FORM_TYPE_1;
+import static org.entando.plugins.pda.core.utils.TestUtils.TASK_FORM_TYPE_2;
 import static org.entando.plugins.pda.core.utils.TestUtils.TASK_ID_1;
 import static org.entando.plugins.pda.core.utils.TestUtils.TASK_ID_2;
 import static org.entando.plugins.pda.core.utils.TestUtils.TASK_NAME_1;
 import static org.entando.plugins.pda.core.utils.TestUtils.TASK_NAME_2;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import lombok.RequiredArgsConstructor;
@@ -28,9 +33,9 @@ import org.entando.plugins.pda.core.model.Task;
 import org.entando.plugins.pda.core.model.form.Form;
 import org.entando.plugins.pda.core.model.form.FormField;
 import org.entando.plugins.pda.core.model.form.FormFieldInteger;
+import org.entando.plugins.pda.core.model.form.FormFieldSubForm;
 import org.entando.plugins.pda.core.model.form.FormFieldText;
 import org.entando.plugins.pda.core.model.form.FormFieldType;
-import org.entando.plugins.pda.core.model.task.CreateTaskFormSubmissionRequest;
 import org.springframework.stereotype.Service;
 
 @SuppressWarnings("PMD.ExcessiveImports")
@@ -40,7 +45,7 @@ public class FakeTaskFormService implements TaskFormService {
 
     private final FakeTaskService taskService;
 
-    public static final List<Form> TASK_FORMS = new ArrayList<>();
+    public static final Form TASK_FORM_1;
 
     static {
         FormField formField11 = FormFieldInteger.builder()
@@ -61,50 +66,57 @@ public class FakeTaskFormService implements TaskFormService {
                 .placeholder(TASK_FORM_PROP_DESCRIPTION_2)
                 .build();
 
-        FormField formField21 = FormFieldText.builder()
+        FormFieldSubForm formField13 = FormFieldSubForm.builder()
                 .id(TASK_FORM_PROP_3)
-                .type(FormFieldType.STRING)
+                .type(FormFieldType.SUBFORM)
                 .name(TASK_FORM_PROP_KEY_3)
                 .label(TASK_FORM_PROP_3)
                 .placeholder(TASK_FORM_PROP_DESCRIPTION_3)
+                .formId(TASK_FORM_ID_2)
+                .formType(TASK_FORM_TYPE_2)
                 .build();
 
-        Form pf1 = Form.builder()
-                .id(TASK_ID_1)
+        FormField formField21 = FormFieldText.builder()
+                .id(TASK_FORM_PROP_4)
+                .type(FormFieldType.STRING)
+                .name(TASK_FORM_PROP_KEY_4)
+                .label(TASK_FORM_PROP_4)
+                .placeholder(TASK_FORM_PROP_DESCRIPTION_4)
+                .build();
+
+        TASK_FORM_1 = Form.builder()
+                .id(TASK_FORM_ID_1)
                 .name(TASK_NAME_1)
-                .fields(Arrays.asList(formField11, formField12))
+                .type(TASK_FORM_TYPE_1)
+                .fields(Arrays.asList(formField11, formField12, formField13))
                 .build();
 
-        Form pf2 = Form.builder()
+        Form subForm = Form.builder()
                 .id(TASK_ID_2)
                 .name(TASK_NAME_2)
                 .fields(Collections.singletonList(formField21))
                 .build();
 
-        TASK_FORMS.add(pf1);
-        TASK_FORMS.add(pf2);
+        formField13.setForm(subForm);
     }
 
     @Override
-    public List<Form> get(Connection connection, String taskId) {
+    public Form get(Connection connection, String taskId) {
         if (TASK_ID_1.equals(taskId)){
-            return TASK_FORMS;
+            return TASK_FORM_1;
         }
 
         throw new TaskNotFoundException();
     }
 
     @Override
-    public Task submit(Connection connection, AuthenticatedUser user, String taskId,
-            CreateTaskFormSubmissionRequest request) {
+    public String submit(Connection connection, AuthenticatedUser user, String taskId,
+            Map<String, Object> request) {
 
         Task task = taskService.get(connection, null, taskId);
 
-        Map<String, Object> variables = new ConcurrentHashMap<>();
-        request.getForms().values().forEach(variables::putAll);
-
-        task.setOutputData(variables);
-        return task;
+        task.setOutputData(new ConcurrentHashMap<>(request));
+        return taskId;
     }
 
 }

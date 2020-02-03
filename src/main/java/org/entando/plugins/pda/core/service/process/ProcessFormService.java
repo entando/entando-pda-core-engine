@@ -1,9 +1,13 @@
 package org.entando.plugins.pda.core.service.process;
 
-import java.util.List;
+import java.util.Map;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.model.form.Form;
 
 public interface ProcessFormService {
-    List<Form> getProcessForm(Connection connection, String processId);
+
+    Form get(Connection connection, String processDefinitionId);
+
+    String submit(Connection connection, String processDefinitionId, Map<String, Object> request);
+
 }
