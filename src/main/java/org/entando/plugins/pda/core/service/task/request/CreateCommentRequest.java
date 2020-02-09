@@ -1,4 +1,4 @@
-package org.entando.plugins.pda.core.request;
+package org.entando.plugins.pda.core.service.task.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
