@@ -1,13 +1,13 @@
 package org.entando.plugins.pda.core.service.summary;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.entando.plugins.pda.core.utils.TestUtils.createDataType;
+import static org.entando.plugins.pda.core.utils.TestUtils.createDataRepository;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.entando.plugins.pda.core.engine.FakeEngine;
-import org.entando.plugins.pda.core.exception.DataTypeNotFoundException;
+import org.entando.plugins.pda.core.exception.DataRepositoryNotFoundException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -21,35 +21,35 @@ public class DataServiceTest {
     private DataService dataService;
     private List<DataRepository> dataRepositories;
 
-    private static final String REQUESTS_DATA_TYPE = "requests";
-    private static final String CASES_DATA_TYPE = "cases";
+    private static final String REQUESTS_TYPE = "requests";
+    private static final String CASES_TYPE = "cases";
 
     @Before
     public void setUp() {
         dataRepositories = new ArrayList<>();
-        dataRepositories.add(createDataType(REQUESTS_DATA_TYPE, new ArrayList<>()));
-        dataRepositories.add(createDataType(CASES_DATA_TYPE, new ArrayList<>()));
+        dataRepositories.add(createDataRepository(REQUESTS_TYPE, new ArrayList<>()));
+        dataRepositories.add(createDataRepository(CASES_TYPE, new ArrayList<>()));
 
         dataService = new DataService(dataRepositories);
     }
 
     @Test
-    public void shouldListDataTypes() {
+    public void shouldListDataRepositories() {
         // When
-        List<String> expected = Arrays.asList(REQUESTS_DATA_TYPE, CASES_DATA_TYPE);
-        List<String> result = dataService.listTypes(FakeEngine.TYPE);
+        List<String> expected = Arrays.asList(REQUESTS_TYPE, CASES_TYPE);
+        List<String> result = dataService.listDataRepositories(FakeEngine.TYPE);
 
         // Then
         assertThat(result).isEqualTo(expected);
     }
 
     @Test
-    public void shouldGetDataType() {
+    public void shouldGetDataRepository() {
         //Given
         DataRepository expected = dataRepositories.get(1);
 
         // When
-        DataRepository result = dataService.getDataRepository(FakeEngine.TYPE, CASES_DATA_TYPE);
+        DataRepository result = dataService.getDataRepository(FakeEngine.TYPE, CASES_TYPE);
 
         // Then
         assertThat(result).isEqualTo(expected);
@@ -57,13 +57,13 @@ public class DataServiceTest {
 
     @Test
     public void shouldThrowNotFoundWhenInvalidEngine() {
-        expectedException.expect(DataTypeNotFoundException.class);
-        dataService.getDataRepository("invalid", CASES_DATA_TYPE);
+        expectedException.expect(DataRepositoryNotFoundException.class);
+        dataService.getDataRepository("invalid", CASES_TYPE);
     }
 
     @Test
-    public void shouldThrowNotFoundWhenInvalidDataType() {
-        expectedException.expect(DataTypeNotFoundException.class);
+    public void shouldThrowNotFoundWhenInvalidDataRepository() {
+        expectedException.expect(DataRepositoryNotFoundException.class);
         dataService.getDataRepository(FakeEngine.TYPE, "invalid");
     }
 }

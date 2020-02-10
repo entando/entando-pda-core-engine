@@ -31,7 +31,7 @@ public class AbstractSummaryProcessorTest {
         AbstractSummaryProcessor processor = createSummaryProcessor(TYPE, dataService);
 
         assertThat(processor.getType()).isEqualTo(TYPE);
-        assertThat(processor.getDataType(null, null)).isEqualTo(dataRepository);
+        assertThat(processor.getDataRepository(null, null)).isEqualTo(dataRepository);
     }
 
     private static AbstractSummaryProcessor createSummaryProcessor(String type, DataService dataService) {

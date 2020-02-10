@@ -22,7 +22,7 @@ public class CardSummaryProcessor extends AbstractSummaryProcessor {
     @Override
     public Summary getSummary(Connection connection, String request) {
         CardSummaryRequest cardRequest = convertRequestObject(request, CardSummaryRequest.class);
-        DataRepository dataRepository = getDataType(connection.getEngine(), cardRequest.getDataType());
+        DataRepository dataRepository = getDataRepository(connection.getEngine(), cardRequest.getType());
         SummaryFrequency frequency = SummaryFrequency.from(cardRequest.getFrequency());
 
         List<PeriodicData> periods = dataRepository.getPeriodicData(connection, frequency, 2);

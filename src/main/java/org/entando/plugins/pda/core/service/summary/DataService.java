@@ -4,7 +4,7 @@ import com.google.common.annotations.VisibleForTesting;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
-import org.entando.plugins.pda.core.exception.DataTypeNotFoundException;
+import org.entando.plugins.pda.core.exception.DataRepositoryNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,7 +13,7 @@ public class DataService {
 
     private final List<DataRepository> repositories;
 
-    public List<String> listTypes(String engine) {
+    public List<String> listDataRepositories(String engine) {
         return repositories.stream()
                 .filter(d -> d.getEngine().equals(engine))
                 .map(DataRepository::getId)
@@ -22,10 +22,10 @@ public class DataService {
 
     public DataRepository getDataRepository(String engine, String id) {
         return repositories.stream()
-                .filter(dataType -> dataType.getId().equals(id)
-                        && dataType.getEngine().equals(engine))
+                .filter(type -> type.getId().equals(id)
+                        && type.getEngine().equals(engine))
                 .findFirst()
-                .orElseThrow(DataTypeNotFoundException::new);
+                .orElseThrow(DataRepositoryNotFoundException::new);
     }
 
     @VisibleForTesting

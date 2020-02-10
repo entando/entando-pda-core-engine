@@ -2,7 +2,7 @@ package org.entando.plugins.pda.core.service.summary.processor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.entando.plugins.pda.core.utils.TestUtils.createChartSummary;
-import static org.entando.plugins.pda.core.utils.TestUtils.createDataType;
+import static org.entando.plugins.pda.core.utils.TestUtils.createDataRepository;
 import static org.entando.plugins.pda.core.utils.TestUtils.createPeriodicSummary;
 import static org.entando.plugins.pda.core.utils.TestUtils.getDummyConnection;
 import static org.entando.plugins.pda.core.utils.TestUtils.readFromFile;
@@ -44,8 +44,8 @@ public class TimeSeriesSummaryProcessorTest {
 
     @Before
     public void setUp() {
-        dataRepository1 = createDataType(TYPE_1, SUMMARY_DAILY_1);
-        dataRepository2 = createDataType(TYPE_2, SUMMARY_DAILY_2);
+        dataRepository1 = createDataRepository(TYPE_1, SUMMARY_DAILY_1);
+        dataRepository2 = createDataRepository(TYPE_2, SUMMARY_DAILY_2);
 
         DataService dataService = mock(DataService.class);
         when(dataService.getDataRepository(any(), eq(TYPE_1))).thenReturn(dataRepository1);

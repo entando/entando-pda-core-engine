@@ -29,8 +29,8 @@ public abstract class AbstractSummaryProcessor implements SummaryProcessor {
     @Override
     public abstract Summary getSummary(Connection connection, String request);
 
-    protected DataRepository getDataType(String engine, String dataType) {
-        return dataService.getDataRepository(engine, dataType);
+    protected DataRepository getDataRepository(String engine, String type) {
+        return dataService.getDataRepository(engine, type);
     }
 
     protected <T> T convertRequestObject(String request, Class<T> objectType) {

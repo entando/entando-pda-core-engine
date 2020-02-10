@@ -30,8 +30,8 @@ public class TimeSeriesSummaryProcessor extends AbstractSummaryProcessor {
 
         List<TimeSeriesData> result = timeSeriesRequest.getSeries()
                 .parallelStream()
-                .map(dataTypeId -> {
-                    DataRepository dataRepository = getDataType(connection.getEngine(), dataTypeId);
+                .map(type -> {
+                    DataRepository dataRepository = getDataRepository(connection.getEngine(), type);
                     List<PeriodicData> values = dataRepository.getPeriodicData(connection, frequency, periods);
                     PeriodicData lastValue = values.get(0);
                     PeriodicData previousValue = values.get(1);

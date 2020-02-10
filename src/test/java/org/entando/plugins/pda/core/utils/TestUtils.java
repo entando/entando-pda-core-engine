@@ -136,7 +136,7 @@ public abstract class TestUtils {
         return new ObjectMapper().readValue(prettyJson, JsonNode.class).toString();
     }
 
-    public static DataRepository createDataType(String type, List<PeriodicData> summary) {
+    public static DataRepository createDataRepository(String type, List<PeriodicData> summary) {
         DataRepository dataRepository = mock(DataRepository.class);
         when(dataRepository.getId()).thenReturn(type);
         when(dataRepository.getEngine()).thenReturn(FakeEngine.TYPE);
