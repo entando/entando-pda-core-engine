@@ -7,35 +7,35 @@ import static org.mockito.Mockito.when;
 
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.model.summary.Summary;
-import org.entando.plugins.pda.core.service.summary.DataType;
-import org.entando.plugins.pda.core.service.summary.DataTypeService;
+import org.entando.plugins.pda.core.service.summary.DataRepository;
+import org.entando.plugins.pda.core.service.summary.DataService;
 import org.junit.Before;
 import org.junit.Test;
 
 public class AbstractSummaryProcessorTest {
     private static final String TYPE = "Type";
 
-    private DataType dataType;
-    private DataTypeService dataTypeService;
+    private DataRepository dataRepository;
+    private DataService dataService;
 
     @Before
     public void setUp() {
-        dataTypeService = mock(DataTypeService.class);
-        dataType = mock(DataType.class);
+        dataService = mock(DataService.class);
+        dataRepository = mock(DataRepository.class);
 
-        when(dataTypeService.getDataType(any(), any())).thenReturn(dataType);
+        when(dataService.getDataRepository(any(), any())).thenReturn(dataRepository);
     }
 
     @Test
     public void shouldInitializeConstructor() {
-        AbstractSummaryProcessor processor = createSummaryProcessor(TYPE, dataTypeService);
+        AbstractSummaryProcessor processor = createSummaryProcessor(TYPE, dataService);
 
         assertThat(processor.getType()).isEqualTo(TYPE);
-        assertThat(processor.getDataType(null, null)).isEqualTo(dataType);
+        assertThat(processor.getDataRepository(null, null)).isEqualTo(dataRepository);
     }
 
-    private static AbstractSummaryProcessor createSummaryProcessor(String type, DataTypeService dataTypeService) {
-        return new AbstractSummaryProcessor(type, dataTypeService) {
+    private static AbstractSummaryProcessor createSummaryProcessor(String type, DataService dataService) {
+        return new AbstractSummaryProcessor(type, dataService) {
             @Override
             public Summary getSummary(Connection connection, String request) {
                 return null;

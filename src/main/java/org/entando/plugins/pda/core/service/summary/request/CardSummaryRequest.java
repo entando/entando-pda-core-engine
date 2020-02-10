@@ -12,5 +12,5 @@ import org.entando.plugins.pda.core.model.summary.SummaryFrequency;
 @AllArgsConstructor
 public class CardSummaryRequest {
     private String frequency = SummaryFrequency.MONTHLY.toString();
-    private String dataType;
+    private String type;
 }

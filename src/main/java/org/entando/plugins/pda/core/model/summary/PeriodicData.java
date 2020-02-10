@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class PeriodicSummary {
+public class PeriodicData {
     private LocalDate date;
     private Double value;
 }

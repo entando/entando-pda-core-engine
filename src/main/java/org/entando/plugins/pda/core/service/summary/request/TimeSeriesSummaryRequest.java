@@ -11,7 +11,7 @@ import org.entando.plugins.pda.core.model.summary.SummaryFrequency;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChartSummaryRequest {
+public class TimeSeriesSummaryRequest {
     private String frequency = SummaryFrequency.MONTHLY.toString();
     private Integer periods;
     private List<String> series;
