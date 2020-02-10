@@ -9,18 +9,19 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class DataTypeService {
+public class DataService {
 
-    private final List<DataType> dataTypes;
+    private final List<DataRepository> repositories;
 
-    public List<DataType> listDataTypes(String engine) {
-        return dataTypes.stream()
+    public List<String> listTypes(String engine) {
+        return repositories.stream()
                 .filter(d -> d.getEngine().equals(engine))
+                .map(DataRepository::getId)
                 .collect(Collectors.toList());
     }
 
-    public DataType getDataType(String engine, String id) {
-        return dataTypes.stream()
+    public DataRepository getDataRepository(String engine, String id) {
+        return repositories.stream()
                 .filter(dataType -> dataType.getId().equals(id)
                         && dataType.getEngine().equals(engine))
                 .findFirst()
@@ -28,9 +29,9 @@ public class DataTypeService {
     }
 
     @VisibleForTesting
-    public void setDataTypes(List<DataType> dataTypes) {
-        this.dataTypes.clear();
-        this.dataTypes.addAll(dataTypes);
+    public void setRepositories(List<DataRepository> repositories) {
+        this.repositories.clear();
+        this.repositories.addAll(repositories);
     }
 
 }

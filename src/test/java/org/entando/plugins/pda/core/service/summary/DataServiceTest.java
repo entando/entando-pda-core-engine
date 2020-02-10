@@ -12,43 +12,43 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class DataTypeServiceTest {
+public class DataServiceTest {
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
-    private DataTypeService dataTypeService;
-    private List<DataType> dataTypes;
+    private DataService dataService;
+    private List<DataRepository> dataRepositories;
 
     private static final String REQUESTS_DATA_TYPE = "requests";
     private static final String CASES_DATA_TYPE = "cases";
 
     @Before
     public void setUp() {
-        dataTypes = new ArrayList<>();
-        dataTypes.add(createDataType(REQUESTS_DATA_TYPE, new ArrayList<>()));
-        dataTypes.add(createDataType(CASES_DATA_TYPE, new ArrayList<>()));
+        dataRepositories = new ArrayList<>();
+        dataRepositories.add(createDataType(REQUESTS_DATA_TYPE, new ArrayList<>()));
+        dataRepositories.add(createDataType(CASES_DATA_TYPE, new ArrayList<>()));
 
-        dataTypeService = new DataTypeService(dataTypes);
+        dataService = new DataService(dataRepositories);
     }
 
     @Test
     public void shouldListDataTypes() {
         // When
-        List<DataType> result = dataTypeService.listDataTypes(FakeEngine.TYPE);
+        List<DataRepository> result = dataService.listTypes(FakeEngine.TYPE);
 
         // Then
-        assertThat(result.size()).isEqualTo(dataTypes.size());
-        assertThat(result).isEqualTo(dataTypes);
+        assertThat(result.size()).isEqualTo(dataRepositories.size());
+        assertThat(result).isEqualTo(dataRepositories);
     }
 
     @Test
     public void shouldGetDataType() {
         //Given
-        DataType expected = dataTypes.get(1);
+        DataRepository expected = dataRepositories.get(1);
 
         // When
-        DataType result = dataTypeService.getDataType(FakeEngine.TYPE, CASES_DATA_TYPE);
+        DataRepository result = dataService.getDataRepository(FakeEngine.TYPE, CASES_DATA_TYPE);
 
         // Then
         assertThat(result).isEqualTo(expected);
@@ -57,12 +57,12 @@ public class DataTypeServiceTest {
     @Test
     public void shouldThrowNotFoundWhenInvalidEngine() {
         expectedException.expect(DataTypeNotFoundException.class);
-        dataTypeService.getDataType("invalid", CASES_DATA_TYPE);
+        dataService.getDataRepository("invalid", CASES_DATA_TYPE);
     }
 
     @Test
     public void shouldThrowNotFoundWhenInvalidDataType() {
         expectedException.expect(DataTypeNotFoundException.class);
-        dataTypeService.getDataType(FakeEngine.TYPE, "invalid");
+        dataService.getDataRepository(FakeEngine.TYPE, "invalid");
     }
 }

@@ -8,10 +8,10 @@ import java.util.Arrays;
 import java.util.List;
 import org.entando.plugins.pda.core.exception.SummaryTypeNotFoundException;
 import org.entando.plugins.pda.core.model.summary.CardSummary;
-import org.entando.plugins.pda.core.model.summary.ChartSummary;
+import org.entando.plugins.pda.core.model.summary.TimeSeriesSummary;
 import org.entando.plugins.pda.core.service.summary.processor.CardSummaryProcessor;
-import org.entando.plugins.pda.core.service.summary.processor.ChartSummaryProcessor;
 import org.entando.plugins.pda.core.service.summary.processor.SummaryProcessor;
+import org.entando.plugins.pda.core.service.summary.processor.TimeSeriesSummaryProcessor;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -29,7 +29,7 @@ public class SummaryServiceTest {
     public void setUp() {
         summaryProcessors = new ArrayList<>();
         summaryProcessors.add(createSummaryProcessor(CardSummaryProcessor.TYPE, CardSummary.builder().build()));
-        summaryProcessors.add(createSummaryProcessor(ChartSummaryProcessor.TYPE, ChartSummary.builder().build()));
+        summaryProcessors.add(createSummaryProcessor(TimeSeriesSummaryProcessor.TYPE, TimeSeriesSummary.builder().build()));
 
         summaryService = new SummaryService(summaryProcessors);
     }
@@ -37,7 +37,7 @@ public class SummaryServiceTest {
     @Test
     public void shouldListSummaryTypes() {
         //Given
-        List<String> expected = Arrays.asList(CardSummaryProcessor.TYPE, ChartSummaryProcessor.TYPE);
+        List<String> expected = Arrays.asList(CardSummaryProcessor.TYPE, TimeSeriesSummaryProcessor.TYPE);
 
         // When
         List<String> result = summaryService.listSummaryTypes();
@@ -53,7 +53,7 @@ public class SummaryServiceTest {
         SummaryProcessor expected = summaryProcessors.get(1);
 
         // When
-        SummaryProcessor result = summaryService.getSummaryProcessor(ChartSummaryProcessor.TYPE);
+        SummaryProcessor result = summaryService.getSummaryProcessor(TimeSeriesSummaryProcessor.TYPE);
 
         // Then
         assertThat(result).isEqualTo(expected);

@@ -23,12 +23,12 @@ import org.entando.keycloak.security.AuthenticatedUser;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.engine.FakeEngine;
 import org.entando.plugins.pda.core.model.summary.CardSummary;
-import org.entando.plugins.pda.core.model.summary.ChartSummary;
-import org.entando.plugins.pda.core.model.summary.PeriodicSummary;
+import org.entando.plugins.pda.core.model.summary.PeriodicData;
 import org.entando.plugins.pda.core.model.summary.Summary;
 import org.entando.plugins.pda.core.model.summary.SummaryFrequency;
+import org.entando.plugins.pda.core.model.summary.TimeSeriesData;
 import org.entando.plugins.pda.core.model.summary.TimeSeriesSummary;
-import org.entando.plugins.pda.core.service.summary.DataType;
+import org.entando.plugins.pda.core.service.summary.DataRepository;
 import org.entando.plugins.pda.core.service.summary.processor.SummaryProcessor;
 import org.entando.web.exception.InternalServerException;
 import org.keycloak.representations.AccessToken;
@@ -136,13 +136,13 @@ public abstract class TestUtils {
         return new ObjectMapper().readValue(prettyJson, JsonNode.class).toString();
     }
 
-    public static DataType createDataType(String type, List<PeriodicSummary> summary) {
-        DataType dataType = mock(DataType.class);
-        when(dataType.getId()).thenReturn(type);
-        when(dataType.getEngine()).thenReturn(FakeEngine.TYPE);
-        when(dataType.getPeriodicSummary(any(), any(), any()))
+    public static DataRepository createDataType(String type, List<PeriodicData> summary) {
+        DataRepository dataRepository = mock(DataRepository.class);
+        when(dataRepository.getId()).thenReturn(type);
+        when(dataRepository.getEngine()).thenReturn(FakeEngine.TYPE);
+        when(dataRepository.getPeriodicData(any(), any(), any()))
                 .thenReturn(summary);
-        return dataType;
+        return dataRepository;
     }
 
     public static SummaryProcessor createSummaryProcessor(String type, Summary summary) {
@@ -153,8 +153,8 @@ public abstract class TestUtils {
         return processor;
     }
 
-    public static List<PeriodicSummary> createPeriodicSummary(SummaryFrequency frequency, int periods) {
-        List<PeriodicSummary> summary = new ArrayList<>();
+    public static List<PeriodicData> createPeriodicSummary(SummaryFrequency frequency, int periods) {
+        List<PeriodicData> summary = new ArrayList<>();
 
         LocalDate currDate = LocalDate.now();
         if (frequency == SummaryFrequency.MONTHLY) {
@@ -164,7 +164,7 @@ public abstract class TestUtils {
         }
 
         for (int i = 0; i < periods; i++) {
-            summary.add(PeriodicSummary.builder()
+            summary.add(PeriodicData.builder()
                     .date(currDate)
                     .value(RandomUtils.nextDouble(0, 1000))
                     .build());
@@ -181,29 +181,29 @@ public abstract class TestUtils {
         return summary;
     }
 
-    public static CardSummary createCardSummary(List<PeriodicSummary> values, DataType dataType) {
+    public static CardSummary createCardSummary(List<PeriodicData> values, DataRepository dataRepository) {
         return CardSummary.builder()
                 .value(values.get(0).getValue())
                 .previousValue(values.get(1).getValue())
                 .build();
     }
 
-    public static ChartSummary createChartSummary(Map<DataType, List<PeriodicSummary>> summaries) {
-        List<TimeSeriesSummary> series = summaries.entrySet().stream()
+    public static TimeSeriesSummary createChartSummary(Map<DataRepository, List<PeriodicData>> summaries) {
+        List<TimeSeriesData> series = summaries.entrySet().stream()
                 .sorted(Comparator.comparing(e -> e.getKey().getId()))
                 .map(entry -> {
-                    DataType dataType = entry.getKey();
-                    List<PeriodicSummary> values = entry.getValue();
+                    DataRepository dataRepository = entry.getKey();
+                    List<PeriodicData> values = entry.getValue();
 
-                    return TimeSeriesSummary.builder()
-                            .dataType(dataType.getId())
+                    return TimeSeriesData.builder()
+                            .id(dataRepository.getId())
                             .values(values)
-                            .card(createCardSummary(values, dataType))
+                            .card(createCardSummary(values, dataRepository))
                             .build();
                 })
                 .collect(Collectors.toList());
 
-        return ChartSummary.builder()
+        return TimeSeriesSummary.builder()
                 .series(series)
                 .build();
     }
