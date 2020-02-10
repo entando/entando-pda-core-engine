@@ -11,6 +11,6 @@ public class CardSummary implements Summary {
     @Builder
     public CardSummary(double value, double previousValue) {
         this.value = value;
-        this.percentage = previousValue > 0 ? value / previousValue : 1;
+        this.percentage = previousValue > 0 ? value / previousValue - 1 : 1;
     }
 }
