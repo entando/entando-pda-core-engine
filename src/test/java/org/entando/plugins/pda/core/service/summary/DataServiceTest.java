@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.entando.plugins.pda.core.utils.TestUtils.createDataType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.entando.plugins.pda.core.engine.FakeEngine;
 import org.entando.plugins.pda.core.exception.DataTypeNotFoundException;
@@ -35,11 +36,11 @@ public class DataServiceTest {
     @Test
     public void shouldListDataTypes() {
         // When
-        List<DataRepository> result = dataService.listTypes(FakeEngine.TYPE);
+        List<String> expected = Arrays.asList(REQUESTS_DATA_TYPE, CASES_DATA_TYPE);
+        List<String> result = dataService.listTypes(FakeEngine.TYPE);
 
         // Then
-        assertThat(result.size()).isEqualTo(dataRepositories.size());
-        assertThat(result).isEqualTo(dataRepositories);
+        assertThat(result).isEqualTo(expected);
     }
 
     @Test
