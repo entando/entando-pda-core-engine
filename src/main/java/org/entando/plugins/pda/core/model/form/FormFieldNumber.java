@@ -9,7 +9,7 @@ import lombok.experimental.SuperBuilder;
 @Data
 @SuperBuilder
 @ToString(callSuper = true)
-public class FormFieldInteger extends FormField {
+public class FormFieldNumber extends FormField {
 
     private Integer minValue;
     private Integer maxValue;

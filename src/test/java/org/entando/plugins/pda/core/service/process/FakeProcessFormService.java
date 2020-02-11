@@ -28,7 +28,7 @@ import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.exception.ProcessNotFoundException;
 import org.entando.plugins.pda.core.model.form.Form;
 import org.entando.plugins.pda.core.model.form.FormField;
-import org.entando.plugins.pda.core.model.form.FormFieldInteger;
+import org.entando.plugins.pda.core.model.form.FormFieldNumber;
 import org.entando.plugins.pda.core.model.form.FormFieldSubForm;
 import org.entando.plugins.pda.core.model.form.FormFieldText;
 import org.entando.plugins.pda.core.model.form.FormFieldType;
@@ -41,7 +41,7 @@ public class FakeProcessFormService implements ProcessFormService {
     public static final Form PROCESS_FORM_1;
 
     static {
-        FormField formField11 = FormFieldInteger.builder()
+        FormField formField11 = FormFieldNumber.builder()
                 .id(PROCESS_FORM_PROP_KEY_1)
                 .type(FormFieldType.INTEGER)
                 .name(PROCESS_FORM_PROP_KEY_1)
