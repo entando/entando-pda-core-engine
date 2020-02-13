@@ -54,8 +54,8 @@ public class FakeTaskFormService implements TaskFormService {
                 .name(TASK_FORM_PROP_KEY_1)
                 .label(TASK_FORM_PROP_1)
                 .placeholder(TASK_FORM_PROP_DESCRIPTION_1)
-                .minValue(0)
-                .maxValue(10)
+                .minValue(0.0)
+                .maxValue(10.0)
                 .build();
 
         FormField formField12 = FormField.builder()

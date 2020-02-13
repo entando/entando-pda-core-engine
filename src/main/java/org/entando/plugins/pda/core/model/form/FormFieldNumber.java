@@ -10,8 +10,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @ToString(callSuper = true)
 public class FormFieldNumber extends FormField {
-
-    private Integer minValue;
-    private Integer maxValue;
-
+    private Double minValue;
+    private Double maxValue;
+    private Double multipleOf;
 }

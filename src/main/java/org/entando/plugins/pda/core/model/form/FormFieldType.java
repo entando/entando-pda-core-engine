@@ -6,5 +6,10 @@ public enum FormFieldType {
     STRING,
     BOOLEAN,
     DATE,
+    SLIDER,
+    RADIO,
+    COMBO,
+    MULTIPLE,
+    INPUT_LIST,
     SUBFORM
 }

@@ -13,5 +13,6 @@ public class FormFieldText extends FormField {
 
     private Integer maxLength;
     private Integer minLength;
+    private Integer rows;
 
 }

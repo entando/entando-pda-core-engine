@@ -47,8 +47,8 @@ public class FakeProcessFormService implements ProcessFormService {
                 .name(PROCESS_FORM_PROP_KEY_1)
                 .label(PROCESS_FORM_PROP_1)
                 .placeholder(PROCESS_FORM_PROP_DESCRIPTION_1)
-                .minValue(0)
-                .maxValue(10)
+                .minValue(0.0)
+                .maxValue(10.0)
                 .build();
 
         FormField formField12 = FormFieldText.builder()
