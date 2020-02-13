@@ -4,6 +4,7 @@ import java.util.List;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Singular;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
@@ -12,8 +13,12 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @ToString(callSuper = true)
 public class FormFieldSelector extends FormField {
+
+    @Singular
     private List<Option> options;
+
     private String defaultValue;
+
     private boolean multiple;
 
     @Builder
