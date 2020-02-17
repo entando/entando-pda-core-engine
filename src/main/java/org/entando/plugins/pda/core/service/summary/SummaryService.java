@@ -1,5 +1,6 @@
 package org.entando.plugins.pda.core.service.summary;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ public class SummaryService {
     public List<String> listSummaryTypes() {
         return summaryProcessors
                 .stream()
+                .sorted(Comparator.comparing(SummaryProcessor::getType))
                 .map(SummaryProcessor::getType)
                 .collect(Collectors.toList());
     }
