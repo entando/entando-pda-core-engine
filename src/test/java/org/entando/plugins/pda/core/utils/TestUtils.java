@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -45,7 +44,7 @@ import org.entando.web.exception.InternalServerException;
 import org.keycloak.representations.AccessToken;
 import org.springframework.core.io.ClassPathResource;
 
-@SuppressWarnings("PMD.ExcessiveImports")
+@SuppressWarnings({ "PMD.ExcessiveImports", "PMD.TooManyMethods" })
 public abstract class TestUtils {
 
     public static final String CONTAINER_ID_1 = "container1";
@@ -219,6 +218,7 @@ public abstract class TestUtils {
                 .build();
     }
 
+    @SuppressWarnings("PMD.ExcessiveMethodLength")
     public static Form createSimpleProcessForm() {
         List<FormField> fields = new ArrayList<>();
 
@@ -371,6 +371,7 @@ public abstract class TestUtils {
                 .build();
     }
 
+    @SuppressWarnings("PMD.ExcessiveMethodLength")
     public static Form createFullProcessForm() {
         List<FormField> fieldsSubForm = new ArrayList<>();
         fieldsSubForm.add(FormFieldDate.builder()
@@ -414,7 +415,7 @@ public abstract class TestUtils {
 
         fieldsSubForm.add(FormFieldNumber.builder()
                 .id("field_5437")
-                .name("__unbound_field_field_5437")
+                .name("myInteger")
                 .label("My Integer")
                 .type(FormFieldType.INTEGER)
                 .placeholder("My Integer")
