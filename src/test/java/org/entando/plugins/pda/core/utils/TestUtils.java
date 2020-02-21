@@ -423,7 +423,7 @@ public abstract class TestUtils {
         );
 
         Form subform = Form.builder()
-                .id("MyObject")
+                .id("myObject")
                 .name("com_myspace_forms_sample_MyObject")
                 .type("com.myspace.forms_sample.MyObject")
                 .fields(fieldsSubForm)
