@@ -11,5 +11,7 @@ public enum FormFieldType {
     COMBO,
     MULTIPLE,
     INPUT_LIST,
-    SUBFORM
+    SUBFORM,
+    DOCUMENT,
+    DOCUMENT_LIST
 }
