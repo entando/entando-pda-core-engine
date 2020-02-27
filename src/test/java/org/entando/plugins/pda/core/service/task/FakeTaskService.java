@@ -35,7 +35,7 @@ public class FakeTaskService implements TaskService {
 
     @Override
     public PagedRestResponse<Task> list(Connection connection, AuthenticatedUser user,
-            PagedListRequest restListRequest, String search) {
+            PagedListRequest restListRequest, String search, List<String> groups) {
         return new PagedRestResponse<>(new PagedMetadata<>(restListRequest, new ArrayList<>(
                 TASKS.values().stream()
                     .filter(t -> search == null
