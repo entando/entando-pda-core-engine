@@ -1,5 +1,6 @@
 package org.entando.plugins.pda.core.service.task;
 
+import java.util.List;
 import org.entando.keycloak.security.AuthenticatedUser;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.model.Task;
@@ -9,7 +10,7 @@ import org.entando.web.response.PagedRestResponse;
 public interface TaskService {
 
     PagedRestResponse<Task> list(Connection connection, AuthenticatedUser user, PagedListRequest restListRequest,
-            String filter);
+            String filter, List<String> groups);
 
     Task get(Connection connection, AuthenticatedUser user, String id);
 }
