@@ -30,9 +30,17 @@ public class FakeTaskServiceTest {
     @Test
     public void shouldListTasks() {
         PagedRestResponse<Task> result = taskService
-                .list(Connection.builder().build(), getDummyUser(), new PagedListRequest());
+                .list(Connection.builder().build(), getDummyUser(), new PagedListRequest(), null, null);
 
-        assertThat(result.getPayload()).isNotEmpty();
+        assertThat(result.getPayload()).hasSize(2);
+    }
+
+    @Test
+    public void shouldSearchTaskList() {
+        PagedRestResponse<Task> result = taskService
+                .list(Connection.builder().build(), getDummyUser(), new PagedListRequest(), "* 1", null);
+
+        assertThat(result.getPayload()).hasSize(1);
     }
 
     @Test

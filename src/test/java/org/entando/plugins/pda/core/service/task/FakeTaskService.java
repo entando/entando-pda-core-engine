@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 import org.entando.keycloak.security.AuthenticatedUser;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.exception.TaskNotFoundException;
@@ -34,8 +35,12 @@ public class FakeTaskService implements TaskService {
 
     @Override
     public PagedRestResponse<Task> list(Connection connection, AuthenticatedUser user,
-            PagedListRequest restListRequest) {
-        return new PagedRestResponse<>(new PagedMetadata<>(restListRequest, new ArrayList<>(TASKS.values())));
+            PagedListRequest restListRequest, String search, List<String> groups) {
+        return new PagedRestResponse<>(new PagedMetadata<>(restListRequest, new ArrayList<>(
+                TASKS.values().stream()
+                    .filter(t -> search == null
+                            || t.getName().contains(search.replace("*", "").trim()))
+                    .collect(Collectors.toList()))));
     }
 
     @Override

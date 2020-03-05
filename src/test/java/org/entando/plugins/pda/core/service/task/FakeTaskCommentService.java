@@ -22,7 +22,7 @@ import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.exception.CommentNotFoundException;
 import org.entando.plugins.pda.core.exception.TaskNotFoundException;
 import org.entando.plugins.pda.core.model.Comment;
-import org.entando.plugins.pda.core.request.CreateCommentRequest;
+import org.entando.plugins.pda.core.service.task.request.CreateCommentRequest;
 import org.springframework.stereotype.Service;
 
 @Service
