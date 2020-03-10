@@ -7,7 +7,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.entando.keycloak.security.AuthenticatedUser;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.model.Task;
+import org.springframework.stereotype.Service;
 
+@Service
 public class FakeTaskLifecycleService implements TaskLifecycleService {
 
     public static final String CLAIM_ACTION = "claim";
