@@ -1,7 +1,6 @@
 package org.entando.plugins.pda.core.service.task;
 
 import java.util.List;
-import javax.servlet.http.HttpServletResponse;
 import org.entando.keycloak.security.AuthenticatedUser;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.model.Attachment;
@@ -17,7 +16,6 @@ public interface TaskAttachmentService {
 
     String delete(Connection connection, AuthenticatedUser user, String id, String attachmentId);
 
-    byte[] file(Connection connection, HttpServletResponse response, AuthenticatedUser user, String id,
-            String attachmentId);
+    byte[] download(Connection connection, AuthenticatedUser user, String id, String attachmentId);
 
 }
