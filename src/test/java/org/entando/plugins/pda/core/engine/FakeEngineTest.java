@@ -9,6 +9,7 @@ import org.entando.plugins.pda.core.service.process.FakeProcessService;
 import org.entando.plugins.pda.core.service.task.FakeTaskCommentService;
 import org.entando.plugins.pda.core.service.task.FakeTaskDefinitionService;
 import org.entando.plugins.pda.core.service.task.FakeTaskFormService;
+import org.entando.plugins.pda.core.service.task.FakeTaskLifecycleBulkService;
 import org.entando.plugins.pda.core.service.task.FakeTaskLifecycleService;
 import org.entando.plugins.pda.core.service.task.FakeTaskService;
 import org.junit.Rule;
@@ -92,6 +93,15 @@ public class FakeEngineTest {
         Engine engine = FakeEngine.builder().taskLifecycleService(taskLifecycleService).build();
 
         assertThat(engine.getTaskLifecycleService()).isEqualTo(taskLifecycleService);
+    }
+
+    @Test
+    public void shouldReturnTaskLifecycleBulkService() {
+        FakeTaskLifecycleBulkService taskLifecycleBulkService = new FakeTaskLifecycleBulkService();
+
+        Engine engine = FakeEngine.builder().taskLifecycleBulkService(taskLifecycleBulkService).build();
+
+        assertThat(engine.getTaskLifecycleBulkService()).isEqualTo(taskLifecycleBulkService);
     }
 
     @Test
