@@ -16,6 +16,8 @@ public interface TaskLifecycleService {
 
     Task pause(Connection connection, AuthenticatedUser user, String id);
 
+    Task resume(Connection connection, AuthenticatedUser user, String id);
+
     Task complete(Connection connection, AuthenticatedUser user, String id);
 
 }

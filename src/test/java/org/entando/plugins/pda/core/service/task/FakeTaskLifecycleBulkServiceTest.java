@@ -57,6 +57,13 @@ public class FakeTaskLifecycleBulkServiceTest {
     }
 
     @Test
+    public void shouldBulkResume() {
+        List<TaskBulkActionResponse> response = taskLifecycleBulkService.bulkResume(null, null, ids);
+
+        assertResponse(response);
+    }
+
+    @Test
     public void shouldBulkComplete() {
         List<TaskBulkActionResponse> response = taskLifecycleBulkService.bulkComplete(null, null, ids);
 
@@ -71,5 +78,4 @@ public class FakeTaskLifecycleBulkServiceTest {
                         tuple(ids.get(2), HttpStatus.OK.value())
                 );
     }
-
 }

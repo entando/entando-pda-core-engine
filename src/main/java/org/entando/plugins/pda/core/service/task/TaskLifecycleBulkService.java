@@ -18,6 +18,8 @@ public interface TaskLifecycleBulkService {
 
     List<TaskBulkActionResponse> bulkPause(Connection connection, AuthenticatedUser user, List<String> ids);
 
+    List<TaskBulkActionResponse> bulkResume(Connection connection, AuthenticatedUser user, List<String> ids);
+
     List<TaskBulkActionResponse> bulkComplete(Connection connection, AuthenticatedUser user, List<String> ids);
 
 }

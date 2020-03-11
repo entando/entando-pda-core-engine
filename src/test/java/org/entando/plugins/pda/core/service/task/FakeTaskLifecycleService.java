@@ -17,6 +17,7 @@ public class FakeTaskLifecycleService implements TaskLifecycleService {
     public static final String ASSIGN_ACTION = "assign";
     public static final String START_ACTION = "start";
     public static final String PAUSE_ACTION = "pause";
+    public static final String RESUME_ACTION = "resume";
     public static final String COMPLETE_ACTION = "complete";
 
     private final Map<String, List<String>> recordedActions = new ConcurrentHashMap<>();
@@ -44,6 +45,11 @@ public class FakeTaskLifecycleService implements TaskLifecycleService {
     @Override
     public Task pause(Connection connection, AuthenticatedUser user, String id) {
         return recordAction(id, PAUSE_ACTION);
+    }
+
+    @Override
+    public Task resume(Connection connection, AuthenticatedUser user, String id) {
+        return recordAction(id, RESUME_ACTION);
     }
 
     @Override
