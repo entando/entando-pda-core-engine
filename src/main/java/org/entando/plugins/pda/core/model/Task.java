@@ -20,7 +20,7 @@ public class Task {
     protected Date createdAt;
     protected Date dueTo;
     protected Status status;
-    protected String assignee;
+    protected String owner;
     protected Map<String, Object> inputData;
     protected Map<String, Object> outputData;
 
@@ -35,7 +35,7 @@ public class Task {
         this.createdAt = createdAt == null ? null : new Date(createdAt.getTime());
         this.dueTo = dueTo == null ? null : new Date(dueTo.getTime());
         this.status = status;
-        this.assignee = owner;
+        this.owner = owner;
         this.inputData = inputData;
         this.outputData = outputData;
     }
@@ -58,7 +58,7 @@ public class Task {
 
     public enum Status {
         CREATED,
-        ASSIGNED,
+        RESERVED,
         IN_PROGRESS,
         PAUSED,
         COMPLETED,
