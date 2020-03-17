@@ -8,12 +8,12 @@ import org.entando.plugins.pda.core.service.task.request.CreateCommentRequest;
 
 public interface TaskCommentService {
 
-    List<Comment> listComments(Connection connection, AuthenticatedUser user, String id);
+    List<Comment> list(Connection connection, AuthenticatedUser user, String id);
 
-    Comment getComment(Connection connection, AuthenticatedUser user, String id, String commentId);
+    Comment get(Connection connection, AuthenticatedUser user, String id, String commentId);
 
-    Comment createComment(Connection connection, AuthenticatedUser user, String id, CreateCommentRequest comment);
+    Comment create(Connection connection, AuthenticatedUser user, String id, CreateCommentRequest comment);
 
-    String deleteComment(Connection connection, AuthenticatedUser user, String id, String commentId);
+    String delete(Connection connection, AuthenticatedUser user, String id, String commentId);
 
 }

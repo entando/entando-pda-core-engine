@@ -8,6 +8,7 @@ import org.entando.plugins.pda.core.exception.EngineNotSupportedException;
 import org.entando.plugins.pda.core.service.group.GroupService;
 import org.entando.plugins.pda.core.service.process.ProcessFormService;
 import org.entando.plugins.pda.core.service.process.ProcessService;
+import org.entando.plugins.pda.core.service.task.TaskAttachmentService;
 import org.entando.plugins.pda.core.service.task.TaskCommentService;
 import org.entando.plugins.pda.core.service.task.TaskDefinitionService;
 import org.entando.plugins.pda.core.service.task.TaskFormService;
@@ -24,6 +25,7 @@ public class Engine {
     protected TaskService taskService;
     protected TaskDefinitionService taskDefinitionService;
     protected TaskCommentService taskCommentService;
+    protected TaskAttachmentService taskAttachmentService;
     protected TaskFormService taskFormService;
     protected TaskLifecycleService taskLifecycleService;
     protected TaskLifecycleBulkService taskLifecycleBulkService;
@@ -47,6 +49,11 @@ public class Engine {
 
     public TaskCommentService getTaskCommentService() {
         return Optional.ofNullable(taskCommentService)
+                .orElseThrow(EngineNotSupportedException::new);
+    }
+
+    public TaskAttachmentService getTaskAttachmentService() {
+        return Optional.ofNullable(taskAttachmentService)
                 .orElseThrow(EngineNotSupportedException::new);
     }
 
