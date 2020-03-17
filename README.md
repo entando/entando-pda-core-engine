@@ -13,7 +13,8 @@ Jenkins X:
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=entando_pda-core-engine&metric=security_rating)](https://sonarcloud.io/dashboard?id=entando_pda-core-engine)
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=entando_pda-core-engine&metric=sqale_index)](https://sonarcloud.io/dashboard?id=entando_pda-core-engine)
 
-Interfaces and base classes for implementing a custom BPM Engine support for Entando PDA Plugin: https://github.com/entando/entando-process-driven-plugin.
+Interfaces and base classes for implementing a custom BPM Engine support for Entando PDA Plugin:
+* https://github.com/entando/entando-process-driven-plugin
 
 Supported BPM Engines:
 * Red Hat PAM: https://github.com/entando/pda-redhatpam-engine/pulls 
