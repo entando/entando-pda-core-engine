@@ -10,4 +10,4 @@
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=entando_pda-core-engine&metric=security_rating)](https://sonarcloud.io/dashboard?id=entando_pda-core-engine)
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=entando_pda-core-engine&metric=sqale_index)](https://sonarcloud.io/dashboard?id=entando_pda-core-engine)
 
-Interfaces and base classes for implementing a specific BPM Engine implementation for Entando PDA
+Interfaces and base classes for implementing a specific BPM Engine implementation for Entando PDA.
