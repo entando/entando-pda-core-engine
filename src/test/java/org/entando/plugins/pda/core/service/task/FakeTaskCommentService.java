@@ -22,7 +22,7 @@ import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.exception.CommentNotFoundException;
 import org.entando.plugins.pda.core.exception.TaskNotFoundException;
 import org.entando.plugins.pda.core.model.Comment;
-import org.entando.plugins.pda.core.request.CreateCommentRequest;
+import org.entando.plugins.pda.core.service.task.request.CreateCommentRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -61,7 +61,7 @@ public class FakeTaskCommentService implements TaskCommentService {
     }
 
     @Override
-    public List<Comment> listComments(Connection connection, AuthenticatedUser user, String id) {
+    public List<Comment> list(Connection connection, AuthenticatedUser user, String id) {
 
         if(COMMENTS_MAP.containsKey(id)) {
             return COMMENTS_MAP.get(id);
@@ -71,7 +71,7 @@ public class FakeTaskCommentService implements TaskCommentService {
     }
 
     @Override
-    public Comment getComment(Connection connection, AuthenticatedUser user, String id, String commentId) {
+    public Comment get(Connection connection, AuthenticatedUser user, String id, String commentId) {
         List<Comment> comments = Optional.ofNullable(COMMENTS_MAP.get(id))
                 .orElseThrow(CommentNotFoundException::new);
 
@@ -85,7 +85,7 @@ public class FakeTaskCommentService implements TaskCommentService {
     }
 
     @Override
-    public Comment createComment(Connection connection, AuthenticatedUser user, String id, CreateCommentRequest request) {
+    public Comment create(Connection connection, AuthenticatedUser user, String id, CreateCommentRequest request) {
         List<Comment> comments = COMMENTS_MAP.get(id);
         if (comments == null) {
             comments = new ArrayList<>();
@@ -105,8 +105,8 @@ public class FakeTaskCommentService implements TaskCommentService {
     }
 
     @Override
-    public String deleteComment(Connection connection, AuthenticatedUser user, String id, String commentId) {
-        Comment comment = getComment(connection, user, id, commentId);
+    public String delete(Connection connection, AuthenticatedUser user, String id, String commentId) {
+        Comment comment = get(connection, user, id, commentId);
 
         List<Comment> comments = COMMENTS_MAP.get(id);
         comments.remove(comment);

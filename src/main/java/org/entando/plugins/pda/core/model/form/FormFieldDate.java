@@ -9,10 +9,8 @@ import lombok.experimental.SuperBuilder;
 @Data
 @SuperBuilder
 @ToString(callSuper = true)
-public class FormFieldText extends FormField {
+public class FormFieldDate extends FormField {
 
-    private Integer maxLength;
-    private Integer minLength;
-    private Integer rows;
+    private boolean withTime;
 
 }

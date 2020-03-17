@@ -18,7 +18,7 @@ public class Form {
 
     public FormField getFieldByName(String name) {
         return fields.stream()
-                .filter(e -> name.equalsIgnoreCase(e.getName()))
+                .filter(e -> name.equals(e.getName()))
                 .findFirst().orElse(null);
     }
 }
