@@ -132,9 +132,7 @@ public abstract class TestUtils {
         return Connection.builder()
                 .username("myUsername")
                 .password("myPassword")
-                .schema("http")
-                .host("myurl")
-                .port("8080")
+                .url("http://myurl.com:8080")
                 .build();
     }
 
