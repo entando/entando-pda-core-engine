@@ -12,6 +12,8 @@ import org.entando.plugins.pda.core.service.task.TaskAttachmentService;
 import org.entando.plugins.pda.core.service.task.TaskCommentService;
 import org.entando.plugins.pda.core.service.task.TaskDefinitionService;
 import org.entando.plugins.pda.core.service.task.TaskFormService;
+import org.entando.plugins.pda.core.service.task.TaskLifecycleBulkService;
+import org.entando.plugins.pda.core.service.task.TaskLifecycleService;
 import org.entando.plugins.pda.core.service.task.TaskService;
 
 @Getter
@@ -25,6 +27,8 @@ public class Engine {
     protected TaskCommentService taskCommentService;
     protected TaskAttachmentService taskAttachmentService;
     protected TaskFormService taskFormService;
+    protected TaskLifecycleService taskLifecycleService;
+    protected TaskLifecycleBulkService taskLifecycleBulkService;
     protected ProcessService processService;
     protected ProcessFormService processFormService;
     protected GroupService groupService;
@@ -55,6 +59,16 @@ public class Engine {
 
     public TaskFormService getTaskFormService() {
         return Optional.ofNullable(taskFormService)
+                .orElseThrow(EngineNotSupportedException::new);
+    }
+
+    public TaskLifecycleService getTaskLifecycleService() {
+        return Optional.ofNullable(taskLifecycleService)
+                .orElseThrow(EngineNotSupportedException::new);
+    }
+
+    public TaskLifecycleBulkService getTaskLifecycleBulkService() {
+        return Optional.ofNullable(taskLifecycleBulkService)
                 .orElseThrow(EngineNotSupportedException::new);
     }
 
