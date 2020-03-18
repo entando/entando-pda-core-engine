@@ -13,4 +13,5 @@ public interface TaskService {
             String filter, List<String> groups);
 
     Task get(Connection connection, AuthenticatedUser user, String id);
+
 }
