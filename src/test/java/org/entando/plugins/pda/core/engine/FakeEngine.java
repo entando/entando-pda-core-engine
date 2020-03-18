@@ -13,6 +13,7 @@ import org.entando.plugins.pda.core.service.task.FakeTaskLifecycleService;
 import org.entando.plugins.pda.core.service.task.FakeTaskService;
 import org.springframework.stereotype.Component;
 
+@SuppressWarnings("PMD.ExcessiveParameterList")
 @Component
 public class FakeEngine extends Engine {
 
@@ -20,11 +21,11 @@ public class FakeEngine extends Engine {
 
     @Builder
     public FakeEngine(FakeTaskService taskService, FakeTaskDefinitionService taskDefinitionService,
-            FakeTaskCommentService taskCommentService, FakeTaskFormService taskFormService,
-            FakeTaskLifecycleService taskLifecycleService, FakeTaskLifecycleBulkService taskLifecycleBulkService,
-            FakeProcessService processService, FakeProcessFormService processFormService,
-            FakeGroupService groupService) {
-        super(TYPE, taskService, taskDefinitionService, taskCommentService, taskFormService, taskLifecycleService,
-                taskLifecycleBulkService, processService, processFormService, groupService);
+            FakeTaskCommentService taskCommentService, FakeTaskAttachmentService taskAttachmentService,
+            FakeTaskFormService taskFormService, FakeTaskLifecycleService taskLifecycleService,
+            FakeTaskLifecycleBulkService taskLifecycleBulkService, FakeProcessService processService,
+            FakeProcessFormService processFormService, FakeGroupService groupService) {
+        super(TYPE, taskService, taskDefinitionService, taskCommentService, taskAttachmentService, taskFormService,
+                taskLifecycleService, taskLifecycleBulkService, processService, processFormService, groupService);
     }
 }
