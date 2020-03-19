@@ -22,3 +22,6 @@ Supported BPM Engines:
 Sonar Cloud Report:
 * https://sonarcloud.io/dashboard?id=entando_pda-core-engine
 
+Jars deployed on Nexus:
+* https://nexus-jx.apps.serv.run/
+
