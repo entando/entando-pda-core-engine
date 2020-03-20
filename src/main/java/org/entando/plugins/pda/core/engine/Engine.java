@@ -16,6 +16,18 @@ import org.entando.plugins.pda.core.service.task.TaskLifecycleBulkService;
 import org.entando.plugins.pda.core.service.task.TaskLifecycleService;
 import org.entando.plugins.pda.core.service.task.TaskService;
 
+/**
+ * This class Represents a BPM engine and expose the services that are available for that specific implementation. It is
+ * intended to be inherited and the subclass should provide the real implementation for each Service by calling the
+ * superclass constructor with the service implementations as arguments. If any service is not supported, a null value
+ * should be passed to the corresponding constructor argument.
+ * <p>
+ * The type attribute should be a unique identifier for the engine being implemented and it is going to be used to map
+ * the {@link Connection} to the engine.
+ * <p>
+ * All the methods that return a service can throw a {@link EngineNotSupportedException} if that service is not
+ * available for the engine implementation. In other words, if a null value was provided by the subclass.
+ */
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
