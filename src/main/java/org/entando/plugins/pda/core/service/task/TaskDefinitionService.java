@@ -4,7 +4,7 @@ import java.util.Set;
 
 /**
  * Defines service methods related to task definition. A task definition specifies which fields or
- * columns are available for all task instance.
+ * columns are available for all task instances.
  *
  * @see org.entando.plugins.pda.core.engine.Engine
  */
