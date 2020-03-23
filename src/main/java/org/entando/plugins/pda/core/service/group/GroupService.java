@@ -5,8 +5,8 @@ import org.entando.plugins.pda.core.engine.Connection;
 
 /**
  * Defines service methods related to groups from the BPM engine.
- * <p>
- * Implementations should use the {@link Connection} argument to get access to the engine.
+ *
+ * <p>Implementations should use the {@link Connection} argument to get access to the engine.
  *
  * @see org.entando.plugins.pda.core.engine.Engine
  */

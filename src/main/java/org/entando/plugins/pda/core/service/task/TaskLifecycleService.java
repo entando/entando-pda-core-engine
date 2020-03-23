@@ -5,10 +5,10 @@ import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.model.Task;
 
 /**
- * Defines service methods related to the task lifecycle. The lifecycle operations move the task from
- * one state to another.
- * <p>
- * Implementations should use the {@link Connection} argument to get access to the engine.
+ * Defines service methods related to the task lifecycle. The lifecycle operations move the task from one state to
+ * another.
+ *
+ * <p>Implementations should use the {@link Connection} argument to get access to the engine.
  *
  * @see org.entando.plugins.pda.core.engine.Engine
  */

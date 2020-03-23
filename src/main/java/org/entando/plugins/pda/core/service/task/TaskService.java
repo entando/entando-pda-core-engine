@@ -9,8 +9,8 @@ import org.entando.web.response.PagedRestResponse;
 
 /**
  * Defines service methods for task retrieval from the BPM engine.
- * <p>
- * Implementations should use the {@link Connection} argument to get access to the engine.
+ *
+ * <p>Implementations should use the {@link Connection} argument to get access to the engine.
  *
  * @see org.entando.plugins.pda.core.engine.Engine
  */

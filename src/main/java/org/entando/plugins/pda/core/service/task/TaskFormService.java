@@ -6,10 +6,10 @@ import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.model.form.Form;
 
 /**
- * Defines service methods for task form operations, like retrieving the form definition and submitting a
- * form. The {@link Form} object can be used to render a form dynamically.
- * <p>
- * Implementations should use the {@link Connection} argument to get access to the engine.
+ * Defines service methods for task form operations, like retrieving the form definition and submitting a form. The
+ * {@link Form} object can be used to render a form dynamically.
+ *
+ * <p>Implementations should use the {@link Connection} argument to get access to the engine.
  *
  * @see org.entando.plugins.pda.core.engine.Engine
  */

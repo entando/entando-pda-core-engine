@@ -7,10 +7,10 @@ import org.entando.plugins.pda.core.model.Comment;
 import org.entando.plugins.pda.core.service.task.request.CreateCommentRequest;
 
 /**
- * Defines service methods related to task comment manipulation. It should be implemented if task comment
- * is supported by the engine.
- * <p>
- * Implementations should use the {@link Connection} argument to get access to the engine.
+ * Defines service methods related to task comment manipulation. It should be implemented if task comment is supported
+ * by the engine.
+ *
+ * <p>Implementations should use the {@link Connection} argument to get access to the engine.
  *
  * @see org.entando.plugins.pda.core.engine.Engine
  */

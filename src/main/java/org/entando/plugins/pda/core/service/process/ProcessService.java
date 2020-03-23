@@ -6,8 +6,8 @@ import org.entando.plugins.pda.core.model.ProcessDefinition;
 
 /**
  * Defines service methods for process definitions operations.
- * <p>
- * Implementations should use the {@link Connection} argument to get access to the engine.
+ *
+ * <p>Implementations should use the {@link Connection} argument to get access to the engine.
  *
  * @see org.entando.plugins.pda.core.engine.Engine
  */

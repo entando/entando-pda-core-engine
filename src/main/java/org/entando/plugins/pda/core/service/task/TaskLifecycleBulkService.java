@@ -6,10 +6,10 @@ import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.service.task.response.TaskBulkActionResponse;
 
 /**
- * Defines methods for bulk lifecycle operations. Like the {@link TaskLifecycleService}, methods here
- * move the task from one state to another, but this interface works with multiple tasks at a time.
- * <p>
- * Implementations should use the {@link Connection} argument to get access to the engine.
+ * Defines methods for bulk lifecycle operations. Like the {@link TaskLifecycleService}, methods here move the task from
+ * one state to another, but this interface works with multiple tasks at a time.
+ *
+ * <p>Implementations should use the {@link Connection} argument to get access to the engine.
  *
  * @see TaskLifecycleService
  * @see org.entando.plugins.pda.core.engine.Engine

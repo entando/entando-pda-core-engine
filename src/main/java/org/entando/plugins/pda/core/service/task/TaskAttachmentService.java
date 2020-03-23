@@ -7,10 +7,10 @@ import org.entando.plugins.pda.core.model.Attachment;
 import org.entando.plugins.pda.core.request.CreateAttachmentRequest;
 
 /**
- * Defines service methods to operate on task attachments. It should be implemented if the engine
- * supports file attachment on the task.
- * <p>
- * Implementations should use the {@link Connection} argument to get access to the engine.
+ * Defines service methods to operate on task attachments. It should be implemented if the engine supports file
+ * attachment on the task.
+ *
+ * <p>Implementations should use the {@link Connection} argument to get access to the engine.
  *
  * @see org.entando.plugins.pda.core.engine.Engine
  */
