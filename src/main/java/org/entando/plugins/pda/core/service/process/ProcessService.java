@@ -5,7 +5,7 @@ import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.model.ProcessDefinition;
 
 /**
- * This interface defines service methods for process definitions operations.
+ * Defines service methods for process definitions operations.
  * <p>
  * Implementations should use the {@link Connection} argument to get access to the engine.
  *
@@ -16,7 +16,7 @@ public interface ProcessService {
     /**
      * List all process definitions for the given connection.
      *
-     * @param connection Connection to the BPM engine
+     * @param connection the connection to the BPM engine
      * @return list with the process definitions
      */
     List<ProcessDefinition> listDefinitions(Connection connection);
@@ -24,7 +24,7 @@ public interface ProcessService {
     /**
      * Gets the process diagram for the given process id.
      *
-     * @param connection Connection to the BPM engine
+     * @param connection the connection to the BPM engine
      * @param id the process id
      * @return list with the process definitions
      */

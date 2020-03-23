@@ -17,8 +17,8 @@ import org.entando.plugins.pda.core.service.task.TaskLifecycleService;
 import org.entando.plugins.pda.core.service.task.TaskService;
 
 /**
- * This class Represents a BPM engine and expose the services that are available for that specific implementation. It is
- * intended to be inherited and the subclass should provide the real implementation for each Service by calling the
+ * Represents a BPM engine and expose the services that are available for that specific implementation. It is
+ * intended to be inherited and the subclass should provide the real implementation for each service by calling the
  * superclass constructor with the service implementations as arguments. If any service is not supported, a null value
  * should be passed to the corresponding constructor argument.
  * <p>

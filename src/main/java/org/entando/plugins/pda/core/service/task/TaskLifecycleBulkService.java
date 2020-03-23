@@ -6,7 +6,7 @@ import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.service.task.response.TaskBulkActionResponse;
 
 /**
- * This interface defines methods for bulk lifecycle operations. Like the {@link TaskLifecycleService}, methods here
+ * Defines methods for bulk lifecycle operations. Like the {@link TaskLifecycleService}, methods here
  * move the task from one state to another, but this interface works with multiple tasks at a time.
  * <p>
  * Implementations should use the {@link Connection} argument to get access to the engine.
@@ -19,9 +19,9 @@ public interface TaskLifecycleBulkService {
     /**
      * Assign all tasks to the authenticated user.
      *
-     * @param connection Connection to the BPM engine
-     * @param user Authenticated user
-     * @param ids task ids
+     * @param connection the connection to the BPM engine
+     * @param user the authenticated user
+     * @param ids the task ids
      * @return response with the status for each task id
      */
     List<TaskBulkActionResponse> bulkClaim(Connection connection, AuthenticatedUser user, List<String> ids);
@@ -29,9 +29,9 @@ public interface TaskLifecycleBulkService {
     /**
      * Release all tasks that are currently assign to the authenticated user.
      *
-     * @param connection Connection to the BPM engine
-     * @param user Authenticated user
-     * @param ids task ids
+     * @param connection the connection to the BPM engine
+     * @param user the authenticated user
+     * @param ids the task ids
      * @return response with the status for each task id
      */
     List<TaskBulkActionResponse> bulkUnclaim(Connection connection, AuthenticatedUser user, List<String> ids);
@@ -39,9 +39,9 @@ public interface TaskLifecycleBulkService {
     /**
      * Delegate the tasks to another user.
      *
-     * @param connection Connection to the BPM engine
-     * @param user Authenticated user
-     * @param ids task ids
+     * @param connection the connection to the BPM engine
+     * @param user the authenticated user
+     * @param ids the task ids
      * @param assignee the user to delegate the tasks to
      * @return response with the status for each task id
      */
@@ -51,9 +51,9 @@ public interface TaskLifecycleBulkService {
     /**
      * Start the tasks to indicate they are being worked on.
      *
-     * @param connection Connection to the BPM engine
-     * @param user Authenticated user
-     * @param ids task ids
+     * @param connection the connection to the BPM engine
+     * @param user the authenticated user
+     * @param ids the task ids
      * @return response with the status for each task id
      */
     List<TaskBulkActionResponse> bulkStart(Connection connection, AuthenticatedUser user, List<String> ids);
@@ -61,9 +61,9 @@ public interface TaskLifecycleBulkService {
     /**
      * Pause the tasks to indicate they are not being worked on.
      *
-     * @param connection Connection to the BPM engine
-     * @param user Authenticated user
-     * @param ids task ids
+     * @param connection the connection to the BPM engine
+     * @param user the authenticated user
+     * @param ids the task ids
      * @return response with the status for each task id
      */
     List<TaskBulkActionResponse> bulkPause(Connection connection, AuthenticatedUser user, List<String> ids);
@@ -71,9 +71,9 @@ public interface TaskLifecycleBulkService {
     /**
      * Resume the tasks that were previously paused.
      *
-     * @param connection Connection to the BPM engine
-     * @param user Authenticated user
-     * @param ids task ids
+     * @param connection the connection to the BPM engine
+     * @param user the authenticated user
+     * @param ids the task ids
      * @return response with the status for each task id
      */
     List<TaskBulkActionResponse> bulkResume(Connection connection, AuthenticatedUser user, List<String> ids);
@@ -81,9 +81,9 @@ public interface TaskLifecycleBulkService {
     /**
      * Complete the tasks.
      *
-     * @param connection Connection to the BPM engine
-     * @param user Authenticated user
-     * @param ids task ids
+     * @param connection the connection to the BPM engine
+     * @param user the authenticated user
+     * @param ids the task ids
      * @return response with the status for each task id
      */
     List<TaskBulkActionResponse> bulkComplete(Connection connection, AuthenticatedUser user, List<String> ids);
