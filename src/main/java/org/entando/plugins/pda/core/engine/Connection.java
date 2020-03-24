@@ -7,6 +7,9 @@ import lombok.Builder.Default;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Data structure for BPM connections.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
