@@ -148,12 +148,10 @@ public class FakeTaskAttachmentService implements TaskAttachmentService {
     }
 
     @Override
-    public byte[] download(Connection connection, AuthenticatedUser user, String id,
+    public File download(Connection connection, AuthenticatedUser user, String id,
             String attachmentId) {
 
         get(connection, user, id, attachmentId); //validates attachment exists
-        File file = new File(readFromFile("task_attachment_file.txt"));
-
-        return file.getData().getBytes();
+        return new File(readFromFile("task_attachment_file.txt"));
     }
 }

@@ -1,13 +1,18 @@
 package org.entando.plugins.pda.core.model;
 
 import java.util.Base64;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 
-@Getter
+@Data
+@Builder
+@AllArgsConstructor
 public class File {
     private String type;
     private String name;
-    private String data;
+    private byte[] data;
     private Integer size = 0;
 
 
@@ -20,7 +25,7 @@ public class File {
             } else if (property.startsWith("name=")) {
                 name = property.replace("name=", "").replace("%20", " ");
             } else if (property.startsWith("base64,")) {
-                data = property.replace("base64,", "");
+                data = property.replace("base64,", "").getBytes();
                 size = Base64.getDecoder().decode(data).length;
             }
         }
