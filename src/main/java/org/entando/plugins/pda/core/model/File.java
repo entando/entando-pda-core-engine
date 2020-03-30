@@ -14,7 +14,7 @@ import lombok.Data;
 public class File {
     private String type;
     private String name;
-    private byte[] data;
+    private String data;
     private Integer size = 0;
 
 
@@ -27,9 +27,21 @@ public class File {
             } else if (property.startsWith("name=")) {
                 name = property.replace("name=", "").replace("%20", " ");
             } else if (property.startsWith("base64,")) {
-                data = property.replace("base64,", "").getBytes(StandardCharsets.UTF_8);
+                data = property.replace("base64,", "");
                 size = Base64.getDecoder().decode(data).length;
             }
         }
+    }
+
+    public byte[] getDataAsByteArray() {
+        return data.getBytes(StandardCharsets.UTF_8);
+    }
+
+    public void setData(byte[] data) {
+        this.data = new String(data, StandardCharsets.UTF_8);
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 }

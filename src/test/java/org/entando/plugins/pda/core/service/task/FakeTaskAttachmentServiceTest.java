@@ -132,6 +132,6 @@ public class FakeTaskAttachmentServiceTest {
                 TASK_ATTACHMENT_ID_1_1);
         File file = taskService.download(getDummyConnection(), getDummyUser(), TASK_ID_1, TASK_ATTACHMENT_ID_1_1);
 
-        assertThat(file.getData().length).isEqualTo(attachment.getSize().intValue());
+        assertThat(file.getDataAsByteArray().length).isEqualTo(attachment.getSize().intValue());
     }
 }
