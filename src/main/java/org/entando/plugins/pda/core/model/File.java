@@ -1,7 +1,6 @@
 package org.entando.plugins.pda.core.model;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,14 +33,16 @@ public class File {
     }
 
     public byte[] getDataAsByteArray() {
-        return data.getBytes(StandardCharsets.UTF_8);
+        return Base64.getDecoder().decode(data);
     }
 
     public void setData(byte[] data) {
-        this.data = new String(data, StandardCharsets.UTF_8);
+        this.data = Base64.getEncoder().encodeToString(data);
+        this.size = data.length;
     }
 
     public void setData(String data) {
         this.data = data;
+        this.size = Base64.getDecoder().decode(data).length;
     }
 }
