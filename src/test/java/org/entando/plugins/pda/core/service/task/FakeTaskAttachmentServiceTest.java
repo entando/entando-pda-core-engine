@@ -18,6 +18,7 @@ import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.exception.AttachmentNotFoundException;
 import org.entando.plugins.pda.core.exception.TaskNotFoundException;
 import org.entando.plugins.pda.core.model.Attachment;
+import org.entando.plugins.pda.core.model.File;
 import org.entando.plugins.pda.core.request.CreateAttachmentRequest;
 import org.junit.Before;
 import org.junit.Rule;
@@ -129,8 +130,8 @@ public class FakeTaskAttachmentServiceTest {
     public void shouldDownloadTaskAttachment() {
         Attachment attachment = taskService.get(getDummyConnection(), getDummyUser(), TASK_ID_1,
                 TASK_ATTACHMENT_ID_1_1);
-        byte[] file = taskService.download(getDummyConnection(), getDummyUser(), TASK_ID_1, TASK_ATTACHMENT_ID_1_1);
+        File file = taskService.download(getDummyConnection(), getDummyUser(), TASK_ID_1, TASK_ATTACHMENT_ID_1_1);
 
-        assertThat(file.length).isEqualTo(attachment.getSize().intValue());
+        assertThat(file.getDataAsByteArray().length).isEqualTo(attachment.getSize().intValue());
     }
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import org.entando.keycloak.security.AuthenticatedUser;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.model.Attachment;
+import org.entando.plugins.pda.core.model.File;
 import org.entando.plugins.pda.core.request.CreateAttachmentRequest;
 
 /**
@@ -66,8 +67,8 @@ public interface TaskAttachmentService {
      * @param user the authenticated user
      * @param id the task id
      * @param attachmentId the task attachments id
-     * @return byte array of the actual file
+     * @return File representation of the Attachment
      */
-    byte[] download(Connection connection, AuthenticatedUser user, String id, String attachmentId);
+    File download(Connection connection, AuthenticatedUser user, String id, String attachmentId);
 
 }
