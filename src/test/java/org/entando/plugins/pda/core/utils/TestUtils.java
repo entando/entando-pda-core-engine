@@ -64,7 +64,7 @@ public abstract class TestUtils {
     public static final String TASK_ATTACHMENT_TYPE_1_1 = "application/pdf";
     public static final String TASK_ATTACHMENT_OWNER_1_1 = "Chuck Norris";
     public static final Date TASK_ATTACHMENT_CREATED_1_1 = new Date();
-    public static final Long TASK_ATTACHMENT_SIZE_1_1 = 58_172L;
+    public static final Long TASK_ATTACHMENT_SIZE_1_1 = 43_627L;
 
     public static final String TASK_ATTACHMENT_ID_1_2 = "2";
     public static final String TASK_ATTACHMENT_NAME_1_2 = "image.jpeg";
