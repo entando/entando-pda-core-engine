@@ -46,7 +46,7 @@ import org.keycloak.representations.AccessToken;
 import org.springframework.core.io.ClassPathResource;
 
 // CPD-OFF
-@SuppressWarnings({ "PMD.ExcessiveImports", "PMD.TooManyMethods" })
+@SuppressWarnings({ "PMD.ExcessiveImports", "PMD.TooManyMethods", "PMD.AvoidDuplicateLiterals" })
 public abstract class TestUtils {
 
     public static final String CONTAINER_ID_1 = "container1";
