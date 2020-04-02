@@ -45,7 +45,8 @@ import org.entando.web.exception.InternalServerException;
 import org.keycloak.representations.AccessToken;
 import org.springframework.core.io.ClassPathResource;
 
-@SuppressWarnings({ "PMD.ExcessiveImports", "PMD.TooManyMethods" })
+// CPD-OFF
+@SuppressWarnings({ "PMD.ExcessiveImports", "PMD.TooManyMethods", "PMD.AvoidDuplicateLiterals" })
 public abstract class TestUtils {
 
     public static final String CONTAINER_ID_1 = "container1";
@@ -611,6 +612,414 @@ public abstract class TestUtils {
         return Form.builder()
                 .id("process")
                 .name("forms-sample.ProcessSample-taskform.frm")
+                .fields(fields)
+                .build();
+    }
+
+    @SuppressWarnings("PMD.ExcessiveMethodLength")
+    public static Form createSimpleTaskForm() {
+
+        List<FormField> holderFields = new ArrayList<>();
+
+        holderFields.add(FormFieldNumber.builder()
+                .id("field_4086")
+                .name("mortgageamount")
+                .label("Mortgage amount")
+                .type(FormFieldType.INTEGER)
+                .placeholder("Mortgage amount")
+                .build()
+        );
+
+        holderFields.add(FormFieldNumber.builder()
+                .id("field_3875")
+                .name("downpayment")
+                .label("Down Payment")
+                .readOnly(true)
+                .type(FormFieldType.INTEGER)
+                .placeholder("Down Payment")
+                .build()
+        );
+
+        holderFields.add(FormFieldNumber.builder()
+                .id("field_1184")
+                .name("amortization")
+                .label("Years of amortization")
+                .readOnly(true)
+                .type(FormFieldType.INTEGER)
+                .placeholder("Years of amortization")
+                .build()
+        );
+
+        FormFieldSubForm fieldSubform1 = FormFieldSubForm.builder()
+                .id("field_7992")
+                .name("applicant")
+                .label("Applicant")
+                .readOnly(true)
+                .type(FormFieldType.SUBFORM)
+                .formId("applicant")
+                .formType("com.myspace.mortgage_app.Applicant")
+                .build();
+
+
+        FormFieldSubForm fieldSubform2 = FormFieldSubForm.builder()
+                .id("field_4885")
+                .name("property")
+                .label("Property")
+                .readOnly(true)
+                .type(FormFieldType.SUBFORM)
+                .formId("property")
+                .formType("com.myspace.mortgage_app.Property")
+                .build();
+
+        holderFields.add(fieldSubform1);
+        holderFields.add(fieldSubform2);
+
+        Form holder = Form.builder()
+                .id("Application")
+                .type("com.myspace.mortgage_app.Application")
+                .name("ApplicationMortgage")
+                .fields(holderFields)
+                .build();
+
+        List<FormField> fields1 = new ArrayList<>();
+
+        fields1.add(FormFieldText.builder()
+                .id("field_922175737010885E11")
+                .name("name")
+                .label("Name")
+                .type(FormFieldType.STRING)
+                .placeholder("Name")
+                .maxLength(100)
+                .build()
+        );
+
+        fields1.add(FormFieldNumber.builder()
+                .id("field_405154649767496E12")
+                .name("annualincome")
+                .label("Annual Income")
+                .type(FormFieldType.INTEGER)
+                .placeholder("Annual Income")
+                .build()
+        );
+
+        fields1.add(FormFieldNumber.builder()
+                .id("field_670713100411637E11")
+                .name("ssn")
+                .label("SSN")
+                .type(FormFieldType.INTEGER)
+                .placeholder("SSN")
+                .build()
+        );
+
+        List<FormField> fields2 = new ArrayList<>();
+
+        fields2.add(FormFieldNumber.builder()
+                .id("field_815717729253767E11")
+                .name("age")
+                .label("Age of property")
+                .type(FormFieldType.INTEGER)
+                .placeholder("Age of property")
+                .build()
+        );
+
+        fields2.add(FormFieldText.builder()
+                .id("field_236289653097941E11")
+                .name("address")
+                .label("Address of property")
+                .type(FormFieldType.STRING)
+                .placeholder("Address of property")
+                .maxLength(100)
+                .build()
+        );
+
+        fields2.add(FormFieldText.builder()
+                .id("field_9471909295199063E11")
+                .name("locale")
+                .label("Locale")
+                .type(FormFieldType.STRING)
+                .placeholder("Locale")
+                .maxLength(100)
+                .build()
+        );
+
+        fields2.add(FormFieldNumber.builder()
+                .id("field_4113393327260706E12")
+                .name("saleprice")
+                .label("Sale Price")
+                .type(FormFieldType.INTEGER)
+                .placeholder("Sale Price")
+                .build()
+        );
+
+        Form subform1 = Form.builder()
+                .id("applicant")
+                .name("Applicant")
+                .type("com.myspace.mortgage_app.Applicant")
+                .fields(fields1)
+                .build();
+
+        Form subform2 = Form.builder()
+                .id("property")
+                .name("Property")
+                .type("com.myspace.mortgage_app.Property")
+                .fields(fields2)
+                .build();
+
+        fieldSubform1.setForm(subform1);
+        fieldSubform2.setForm(subform2);
+
+        return Form.builder()
+                .id("task")
+                .name("Qualify-taskform.frm")
+                .field(FormFieldSubForm.builder()
+                        .id("field_0627466111868674E11")
+                        .name("application")
+                        .label("Application")
+                        .readOnly(true)
+                        .type(FormFieldType.SUBFORM)
+                        .formId("application")
+                        .formType("com.myspace.mortgage_app.Application")
+                        .form(holder)
+                        .build())
+                .field(FormField.builder()
+                        .id("field_282450953523892E10")
+                        .name("inlimit")
+                        .label("Is mortgage application in limit?")
+                        .type(FormFieldType.BOOLEAN)
+                        .build())
+                .build();
+    }
+
+    @SuppressWarnings("PMD.ExcessiveMethodLength")
+    public static Form createFullTaskForm() {
+        List<FormField> fieldsSubForm = new ArrayList<>();
+        fieldsSubForm.add(FormFieldDate.builder()
+                .id("field_3423371242937776E12")
+                .name("myDateTime")
+                .label("My Date Time ")
+                .type(FormFieldType.DATE)
+                .placeholder("My Date Time ")
+                .withTime(true)
+                .build()
+        );
+
+        fieldsSubForm.add(FormField.builder()
+                .id("field_912757066857511E11")
+                .name("myBoolean")
+                .label("My Boolean")
+                .type(FormFieldType.BOOLEAN)
+                .build()
+        );
+
+        fieldsSubForm.add(FormFieldText.builder()
+                .id("field_9383327275491315E11")
+                .name("myString")
+                .label("My String ")
+                .type(FormFieldType.STRING)
+                .required(true)
+                .maxLength(100)
+                .placeholder("My String")
+                .build()
+        );
+
+        fieldsSubForm.add(FormFieldNumber.builder()
+                .id("field_889617218948984E11")
+                .name("myDouble")
+                .label("My Double - Read Only")
+                .type(FormFieldType.DOUBLE)
+                .readOnly(true)
+                .placeholder("My Double")
+                .build()
+        );
+
+        fieldsSubForm.add(FormFieldNumber.builder()
+                .id("field_73505")
+                .name("myInteger")
+                .label("My Integer")
+                .type(FormFieldType.INTEGER)
+                .placeholder("My Integer")
+                .build()
+        );
+
+        Form subform = Form.builder()
+                .id("MyObject")
+                .name("com_myspace_forms_sample_MyObject")
+                .type("com.myspace.forms_sample.MyObject")
+                .fields(fieldsSubForm)
+                .build();
+
+        List<FormField> fields = new ArrayList<>();
+
+        fields.add(FormField.builder()
+                .id("field_0288987185344915E12")
+                .name("_processDocument")
+                .label("Upload a document")
+                .type(FormFieldType.DOCUMENT)
+                .build());
+
+        fields.add(FormFieldSelector.builder()
+                .id("field_0465988380419236E12")
+                .name("_comboWithDefault")
+                .label("Combo with default")
+                .type(FormFieldType.COMBO)
+                .defaultValue("myValue")
+                .option(Option.builder()
+                        .value("myValue")
+                        .label("myText")
+                        .build())
+                .option(Option.builder()
+                        .value("anotherValue")
+                        .label("anotherText")
+                        .build())
+                .option(Option.builder()
+                        .value("what?")
+                        .label("yup!")
+                        .build())
+                .build());
+
+        fields.add(FormFieldSelector.builder()
+                .id("field_990334777874346E11")
+                .name("_comboWithoutDefault")
+                .label("Combo without default")
+                .type(FormFieldType.COMBO)
+                .option(Option.builder()
+                        .value("oneValue")
+                        .label("one")
+                        .build())
+                .option(Option.builder()
+                        .value("twoValue")
+                        .label("two")
+                        .build())
+                .option(Option.builder()
+                        .value("threeValue")
+                        .label("three")
+                        .build())
+                .build());
+
+        fields.add(FormFieldSelector.builder()
+                .id("field_535447945936313E11")
+                .name("_multipleSelector")
+                .label("My Multiple Selector")
+                .type(FormFieldType.MULTIPLE)
+                .multiple(true)
+                .option(Option.builder()
+                        .value("first")
+                        .label("first")
+                        .build())
+                .option(Option.builder()
+                        .value("second")
+                        .label("second")
+                        .build())
+                .option(Option.builder()
+                        .value("third")
+                        .label("third")
+                        .build())
+                .option(Option.builder()
+                        .value("last")
+                        .label("last")
+                        .build())
+                .build());
+
+        fields.add(FormFieldText.builder()
+                .id("field_405377198216737E11")
+                .name("_bigText")
+                .label("This is a big text")
+                .type(FormFieldType.STRING)
+                .placeholder("Write here your big text!")
+                .required(true)
+                .rows(4)
+                .build());
+
+        fields.add(FormFieldNumber.builder()
+                .id("field_62054")
+                .name("__unbound_field_field_62054")
+                .label("Slider 0to1")
+                .type(FormFieldType.SLIDER)
+                .minValue(0.0)
+                .maxValue(1.0)
+                .multipleOf(0.1)
+                .build());
+
+        fields.add(FormField.builder()
+                .id("field_027589198264173E11")
+                .name("_processList")
+                .label("Multiple Input")
+                .type(FormFieldType.INPUT_LIST)
+                .build());
+
+        fields.add(FormField.builder()
+                .id("field_3483")
+                .name("_processDocumentList")
+                .label("Upload a list of documents")
+                .type(FormFieldType.DOCUMENT_LIST)
+                .build());
+
+        fields.add(FormFieldNumber.builder()
+                .id("field_0253450468149055E12")
+                .name("_sliderInteger")
+                .label("Slider")
+                .type(FormFieldType.SLIDER)
+                .minValue(0.0)
+                .maxValue(200.0)
+                .multipleOf(5.0)
+                .build());
+
+        fields.add(FormFieldSelector.builder()
+                .id("field_188354818614785E11")
+                .name("_radioWithDefault")
+                .label("My Radio Group with default value")
+                .type(FormFieldType.RADIO)
+                .required(true)
+                .defaultValue("thirdValue")
+                .option(Option.builder()
+                        .value("firstValue")
+                        .label("first")
+                        .build())
+                .option(Option.builder()
+                        .value("secondValue")
+                        .label("second")
+                        .build())
+                .option(Option.builder()
+                        .value("thirdValue")
+                        .label("third")
+                        .build())
+                .build());
+
+        FormFieldSubForm fieldSubform = FormFieldSubForm.builder()
+                .id("field_671979933751011E11")
+                .name("_customObject")
+                .label("Nested Form of My Object")
+                .type(FormFieldType.SUBFORM)
+                .formId("_customObject")
+                .formType("com.myspace.forms_sample.MyObject")
+                .build();
+
+        fields.add(fieldSubform);
+
+        fieldSubform.setForm(subform);
+
+        fields.add(FormFieldSelector.builder()
+                .id("field_145054")
+                .name("_radioWithoutDefault")
+                .label("My Radio Group without default value")
+                .type(FormFieldType.RADIO)
+                .option(Option.builder()
+                        .value("myValue")
+                        .label("myText")
+                        .build())
+                .option(Option.builder()
+                        .value("anotherValue")
+                        .label("anotherText")
+                        .build())
+                .option(Option.builder()
+                        .value("what?")
+                        .label("yup!")
+                        .build())
+                .build());
+
+        return Form.builder()
+                .id("task")
+                .name("Task-taskform.frm")
                 .fields(fields)
                 .build();
     }
