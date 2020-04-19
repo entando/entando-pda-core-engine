@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TimeSeriesSummaryProcessor extends AbstractSummaryProcessor {
+
     public static final String TYPE = "TimeSeries";
 
     public TimeSeriesSummaryProcessor(DataService dataService) {
@@ -33,20 +34,25 @@ public class TimeSeriesSummaryProcessor extends AbstractSummaryProcessor {
                 .map(type -> {
                     DataRepository dataRepository = getDataRepository(connection.getEngine(), type);
                     List<PeriodicData> values = dataRepository.getPeriodicData(connection, frequency, periods);
-                    PeriodicData lastValue = values.get(0);
-                    PeriodicData previousValue = values.get(1);
+                    double lastValue = 0.0;
+                    if (!values.isEmpty()) {
+                        lastValue = values.get(0).getValue();
+                    }
+                    double previousValue = 0.0;
+                    if (values.size() > 1) { // NOPMD
+                        previousValue = values.get(1).getValue();
+                    }
 
                     return TimeSeriesData.builder()
                             .id(dataRepository.getId())
                             .values(values)
                             .card(CardSummary.builder()
-                                    .value(lastValue.getValue())
-                                    .previousValue(previousValue.getValue())
+                                    .value(lastValue)
+                                    .previousValue(previousValue)
                                     .build())
                             .build();
                 })
                 .collect(Collectors.toList());
-
 
         return TimeSeriesSummary.builder()
                 .series(result)

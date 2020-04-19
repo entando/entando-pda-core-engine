@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CardSummaryProcessor extends AbstractSummaryProcessor {
+
     public static final String TYPE = "Card";
 
     public CardSummaryProcessor(DataService dataService) {
@@ -28,8 +29,8 @@ public class CardSummaryProcessor extends AbstractSummaryProcessor {
         List<PeriodicData> periods = dataRepository.getPeriodicData(connection, frequency, 2);
 
         return CardSummary.builder()
-                .value(periods.get(0).getValue())
-                .previousValue(periods.get(1).getValue())
+                .value(periods.isEmpty() ? 0.0 : periods.get(0).getValue())
+                .previousValue(periods.size() > 1 ? periods.get(1).getValue() : 0.0)
                 .build();
     }
 }

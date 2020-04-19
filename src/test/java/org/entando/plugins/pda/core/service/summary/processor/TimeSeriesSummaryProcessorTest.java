@@ -13,6 +13,7 @@ import static org.mockito.Mockito.when;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -127,6 +128,60 @@ public class TimeSeriesSummaryProcessorTest {
         Map<DataRepository, List<PeriodicData>> summaries = new ConcurrentHashMap<>();
         summaries.put(dataRepository1, SUMMARY_ANNUALLY_1);
         summaries.put(dataRepository2, SUMMARY_ANNUALLY_2);
+
+        TimeSeriesSummary expected = createChartSummary(summaries);
+
+        //When
+        TimeSeriesSummary result = (TimeSeriesSummary) processor
+                .getSummary(getDummyConnection(), MAPPER.writeValueAsString(request));
+
+        //Then
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    public void shouldCreateChartSummaryWithPeriodsEqualsOne() throws Exception {
+        //Given
+        List<PeriodicData> periodicSummary1 = createPeriodicSummary(SummaryFrequency.ANNUALLY, 1);
+        List<PeriodicData> periodicSummary2 = createPeriodicSummary(SummaryFrequency.ANNUALLY, 1);
+        when(dataRepository1.getPeriodicData(any(), any(), any())).thenReturn(periodicSummary1);
+        when(dataRepository2.getPeriodicData(any(), any(), any())).thenReturn(periodicSummary2);
+
+        TimeSeriesSummaryRequest request = TimeSeriesSummaryRequest.builder()
+                .frequency(SummaryFrequency.ANNUALLY.toString())
+                .periods(1)
+                .series(Arrays.asList(TYPE_1, TYPE_2))
+                .build();
+
+        Map<DataRepository, List<PeriodicData>> summaries = new ConcurrentHashMap<>();
+        summaries.put(dataRepository1, periodicSummary1);
+        summaries.put(dataRepository2, periodicSummary2);
+
+        TimeSeriesSummary expected = createChartSummary(summaries);
+
+        //When
+        TimeSeriesSummary result = (TimeSeriesSummary) processor
+                .getSummary(getDummyConnection(), MAPPER.writeValueAsString(request));
+
+        //Then
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    public void shouldCreateChartSummaryWithPeriodsEqualsZero() throws Exception {
+        //Given
+        when(dataRepository1.getPeriodicData(any(), any(), any())).thenReturn(Collections.emptyList());
+        when(dataRepository2.getPeriodicData(any(), any(), any())).thenReturn(Collections.emptyList());
+
+        TimeSeriesSummaryRequest request = TimeSeriesSummaryRequest.builder()
+                .frequency(SummaryFrequency.ANNUALLY.toString())
+                .periods(0)
+                .series(Arrays.asList(TYPE_1, TYPE_2))
+                .build();
+
+        Map<DataRepository, List<PeriodicData>> summaries = new ConcurrentHashMap<>();
+        summaries.put(dataRepository1, Collections.emptyList());
+        summaries.put(dataRepository2, Collections.emptyList());
 
         TimeSeriesSummary expected = createChartSummary(summaries);
 
