@@ -1,3 +1,4 @@
+
 package org.entando.plugins.pda.core.utils;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -46,7 +47,7 @@ import org.keycloak.representations.AccessToken;
 import org.springframework.core.io.ClassPathResource;
 
 // CPD-OFF
-@SuppressWarnings({ "PMD.ExcessiveImports", "PMD.TooManyMethods", "PMD.AvoidDuplicateLiterals" })
+@SuppressWarnings({"PMD.ExcessiveImports", "PMD.TooManyMethods", "PMD.AvoidDuplicateLiterals"})
 public abstract class TestUtils {
 
     public static final String CONTAINER_ID_1 = "container1";
@@ -146,7 +147,7 @@ public abstract class TestUtils {
     }
 
     public static String readFromFile(String filename) {
-        try (InputStream is = new ClassPathResource(filename).getInputStream()){
+        try (InputStream is = new ClassPathResource(filename).getInputStream()) {
             return IOUtils.toString(is);
         } catch (IOException e) {
             throw new InternalServerException("Error reading file", e);
@@ -202,10 +203,10 @@ public abstract class TestUtils {
         return summary;
     }
 
-    public static CardSummary createCardSummary(List<PeriodicData> values, DataRepository dataRepository) {
+    public static CardSummary createCardSummary(List<PeriodicData> values) {
         return CardSummary.builder()
-                .value(values.get(0).getValue())
-                .previousValue(values.get(1).getValue())
+                .value(values.isEmpty() ? 0.0 : values.get(0).getValue())
+                .previousValue(values.size() > 1 ? values.get(1).getValue() : 0.0)
                 .build();
     }
 
@@ -219,7 +220,7 @@ public abstract class TestUtils {
                     return TimeSeriesData.builder()
                             .id(dataRepository.getId())
                             .values(values)
-                            .card(createCardSummary(values, dataRepository))
+                            .card(createCardSummary(values))
                             .build();
                 })
                 .collect(Collectors.toList());
@@ -241,7 +242,6 @@ public abstract class TestUtils {
                 .formId("applicant")
                 .formType("com.myspace.mortgage_app.Applicant")
                 .build();
-
 
         FormFieldSubForm fieldSubform2 = FormFieldSubForm.builder()
                 .id("field_1811697043491191E12")
@@ -347,7 +347,6 @@ public abstract class TestUtils {
                 .placeholder("Sale Price")
                 .build()
         );
-
 
         Form subform1 = Form.builder()
                 .id("applicant")
@@ -659,7 +658,6 @@ public abstract class TestUtils {
                 .formId("applicant")
                 .formType("com.myspace.mortgage_app.Applicant")
                 .build();
-
 
         FormFieldSubForm fieldSubform2 = FormFieldSubForm.builder()
                 .id("field_4885")

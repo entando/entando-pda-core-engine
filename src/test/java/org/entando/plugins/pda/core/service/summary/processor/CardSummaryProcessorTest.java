@@ -11,6 +11,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import org.entando.plugins.pda.core.model.summary.CardSummary;
 import org.entando.plugins.pda.core.model.summary.PeriodicData;
@@ -54,7 +56,7 @@ public class CardSummaryProcessorTest {
                 .frequency(SummaryFrequency.DAILY.toString())
                 .build();
 
-        CardSummary expected = createCardSummary(SUMMARY_DAILY, dataRepository);
+        CardSummary expected = createCardSummary(SUMMARY_DAILY);
 
         //When
         CardSummary result = (CardSummary) processor
@@ -75,7 +77,7 @@ public class CardSummaryProcessorTest {
                 .frequency(SummaryFrequency.MONTHLY.toString())
                 .build();
 
-        CardSummary expected = createCardSummary(SUMMARY_MONTHLY, dataRepository);
+        CardSummary expected = createCardSummary(SUMMARY_MONTHLY);
 
         //When
         CardSummary result = (CardSummary) processor
@@ -96,7 +98,7 @@ public class CardSummaryProcessorTest {
                 .frequency(SummaryFrequency.ANNUALLY.toString())
                 .build();
 
-        CardSummary expected = createCardSummary(SUMMARY_ANNUALLY, dataRepository);
+        CardSummary expected = createCardSummary(SUMMARY_ANNUALLY);
 
         //When
         CardSummary result = (CardSummary) processor
@@ -104,6 +106,26 @@ public class CardSummaryProcessorTest {
 
         //Then
         assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    public void shouldReturnZeroPercentageForSingleValueEqualsZero() throws Exception {
+        //Given
+        PeriodicData periodicData = PeriodicData.builder().date(LocalDate.now()).value(0.0).build();
+        when(dataRepository.getPeriodicData(any(), any(), any()))
+                .thenReturn(Collections.singletonList(periodicData));
+
+        CardSummaryRequest request = CardSummaryRequest.builder()
+                .type(TYPE_1)
+                .frequency(SummaryFrequency.ANNUALLY.toString())
+                .build();
+
+        //When
+        CardSummary result = (CardSummary) processor
+                .getSummary(getDummyConnection(), MAPPER.writeValueAsString(request));
+
+        //Then
+        assertThat(result.getPercentage()).isEqualTo(0.0);
     }
 
     @Test
