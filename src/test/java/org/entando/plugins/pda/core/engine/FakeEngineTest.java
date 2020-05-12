@@ -1,10 +1,11 @@
 package org.entando.plugins.pda.core.engine;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.entando.plugins.pda.core.exception.EngineNotSupportedException;
 import org.entando.plugins.pda.core.service.group.FakeGroupService;
 import org.entando.plugins.pda.core.service.process.FakeProcessFormService;
+import org.entando.plugins.pda.core.service.process.FakeProcessInstanceService;
 import org.entando.plugins.pda.core.service.process.FakeProcessService;
 import org.entando.plugins.pda.core.service.task.FakeTaskCommentService;
 import org.entando.plugins.pda.core.service.task.FakeTaskDefinitionService;
@@ -138,5 +139,23 @@ public class FakeEngineTest {
         Engine engine = FakeEngine.builder().build();
 
         engine.getGroupService();
+    }
+
+    @Test
+    public void shouldReturnProcessInstanceService() {
+        FakeProcessInstanceService processInstanceService = new FakeProcessInstanceService();
+
+        Engine engine = FakeEngine.builder().processInstanceService(processInstanceService).build();
+
+        assertThat(engine.getProcessInstanceService()).isEqualTo(processInstanceService);
+    }
+
+    @Test
+    public void shouldThrowExceptionForNullProcessInstanceService() {
+        expectedException.expect(EngineNotSupportedException.class);
+
+        Engine engine = FakeEngine.builder().build();
+
+        engine.getProcessInstanceService();
     }
 }

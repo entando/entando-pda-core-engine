@@ -44,7 +44,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class FakeTaskAttachmentService implements TaskAttachmentService {
 
-    public static final Attachment[] TASK_ATTACHMENTS_1 = new Attachment[]{
+    public static final Attachment[] TASK_ATTACHMENTS_1 = {
             Attachment.builder()
                     .id(TASK_ATTACHMENT_ID_1_1)
                     .name(TASK_ATTACHMENT_NAME_1_1)
@@ -63,7 +63,7 @@ public class FakeTaskAttachmentService implements TaskAttachmentService {
                     .build()
     };
 
-    public static final Attachment[] TASK_ATTACHMENTS_2 = new Attachment[]{
+    public static final Attachment[] TASK_ATTACHMENTS_2 = {
             Attachment.builder()
                     .id(TASK_ATTACHMENT_ID_2_1)
                     .name(TASK_ATTACHMENT_NAME_2_1)
@@ -89,7 +89,7 @@ public class FakeTaskAttachmentService implements TaskAttachmentService {
     @Override
     public List<Attachment> list(Connection connection, AuthenticatedUser user, String id) {
 
-        if(ATTACHMENTS_MAP.containsKey(id)) {
+        if (ATTACHMENTS_MAP.containsKey(id)) {
             return ATTACHMENTS_MAP.get(id);
         }
 
@@ -111,7 +111,8 @@ public class FakeTaskAttachmentService implements TaskAttachmentService {
     }
 
     @Override
-    public Attachment create(Connection connection, AuthenticatedUser user, String id, CreateAttachmentRequest request) {
+    public Attachment create(Connection connection, AuthenticatedUser user, String id,
+            CreateAttachmentRequest request) {
         List<Attachment> attachments = ATTACHMENTS_MAP.get(id);
         if (attachments == null) {
             attachments = new ArrayList<>();

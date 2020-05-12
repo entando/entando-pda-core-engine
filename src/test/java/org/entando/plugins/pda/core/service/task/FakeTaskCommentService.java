@@ -28,7 +28,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class FakeTaskCommentService implements TaskCommentService {
 
-    public static final Comment[] TASK_COMMENTS_1 = new Comment[]{
+    public static final Comment[] TASK_COMMENTS_1 = {
             Comment.builder()
                     .id(TASK_COMMENT_ID_1_1)
                     .text(TASK_COMMENT_1_1)
@@ -43,7 +43,7 @@ public class FakeTaskCommentService implements TaskCommentService {
                     .build()
     };
 
-    public static final Comment[] TASK_COMMENTS_2 = new Comment[]{
+    public static final Comment[] TASK_COMMENTS_2 = {
             Comment.builder()
                     .id(TASK_COMMENT_ID_2_1)
                     .text(TASK_COMMENT_2_1)
@@ -63,7 +63,7 @@ public class FakeTaskCommentService implements TaskCommentService {
     @Override
     public List<Comment> list(Connection connection, AuthenticatedUser user, String id) {
 
-        if(COMMENTS_MAP.containsKey(id)) {
+        if (COMMENTS_MAP.containsKey(id)) {
             return COMMENTS_MAP.get(id);
         }
 
