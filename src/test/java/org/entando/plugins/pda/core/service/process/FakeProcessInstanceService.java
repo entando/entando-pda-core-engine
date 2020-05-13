@@ -17,16 +17,16 @@ public class FakeProcessInstanceService implements ProcessInstanceService {
 
     @Override
     public List<ProcessInstance> list(Connection connection, String processDefinitionId, AuthenticatedUser user) {
-        return processInstancesByInitiator.get(user.getAccessToken().getPreferredUsername());
+        return processInstancesByInitiator.get(processDefinitionId);
     }
 
     @VisibleForTesting
-    public void initiateProcess(String initiator, ProcessInstance processInstance) {
+    public void initiateProcess(String processDefinitionId, ProcessInstance processInstance) {
         if (processInstancesByInitiator == null) {
             processInstancesByInitiator = new HashMap<>();
         }
         List<ProcessInstance> processInstances = processInstancesByInitiator
-                .computeIfAbsent(initiator, k -> new ArrayList<>());
+                .computeIfAbsent(processDefinitionId, k -> new ArrayList<>());
         processInstances.add(processInstance);
     }
 }
