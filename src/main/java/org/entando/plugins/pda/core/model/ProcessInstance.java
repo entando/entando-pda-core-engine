@@ -22,5 +22,5 @@ public class ProcessInstance {
     private String state;
     private String initiator;
     private LocalDateTime date;
-    private List<String> activeUserTasks;
+    private List<String> userTasks;
 }
