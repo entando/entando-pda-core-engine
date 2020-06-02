@@ -3,6 +3,7 @@ package org.entando.plugins.pda.core.engine;
 import lombok.Builder;
 import org.entando.plugins.pda.core.service.group.FakeGroupService;
 import org.entando.plugins.pda.core.service.process.FakeProcessFormService;
+import org.entando.plugins.pda.core.service.process.FakeProcessInstanceService;
 import org.entando.plugins.pda.core.service.process.FakeProcessService;
 import org.entando.plugins.pda.core.service.task.FakeTaskAttachmentService;
 import org.entando.plugins.pda.core.service.task.FakeTaskCommentService;
@@ -24,8 +25,10 @@ public class FakeEngine extends Engine {
             FakeTaskCommentService taskCommentService, FakeTaskAttachmentService taskAttachmentService,
             FakeTaskFormService taskFormService, FakeTaskLifecycleService taskLifecycleService,
             FakeTaskLifecycleBulkService taskLifecycleBulkService, FakeProcessService processService,
-            FakeProcessFormService processFormService, FakeGroupService groupService) {
+            FakeProcessInstanceService processInstanceService, FakeProcessFormService processFormService,
+            FakeGroupService groupService) {
         super(TYPE, taskService, taskDefinitionService, taskCommentService, taskAttachmentService, taskFormService,
-                taskLifecycleService, taskLifecycleBulkService, processService, processFormService, groupService);
+                taskLifecycleService, taskLifecycleBulkService, processService, processInstanceService,
+                processFormService, groupService);
     }
 }
