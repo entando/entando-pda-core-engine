@@ -3,6 +3,7 @@ package org.entando.plugins.pda.core.service.process;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.entando.plugins.pda.core.service.process.FakeProcessFormService.PROCESS_FORM_1;
 import static org.entando.plugins.pda.core.utils.TestUtils.PROCESS_ID_1;
+import static org.entando.plugins.pda.core.utils.TestUtils.getDummyUser;
 import static org.entando.plugins.pda.core.utils.TestUtils.randomStringId;
 
 import java.util.UUID;
@@ -29,8 +30,7 @@ public class FakeProcessFormServiceTest {
 
     @Test
     public void shouldGetProcessForm() {
-        Form result = processFormService
-                .get(Connection.builder().build(), PROCESS_ID_1);
+        Form result = processFormService.get(Connection.builder().build(), PROCESS_ID_1);
 
         assertThat(result).isEqualTo(PROCESS_FORM_1);
     }
@@ -44,7 +44,7 @@ public class FakeProcessFormServiceTest {
     @Test
     public void shouldSubmitProcessForm() {
         String result = processFormService
-                .submit(Connection.builder().build(), PROCESS_ID_1, new ConcurrentHashMap<>());
+                .submit(Connection.builder().build(), PROCESS_ID_1, new ConcurrentHashMap<>(), getDummyUser());
 
         assertThat(result).isNotEmpty();
     }
@@ -52,6 +52,7 @@ public class FakeProcessFormServiceTest {
     @Test
     public void shouldThrowProcessNotFoundWhenSubmitProcessForm() {
         expectedException.expect(ProcessNotFoundException.class);
-        processFormService.submit(Connection.builder().build(), randomStringId(), new ConcurrentHashMap<>());
+        processFormService
+                .submit(Connection.builder().build(), randomStringId(), new ConcurrentHashMap<>(), getDummyUser());
     }
 }
