@@ -7,6 +7,7 @@ import static org.entando.plugins.pda.core.utils.TestUtils.createSimpleProcessFo
 
 import java.util.Map;
 import java.util.UUID;
+import org.entando.keycloak.security.AuthenticatedUser;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.exception.ProcessNotFoundException;
 import org.entando.plugins.pda.core.model.form.Form;
@@ -21,22 +22,20 @@ public class FakeProcessFormService implements ProcessFormService {
 
     @Override
     public Form get(Connection connection, String processId) {
-        if (PROCESS_ID_1.equals(processId)){
+        if (PROCESS_ID_1.equals(processId)) {
             return PROCESS_FORM_1;
         } else if (PROCESS_ID_2.equals(processId)) {
             return PROCESS_FORM_2;
         }
-
         throw new ProcessNotFoundException();
     }
 
     @Override
-    public String submit(Connection connection, String processDefinitionId, Map<String, Object> request) {
-        if (PROCESS_ID_1.equals(processDefinitionId) || PROCESS_ID_2.equals(processDefinitionId)){
+    public String submit(Connection connection, String processDefinitionId, Map<String, Object> request,
+            AuthenticatedUser user) {
+        if (PROCESS_ID_1.equals(processDefinitionId) || PROCESS_ID_2.equals(processDefinitionId)) {
             return UUID.randomUUID().toString();
         }
-
         throw new ProcessNotFoundException();
     }
-
 }

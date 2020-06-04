@@ -1,6 +1,7 @@
 package org.entando.plugins.pda.core.service.process;
 
 import java.util.Map;
+import org.entando.keycloak.security.AuthenticatedUser;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.model.form.Form;
 
@@ -29,8 +30,10 @@ public interface ProcessFormService {
      * @param connection the connection to the BPM engine
      * @param processDefinitionId the process definition id
      * @param request the variables to fill out the form
+     * @param user the user starting the new process
      * @return process instance id
      */
-    String submit(Connection connection, String processDefinitionId, Map<String, Object> request);
+    String submit(Connection connection, String processDefinitionId, Map<String, Object> request,
+            AuthenticatedUser user);
 
 }
