@@ -11,6 +11,7 @@ import static org.entando.plugins.pda.core.utils.TestUtils.TASK_ID_2;
 import static org.entando.plugins.pda.core.utils.TestUtils.getDummyConnection;
 import static org.entando.plugins.pda.core.utils.TestUtils.getDummyUser;
 import static org.entando.plugins.pda.core.utils.TestUtils.readFromFile;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,19 +21,14 @@ import org.entando.plugins.pda.core.exception.TaskNotFoundException;
 import org.entando.plugins.pda.core.model.Attachment;
 import org.entando.plugins.pda.core.model.File;
 import org.entando.plugins.pda.core.request.CreateAttachmentRequest;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FakeTaskAttachmentServiceTest {
 
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
-
     private FakeTaskAttachmentService taskService;
 
-    @Before
+    @BeforeEach
     public void init() {
         taskService = new FakeTaskAttachmentService();
     }
@@ -52,9 +48,8 @@ public class FakeTaskAttachmentServiceTest {
 
     @Test
     public void listTaskAttachmentsShouldThrowNotFoundException() {
-        expectedException.expect(TaskNotFoundException.class);
-
-        taskService.list(Connection.builder().build(), getDummyUser(), "invalid");
+        assertThrows(TaskNotFoundException.class,
+                () -> taskService.list(Connection.builder().build(), getDummyUser(), "invalid"));
     }
 
     @Test
@@ -72,23 +67,20 @@ public class FakeTaskAttachmentServiceTest {
 
     @Test
     public void shouldThrowNotFoundExceptionWhenGetAttachmentNonExistentTask() {
-        expectedException.expect(AttachmentNotFoundException.class);
-
-        taskService.get(Connection.builder().build(), getDummyUser(), "invalid", TASK_ATTACHMENT_ID_1_1);
+        assertThrows(AttachmentNotFoundException.class,
+                () -> taskService.get(Connection.builder().build(), getDummyUser(), "invalid", TASK_ATTACHMENT_ID_1_1));
     }
 
     @Test
     public void shouldThrowNotFoundExceptionWhenGetAttachmentNonExistentAttachment() {
-        expectedException.expect(AttachmentNotFoundException.class);
-
-        taskService.get(Connection.builder().build(), getDummyUser(), TASK_ID_1, "invalid");
+        assertThrows(AttachmentNotFoundException.class,
+                () -> taskService.get(Connection.builder().build(), getDummyUser(), TASK_ID_1, "invalid"));
     }
 
     @Test
     public void shouldThrowNotFoundExceptionWhenGetAttachmentFromWrongTask() {
-        expectedException.expect(AttachmentNotFoundException.class);
-
-        taskService.get(Connection.builder().build(), getDummyUser(), TASK_ID_2, TASK_ATTACHMENT_ID_1_1);
+        assertThrows(AttachmentNotFoundException.class,
+                () -> taskService.get(Connection.builder().build(), getDummyUser(), TASK_ID_2, TASK_ATTACHMENT_ID_1_1));
     }
 
     @Test
@@ -118,9 +110,9 @@ public class FakeTaskAttachmentServiceTest {
 
             assertThat(taskAttachment11).isEqualTo(TASK_ATTACHMENT_ID_1_1);
 
-            expectedException.expect(AttachmentNotFoundException.class);
-
-            taskService.get(Connection.builder().build(), getDummyUser(), TASK_ID_1, TASK_ATTACHMENT_ID_1_1);
+            assertThrows(AttachmentNotFoundException.class,
+                    () -> taskService.get(Connection.builder().build(), getDummyUser(), TASK_ID_1,
+                            TASK_ATTACHMENT_ID_1_1));
         } finally { //rollback changes
             FakeTaskAttachmentService.buildAttachments();
         }

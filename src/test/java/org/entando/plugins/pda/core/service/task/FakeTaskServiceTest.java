@@ -3,26 +3,22 @@ package org.entando.plugins.pda.core.service.task;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.entando.plugins.pda.core.utils.TestUtils.TASK_ID_1;
 import static org.entando.plugins.pda.core.utils.TestUtils.getDummyUser;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.UUID;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.exception.TaskNotFoundException;
 import org.entando.plugins.pda.core.model.Task;
-import org.entando.web.request.PagedListRequest;
-import org.entando.web.response.PagedRestResponse;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.entando.plugins.pda.core.request.PagedListRequest;
+import org.entando.plugins.pda.core.response.PagedRestResponse;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FakeTaskServiceTest {
 
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
-
     private FakeTaskService taskService;
 
-    @Before
+    @BeforeEach
     public void init() {
         taskService = new FakeTaskService();
     }
@@ -53,8 +49,7 @@ public class FakeTaskServiceTest {
 
     @Test
     public void shouldThrowNotFoundException() {
-        expectedException.expect(TaskNotFoundException.class);
-
-        taskService.get(Connection.builder().build(), getDummyUser(), UUID.randomUUID().toString());
+        assertThrows(TaskNotFoundException.class,
+                () -> taskService.get(Connection.builder().build(), getDummyUser(), UUID.randomUUID().toString()));
     }
 }

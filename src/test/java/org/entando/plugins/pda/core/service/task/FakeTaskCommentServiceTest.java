@@ -1,6 +1,6 @@
 package org.entando.plugins.pda.core.service.task;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.entando.plugins.pda.core.service.task.FakeTaskCommentService.TASK_COMMENTS_1;
 import static org.entando.plugins.pda.core.service.task.FakeTaskCommentService.TASK_COMMENTS_2;
 import static org.entando.plugins.pda.core.utils.TestUtils.TASK_COMMENT_ID_1_1;
@@ -8,6 +8,7 @@ import static org.entando.plugins.pda.core.utils.TestUtils.TASK_COMMENT_ID_2_1;
 import static org.entando.plugins.pda.core.utils.TestUtils.TASK_ID_1;
 import static org.entando.plugins.pda.core.utils.TestUtils.TASK_ID_2;
 import static org.entando.plugins.pda.core.utils.TestUtils.getDummyUser;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,19 +16,14 @@ import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.exception.CommentNotFoundException;
 import org.entando.plugins.pda.core.exception.TaskNotFoundException;
 import org.entando.plugins.pda.core.model.Comment;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FakeTaskCommentServiceTest {
 
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
-
     private FakeTaskCommentService taskService;
 
-    @Before
+    @BeforeEach
     public void init() {
         taskService = new FakeTaskCommentService();
     }
@@ -47,9 +43,8 @@ public class FakeTaskCommentServiceTest {
 
     @Test
     public void listTaskCommentsShouldThrowNotFoundException() {
-        expectedException.expect(TaskNotFoundException.class);
-
-        taskService.list(Connection.builder().build(), getDummyUser(), "invalid");
+        assertThrows(TaskNotFoundException.class,
+                () -> taskService.list(Connection.builder().build(), getDummyUser(), "invalid"));
     }
 
     @Test
@@ -67,16 +62,14 @@ public class FakeTaskCommentServiceTest {
 
     @Test
     public void shouldThrowNotFoundExceptionWhenGetCommentNonExistent() {
-        expectedException.expect(CommentNotFoundException.class);
-
-        taskService.get(Connection.builder().build(), getDummyUser(), "invalid", TASK_COMMENT_ID_1_1);
+        assertThrows(CommentNotFoundException.class,
+                () -> taskService.get(Connection.builder().build(), getDummyUser(), "invalid", TASK_COMMENT_ID_1_1));
     }
 
     @Test
     public void shouldThrowNotFoundExceptionWhenGetCommentFromWrongTask() {
-        expectedException.expect(CommentNotFoundException.class);
-
-        taskService.get(Connection.builder().build(), getDummyUser(), TASK_ID_2, TASK_COMMENT_ID_1_1);
+        assertThrows(CommentNotFoundException.class,
+                () -> taskService.get(Connection.builder().build(), getDummyUser(), TASK_ID_2, TASK_COMMENT_ID_1_1));
     }
 
     @Test
@@ -86,8 +79,7 @@ public class FakeTaskCommentServiceTest {
 
         assertThat(taskComment11).isEqualTo(TASK_COMMENT_ID_1_1);
 
-        expectedException.expect(CommentNotFoundException.class);
-
-        taskService.get(Connection.builder().build(), getDummyUser(), TASK_ID_1, TASK_COMMENT_ID_1_1);
+        assertThrows(CommentNotFoundException.class,
+                () -> taskService.get(Connection.builder().build(), getDummyUser(), TASK_ID_1, TASK_COMMENT_ID_1_1));
     }
 }

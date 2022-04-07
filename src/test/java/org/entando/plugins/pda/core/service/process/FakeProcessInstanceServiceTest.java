@@ -1,7 +1,7 @@
 package org.entando.plugins.pda.core.service.process;
 
-import static org.apache.commons.lang.RandomStringUtils.randomNumeric;
 import static org.apache.commons.lang3.RandomStringUtils.random;
+import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDateTime;
@@ -9,8 +9,8 @@ import java.util.List;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.model.ProcessInstance;
 import org.entando.plugins.pda.core.utils.TestUtils;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FakeProcessInstanceServiceTest {
 
@@ -19,7 +19,7 @@ public class FakeProcessInstanceServiceTest {
 
     private FakeProcessInstanceService processInstanceService;
 
-    @Before
+    @BeforeEach
     public void init() {
         processInstanceService = new FakeProcessInstanceService();
     }

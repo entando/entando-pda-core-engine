@@ -4,8 +4,8 @@ import java.util.List;
 import org.entando.keycloak.security.AuthenticatedUser;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.model.Task;
-import org.entando.web.request.PagedListRequest;
-import org.entando.web.response.PagedRestResponse;
+import org.entando.plugins.pda.core.request.PagedListRequest;
+import org.entando.plugins.pda.core.response.PagedRestResponse;
 
 /**
  * Defines service methods for task retrieval from the BPM engine.

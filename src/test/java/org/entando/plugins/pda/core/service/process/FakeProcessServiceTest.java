@@ -2,25 +2,21 @@ package org.entando.plugins.pda.core.service.process;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.entando.plugins.pda.core.utils.TestUtils.readFromFile;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 import java.util.UUID;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.exception.ProcessNotFoundException;
 import org.entando.plugins.pda.core.model.ProcessDefinition;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FakeProcessServiceTest {
 
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
-
     private FakeProcessService processService;
 
-    @Before
+    @BeforeEach
     public void init() {
         processService = new FakeProcessService();
     }
@@ -42,9 +38,8 @@ public class FakeProcessServiceTest {
 
     @Test
     public void shouldThrowProcessNotFoundException() {
-        expectedException.expect(ProcessNotFoundException.class);
-
-        processService.getProcessDiagram(Connection.builder().build(), UUID.randomUUID().toString());
+        assertThrows(ProcessNotFoundException.class,
+                () -> processService.getProcessDiagram(Connection.builder().build(), UUID.randomUUID().toString()));
     }
 
 }

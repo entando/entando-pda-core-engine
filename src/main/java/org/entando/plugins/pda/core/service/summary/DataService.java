@@ -1,6 +1,5 @@
 package org.entando.plugins.pda.core.service.summary;
 
-import com.google.common.annotations.VisibleForTesting;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +27,6 @@ public class DataService {
                 .orElseThrow(DataRepositoryNotFoundException::new);
     }
 
-    @VisibleForTesting
     public void setRepositories(List<DataRepository> repositories) {
         this.repositories.clear();
         this.repositories.addAll(repositories);

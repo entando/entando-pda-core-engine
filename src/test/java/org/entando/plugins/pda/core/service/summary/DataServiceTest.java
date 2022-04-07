@@ -2,21 +2,17 @@ package org.entando.plugins.pda.core.service.summary;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.entando.plugins.pda.core.utils.TestUtils.createDataRepository;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.entando.plugins.pda.core.engine.FakeEngine;
 import org.entando.plugins.pda.core.exception.DataRepositoryNotFoundException;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DataServiceTest {
-
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
 
     private DataService dataService;
     private List<DataRepository> dataRepositories;
@@ -24,7 +20,7 @@ public class DataServiceTest {
     private static final String REQUESTS_TYPE = "requests";
     private static final String CASES_TYPE = "cases";
 
-    @Before
+    @BeforeEach
     public void setUp() {
         dataRepositories = new ArrayList<>();
         dataRepositories.add(createDataRepository(REQUESTS_TYPE, new ArrayList<>()));
@@ -57,13 +53,13 @@ public class DataServiceTest {
 
     @Test
     public void shouldThrowNotFoundWhenInvalidEngine() {
-        expectedException.expect(DataRepositoryNotFoundException.class);
-        dataService.getDataRepository("invalid", CASES_TYPE);
+        assertThrows(DataRepositoryNotFoundException.class,
+                () -> dataService.getDataRepository("invalid", CASES_TYPE));
     }
 
     @Test
     public void shouldThrowNotFoundWhenInvalidDataRepository() {
-        expectedException.expect(DataRepositoryNotFoundException.class);
-        dataService.getDataRepository(FakeEngine.TYPE, "invalid");
+        assertThrows(DataRepositoryNotFoundException.class,
+                () -> dataService.getDataRepository(FakeEngine.TYPE, "invalid"));
     }
 }

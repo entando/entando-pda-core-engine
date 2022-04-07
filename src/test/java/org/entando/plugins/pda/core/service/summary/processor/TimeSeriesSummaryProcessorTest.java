@@ -23,8 +23,8 @@ import org.entando.plugins.pda.core.model.summary.TimeSeriesSummary;
 import org.entando.plugins.pda.core.service.summary.DataRepository;
 import org.entando.plugins.pda.core.service.summary.DataService;
 import org.entando.plugins.pda.core.service.summary.request.TimeSeriesSummaryRequest;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class TimeSeriesSummaryProcessorTest {
 
@@ -43,7 +43,7 @@ public class TimeSeriesSummaryProcessorTest {
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
-    @Before
+    @BeforeEach
     public void setUp() {
         dataRepository1 = createDataRepository(TYPE_1, SUMMARY_DAILY_1);
         dataRepository2 = createDataRepository(TYPE_2, SUMMARY_DAILY_2);
