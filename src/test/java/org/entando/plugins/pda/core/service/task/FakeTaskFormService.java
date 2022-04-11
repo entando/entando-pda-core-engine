@@ -27,9 +27,9 @@ public class FakeTaskFormService implements TaskFormService {
 
     @Override
     public Form get(Connection connection, String taskId) {
-        if (TASK_ID_1.equals(taskId)){
+        if (TASK_ID_1.equals(taskId)) {
             return TASK_FORM_1;
-        } else if (TASK_ID_2.equals(taskId)){
+        } else if (TASK_ID_2.equals(taskId)) {
             return TASK_FORM_2;
         }
 

@@ -17,9 +17,9 @@ import org.entando.keycloak.security.AuthenticatedUser;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.exception.TaskNotFoundException;
 import org.entando.plugins.pda.core.model.Task;
-import org.entando.web.request.PagedListRequest;
-import org.entando.web.response.PagedMetadata;
-import org.entando.web.response.PagedRestResponse;
+import org.entando.plugins.pda.core.request.PagedListRequest;
+import org.entando.plugins.pda.core.response.PagedMetadata;
+import org.entando.plugins.pda.core.response.PagedRestResponse;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -38,9 +38,9 @@ public class FakeTaskService implements TaskService {
             PagedListRequest restListRequest, String search, List<String> groups) {
         return new PagedRestResponse<>(new PagedMetadata<>(restListRequest, new ArrayList<>(
                 TASKS.values().stream()
-                    .filter(t -> search == null
-                            || t.getName().contains(search.replace("*", "").trim()))
-                    .collect(Collectors.toList()))));
+                        .filter(t -> search == null
+                                || t.getName().contains(search.replace("*", "").trim()))
+                        .collect(Collectors.toList()))));
     }
 
     @Override

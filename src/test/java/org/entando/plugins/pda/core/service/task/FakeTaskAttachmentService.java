@@ -33,11 +33,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.entando.keycloak.security.AuthenticatedUser;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.exception.AttachmentNotFoundException;
+import org.entando.plugins.pda.core.exception.BadRequestException;
 import org.entando.plugins.pda.core.exception.TaskNotFoundException;
 import org.entando.plugins.pda.core.model.Attachment;
 import org.entando.plugins.pda.core.model.File;
 import org.entando.plugins.pda.core.request.CreateAttachmentRequest;
-import org.entando.web.exception.BadRequestException;
 import org.springframework.stereotype.Service;
 
 @SuppressWarnings("PMD.ExcessiveImports")

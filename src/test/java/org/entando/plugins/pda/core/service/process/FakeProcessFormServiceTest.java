@@ -5,25 +5,21 @@ import static org.entando.plugins.pda.core.service.process.FakeProcessFormServic
 import static org.entando.plugins.pda.core.utils.TestUtils.PROCESS_ID_1;
 import static org.entando.plugins.pda.core.utils.TestUtils.getDummyUser;
 import static org.entando.plugins.pda.core.utils.TestUtils.randomStringId;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.exception.ProcessNotFoundException;
 import org.entando.plugins.pda.core.model.form.Form;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FakeProcessFormServiceTest {
 
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
-
     private FakeProcessFormService processFormService;
 
-    @Before
+    @BeforeEach
     public void init() {
         processFormService = new FakeProcessFormService();
     }
@@ -37,8 +33,8 @@ public class FakeProcessFormServiceTest {
 
     @Test
     public void shouldThrowProcessNotFoundWhenGetProcessForm() {
-        expectedException.expect(ProcessNotFoundException.class);
-        processFormService.get(Connection.builder().build(), UUID.randomUUID().toString());
+        assertThrows(ProcessNotFoundException.class,
+                () -> processFormService.get(Connection.builder().build(), UUID.randomUUID().toString()));
     }
 
     @Test
@@ -51,8 +47,7 @@ public class FakeProcessFormServiceTest {
 
     @Test
     public void shouldThrowProcessNotFoundWhenSubmitProcessForm() {
-        expectedException.expect(ProcessNotFoundException.class);
-        processFormService
-                .submit(Connection.builder().build(), randomStringId(), new ConcurrentHashMap<>(), getDummyUser());
+        assertThrows(ProcessNotFoundException.class, () -> processFormService
+                .submit(Connection.builder().build(), randomStringId(), new ConcurrentHashMap<>(), getDummyUser()));
     }
 }

@@ -6,8 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.entando.plugins.pda.core.service.task.response.TaskBulkActionResponse;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
 public class FakeTaskLifecycleBulkServiceTest {
@@ -16,7 +16,7 @@ public class FakeTaskLifecycleBulkServiceTest {
 
     private final List<String> ids = Arrays.asList("1", "2", "3");
 
-    @Before
+    @BeforeEach
     public void setUp() {
         taskLifecycleBulkService = new FakeTaskLifecycleBulkService();
     }

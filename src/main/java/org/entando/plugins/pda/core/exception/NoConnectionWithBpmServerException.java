@@ -1,7 +1,5 @@
 package org.entando.plugins.pda.core.exception;
 
-import org.entando.web.exception.InternalServerException;
-
 public class NoConnectionWithBpmServerException extends InternalServerException {
 
     public NoConnectionWithBpmServerException(String message, Throwable throwable) {

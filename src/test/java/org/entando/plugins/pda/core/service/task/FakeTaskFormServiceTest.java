@@ -11,25 +11,21 @@ import static org.entando.plugins.pda.core.utils.TestUtils.TASK_ID_1;
 import static org.entando.plugins.pda.core.utils.TestUtils.getDummyConnection;
 import static org.entando.plugins.pda.core.utils.TestUtils.getDummyUser;
 import static org.entando.plugins.pda.core.utils.TestUtils.randomStringId;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import org.entando.plugins.pda.core.exception.TaskNotFoundException;
 import org.entando.plugins.pda.core.model.form.Form;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FakeTaskFormServiceTest {
-
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
 
     private FakeTaskFormService taskFormService;
     private FakeTaskService taskService;
 
-    @Before
+    @BeforeEach
     public void init() {
         taskService = new FakeTaskService();
         taskFormService = new FakeTaskFormService(taskService);
@@ -44,8 +40,7 @@ public class FakeTaskFormServiceTest {
 
     @Test
     public void shouldThrowTaskNotFound() {
-        expectedException.expect(TaskNotFoundException.class);
-        taskFormService.get(getDummyConnection(), randomStringId());
+        assertThrows(TaskNotFoundException.class, () -> taskFormService.get(getDummyConnection(), randomStringId()));
     }
 
     @Test
@@ -69,9 +64,8 @@ public class FakeTaskFormServiceTest {
 
     @Test
     public void shouldThrowTaskNotFoundWhenSubmittingForm() {
-        expectedException.expect(TaskNotFoundException.class);
-        taskFormService.submit(getDummyConnection(), getDummyUser(), randomStringId(),
-                new ConcurrentHashMap<>());
+        assertThrows(TaskNotFoundException.class, () -> taskFormService.submit(getDummyConnection(), getDummyUser(), randomStringId(),
+                new ConcurrentHashMap<>()));
     }
 
 }

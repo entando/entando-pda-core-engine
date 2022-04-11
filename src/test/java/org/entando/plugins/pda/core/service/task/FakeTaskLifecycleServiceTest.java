@@ -1,6 +1,6 @@
 package org.entando.plugins.pda.core.service.task;
 
-import static org.apache.commons.lang.RandomStringUtils.randomNumeric;
+import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.entando.plugins.pda.core.service.task.FakeTaskLifecycleService.ASSIGN_ACTION;
 import static org.entando.plugins.pda.core.service.task.FakeTaskLifecycleService.CLAIM_ACTION;
@@ -10,14 +10,14 @@ import static org.entando.plugins.pda.core.service.task.FakeTaskLifecycleService
 import static org.entando.plugins.pda.core.service.task.FakeTaskLifecycleService.START_ACTION;
 import static org.entando.plugins.pda.core.service.task.FakeTaskLifecycleService.UNCLAIM_ACTION;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FakeTaskLifecycleServiceTest {
 
     private FakeTaskLifecycleService fakeTaskLifecycleService;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         fakeTaskLifecycleService = new FakeTaskLifecycleService();
     }

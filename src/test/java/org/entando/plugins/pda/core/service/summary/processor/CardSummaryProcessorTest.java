@@ -20,8 +20,8 @@ import org.entando.plugins.pda.core.model.summary.SummaryFrequency;
 import org.entando.plugins.pda.core.service.summary.DataRepository;
 import org.entando.plugins.pda.core.service.summary.DataService;
 import org.entando.plugins.pda.core.service.summary.request.CardSummaryRequest;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class CardSummaryProcessorTest {
 
@@ -35,7 +35,7 @@ public class CardSummaryProcessorTest {
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
-    @Before
+    @BeforeEach
     public void setUp() {
         dataRepository = createDataRepository(TYPE_1, SUMMARY_DAILY);
 

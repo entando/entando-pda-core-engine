@@ -4,10 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import lombok.extern.slf4j.Slf4j;
 import org.entando.plugins.pda.core.engine.Connection;
+import org.entando.plugins.pda.core.exception.BadRequestException;
 import org.entando.plugins.pda.core.model.summary.Summary;
 import org.entando.plugins.pda.core.service.summary.DataRepository;
 import org.entando.plugins.pda.core.service.summary.DataService;
-import org.entando.web.exception.BadRequestException;
 
 @Slf4j
 public abstract class AbstractSummaryProcessor implements SummaryProcessor {

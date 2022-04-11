@@ -1,6 +1,7 @@
 package org.entando.plugins.pda.core.engine;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.entando.plugins.pda.core.exception.EngineNotSupportedException;
 import org.entando.plugins.pda.core.service.group.FakeGroupService;
@@ -13,15 +14,10 @@ import org.entando.plugins.pda.core.service.task.FakeTaskFormService;
 import org.entando.plugins.pda.core.service.task.FakeTaskLifecycleBulkService;
 import org.entando.plugins.pda.core.service.task.FakeTaskLifecycleService;
 import org.entando.plugins.pda.core.service.task.FakeTaskService;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("PMD.TooManyMethods")
 public class FakeEngineTest {
-
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
 
     @Test
     public void shouldReturnCorrectEngineType() {
@@ -107,38 +103,30 @@ public class FakeEngineTest {
 
     @Test
     public void shouldThrowExceptionForNullTaskService() {
-        expectedException.expect(EngineNotSupportedException.class);
-
         Engine engine = FakeEngine.builder().build();
 
-        engine.getTaskService();
+        assertThrows(EngineNotSupportedException.class, engine::getTaskService);
     }
 
     @Test
     public void shouldThrowExceptionForNullTaskCommentService() {
-        expectedException.expect(EngineNotSupportedException.class);
-
         Engine engine = FakeEngine.builder().build();
 
-        engine.getTaskCommentService();
+        assertThrows(EngineNotSupportedException.class, engine::getTaskCommentService);
     }
 
     @Test
     public void shouldThrowExceptionForNullTaskDefinitionService() {
-        expectedException.expect(EngineNotSupportedException.class);
-
         Engine engine = FakeEngine.builder().build();
 
-        engine.getTaskDefinitionService();
+        assertThrows(EngineNotSupportedException.class, engine::getTaskDefinitionService);
     }
 
     @Test
     public void shouldThrowExceptionForNullGroupService() {
-        expectedException.expect(EngineNotSupportedException.class);
-
         Engine engine = FakeEngine.builder().build();
 
-        engine.getGroupService();
+        assertThrows(EngineNotSupportedException.class, engine::getGroupService);
     }
 
     @Test
@@ -152,10 +140,8 @@ public class FakeEngineTest {
 
     @Test
     public void shouldThrowExceptionForNullProcessInstanceService() {
-        expectedException.expect(EngineNotSupportedException.class);
-
         Engine engine = FakeEngine.builder().build();
 
-        engine.getProcessInstanceService();
+        assertThrows(EngineNotSupportedException.class, engine::getProcessInstanceService);
     }
 }

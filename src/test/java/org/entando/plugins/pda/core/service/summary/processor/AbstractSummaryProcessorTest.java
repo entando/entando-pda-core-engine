@@ -9,16 +9,17 @@ import org.entando.plugins.pda.core.engine.Connection;
 import org.entando.plugins.pda.core.model.summary.Summary;
 import org.entando.plugins.pda.core.service.summary.DataRepository;
 import org.entando.plugins.pda.core.service.summary.DataService;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AbstractSummaryProcessorTest {
+
     private static final String TYPE = "Type";
 
     private DataRepository dataRepository;
     private DataService dataService;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         dataService = mock(DataService.class);
         dataRepository = mock(DataRepository.class);

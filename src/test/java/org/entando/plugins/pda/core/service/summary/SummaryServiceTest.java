@@ -2,6 +2,7 @@ package org.entando.plugins.pda.core.service.summary;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.entando.plugins.pda.core.utils.TestUtils.createSummaryProcessor;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,24 +13,20 @@ import org.entando.plugins.pda.core.model.summary.TimeSeriesSummary;
 import org.entando.plugins.pda.core.service.summary.processor.CardSummaryProcessor;
 import org.entando.plugins.pda.core.service.summary.processor.SummaryProcessor;
 import org.entando.plugins.pda.core.service.summary.processor.TimeSeriesSummaryProcessor;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class SummaryServiceTest {
-
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
 
     private SummaryService summaryService;
     private List<SummaryProcessor> summaryProcessors;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         summaryProcessors = new ArrayList<>();
         summaryProcessors.add(createSummaryProcessor(CardSummaryProcessor.TYPE, CardSummary.builder().build()));
-        summaryProcessors.add(createSummaryProcessor(TimeSeriesSummaryProcessor.TYPE, TimeSeriesSummary.builder().build()));
+        summaryProcessors.add(
+                createSummaryProcessor(TimeSeriesSummaryProcessor.TYPE, TimeSeriesSummary.builder().build()));
 
         summaryService = new SummaryService(summaryProcessors);
     }
@@ -62,7 +59,6 @@ public class SummaryServiceTest {
 
     @Test
     public void shouldThrowNotFoundWhenInvalidSummaryType() {
-        expectedException.expect(SummaryTypeNotFoundException.class);
-        summaryService.getSummaryProcessor("invalid");
+        assertThrows(SummaryTypeNotFoundException.class, () -> summaryService.getSummaryProcessor("invalid"));
     }
 }
