@@ -4,14 +4,14 @@ import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 public class BaseMapModel {
 
     @JsonAnySetter
-    protected Map<String, Object> data = new ConcurrentHashMap<>();
+    @SuppressWarnings("PMD.UseConcurrentHashMap")
+    protected Map<String, Object> data = new HashMap<>();
 
     @JsonAnyGetter
     public Map<String, Object> getData() {
